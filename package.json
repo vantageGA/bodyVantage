@@ -1,0 +1,11 @@
+{
+  "name": "bodyvantage",
+  "version": "1.0.0",
+  "description": "Sport profiling application",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Gary Guy Allin",
+  "license": "ISC"
+}
