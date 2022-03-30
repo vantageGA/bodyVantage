@@ -1,0 +1,12 @@
+@import '../../index.scss';
+
+.error-view {
+  .help-text {
+    text-align: center;
+    margin: 30px 0;
+    color: $light-orange;
+    font-size: 3.5rem;
+    line-height: 89px;
+    text-decoration: none;
+  }
+}

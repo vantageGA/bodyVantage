@@ -1,0 +1,13 @@
+@import '../../index.scss';
+
+.quill {
+  background-color: $main-font-colour;
+  color: $main-bg-colour;
+  min-height: 250px;
+}
+.quill.invalid {
+  border-left: $secondary-bg-colour 4px solid;
+}
+.quill.entered {
+  border-left: greenyellow 4px solid;
+}

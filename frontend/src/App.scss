@@ -1,0 +1,16 @@
+@import 'index.scss';
+@import './scssMixIn.scss';
+$grid__bp-md: 1280;
+
+.container {
+  max-width: $grid__bp-md * 1px;
+  margin: 0 auto;
+  &--fluid {
+    margin: 0;
+    max-width: 100%;
+  }
+}
+.content-wrapper {
+  height: calc(100vh - #{$header-height + $footer-height});
+  overflow-y: auto;
+}

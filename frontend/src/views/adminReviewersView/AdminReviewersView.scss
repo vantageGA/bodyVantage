@@ -1,0 +1,52 @@
+@import '../../index.scss';
+@import '../../scssMixIn.scss';
+
+.admin-reviewer-wrapper {
+  .heading {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background-color: $main-font-colour;
+    color: $main-bg-colour;
+    z-index: 100;
+    font-weight: bold;
+  }
+
+  .admin-reviewer-inner-wrapper {
+    display: flex;
+    padding: 0.75rem;
+  }
+  Button {
+    margin: 0 auto;
+  }
+
+  .item {
+    height: auto;
+    overflow-y: auto;
+    text-align: center;
+    width: (100% / 5);
+    font-size: 0.8em;
+    border-left: 1px solid $border-colour;
+  }
+  .admin-reviewer-inner-wrapper:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Responsive layout - makes a one column layout (100%) instead of a two-column layout (50%) */
+@media (max-width: 812px) {
+  .admin-reviewer-wrapper {
+    .heading {
+      display: none;
+    }
+    .admin-view-inner-wrapper {
+      flex-direction: column;
+    }
+    .item {
+      width: 100% !important;
+    }
+    .item + .wider-item {
+      width: 100% !important;
+    }
+  }
+}

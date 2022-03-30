@@ -1,0 +1,29 @@
+@import '../../index.scss';
+.review-wrapper {
+  display: flex;
+  flex-direction: column;
+  // align-items: center;
+  color: $border-colour;
+  padding: 0 0.4em 0.4em 0.4em;
+  border-left: 4px solid $rating-colour;
+
+  .reviewer {
+    text-transform: capitalize;
+    color: $main-font-colour;
+    letter-spacing: 0.1em;
+  }
+  .tagline::before {
+    content: '\275D';
+  }
+
+  .tagline::after {
+    content: '\275E';
+  }
+
+  .tagline::after,
+  .tagline::before {
+    color: $main-font-colour;
+    font-size: 16px;
+    margin: 0 4px;
+  }
+}

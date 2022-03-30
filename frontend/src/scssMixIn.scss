@@ -1,0 +1,5 @@
+@mixin border-all($width, $style, $color) {
+  border-width: $width;
+  border-style: $style;
+  border-color: $color;
+}

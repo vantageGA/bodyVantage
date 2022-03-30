@@ -1,0 +1,74 @@
+@import '../../index.scss';
+
+.input-field-wrapper {
+  input[type='text'],
+  input[type='email'],
+  input[type='password'],
+  input[type='search'],
+  input[type='tel'],
+  textarea {
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    margin: 0;
+    outline: 0;
+    padding: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.6);
+    color: $main-font-colour;
+    -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+  }
+  input[type='text']:focus,
+  input[type='email']:focus,
+  input[type='password']:focus,
+  input[type='search']:focus,
+  input[type='tel']:focus {
+    background-color: rgba(255, 255, 255, 1);
+    color: $main-bg-colour;
+  }
+  .validation-error {
+    color: $danger;
+    padding: 0.2em;
+    font-weight: bold;
+  }
+  input[type='text'].entered {
+    border-left: greenyellow 4px solid;
+  }
+  input[type='email'].entered {
+    border-left: greenyellow 4px solid;
+  }
+  input[type='text'].invalid {
+    border-left: $secondary-bg-colour 4px solid;
+  }
+  input[type='email'].invalid {
+    border-left: $secondary-bg-colour 4px solid;
+  }
+  input[type='password'].entered {
+    border-left: greenyellow 4px solid;
+  }
+  input[type='password'].invalid {
+    border-left: $secondary-bg-colour 4px solid;
+  }
+  input[type='search'].entered {
+    border-left: greenyellow 4px solid;
+  }
+  input[type='search'].invalid {
+    border-left: $secondary-bg-colour 4px solid;
+  }
+  input[type='search']::placeholder {
+    text-align: center;
+  }
+  input[type='tel'].entered {
+    border-left: greenyellow 4px solid;
+  }
+  input[type='tel'].invalid {
+    border-left: $secondary-bg-colour 4px solid;
+  }
+
+  margin-bottom: 0.4rem;
+  margin-top: 0.4rem;
+}

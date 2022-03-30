@@ -1,0 +1,80 @@
+@import '../../index.scss';
+@import '../../scssMixIn.scss';
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+.user-review-login-wrapper {
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: $main-font-colour;
+    border-radius: 4px;
+    width: 25%;
+    margin: 0.4em 0.4em 0.4em 0;
+  }
+  select::-ms-expand {
+    display: none;
+  }
+  select > option {
+    background-color: $main-font-colour;
+    border-radius: 4px;
+  }
+}
+
+.reviewer-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  .item {
+    width: calc(50% - #{10px}); /* and this */
+  }
+  form {
+    // background-color: black;
+    padding: 0.5em;
+  }
+  .review-specialisation-wrapper {
+    display: flex;
+    justify-content: space-between;
+    .review-specialisation {
+      width: 100%;
+      font-size: 0.75em;
+      padding: 0.5em;
+      margin-left: 0.2em;
+      text-align: center;
+      background-color: $main-bg-colour;
+      text-transform: uppercase;
+    }
+  }
+  .full-profile-name {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 2.6em;
+    text-transform: uppercase;
+  }
+  & h3 {
+    color: $warning;
+  }
+  input[type='checkbox'] {
+    height: 20px;
+    width: 20px;
+    padding: 2em;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .userReviewInfo {
+    padding-left: 0.5em;
+    font-size: 1.2em;
+    color: $rating-colour;
+    font-weight: bold;
+  }
+}
+/* Responsive layout - makes a one column layout (100%) instead of a two-column layout (50%) */
+@media (max-width: 812px) {
+  .reviewer-wrapper {
+    flex-wrap: wrap;
+    .item {
+      width: 100vw; /* and this */
+    }
+  }
+}

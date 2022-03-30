@@ -1,0 +1,60 @@
+@import '../../index.scss';
+@import '../../scssMixIn.scss';
+
+.profile-edit-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  .item {
+    width: calc(50% - #{10px}); /* and this */
+  }
+
+  .image {
+    width: 120px;
+    height: 120px;
+  }
+  .input-wrapper {
+    border: 1px solid $border-colour;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0.5em;
+    justify-content: space-between;
+  }
+  .quill {
+    background-color: rgba(255, 255, 255, 0.6);
+  }
+  .ql-editor:focus {
+    background-color: rgba(255, 255, 255, 1);
+    color: $main-bg-colour;
+  }
+  .input-border {
+    border: 1px solid $border-colour;
+  }
+  .summary-wrapper {
+    border: 1px solid $border-colour;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0.5em;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .search-algorithm {
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  .fieldSet.item textarea {
+    height: 100px;
+  }
+}
+
+/* Responsive layout - makes a one column layout (100%) instead of a two-column layout (50%) */
+@media (max-width: 812px) {
+  .profile-edit-wrapper {
+    flex-wrap: wrap;
+    .item {
+      width: 100vw; /* and this */
+    }
+  }
+}
