@@ -1,0 +1,54 @@
+@import '../../index.scss';
+@import '../../scssMixIn.scss';
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+.card-inner-wrapper {
+  padding: 0.4em;
+  background-color: rgba(0, 0, 0, 1);
+  width: 600px;
+  border-left: 1px solid $rating-colour;
+  margin-bottom: 1rem;
+
+  .item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    .link {
+      float: right;
+    }
+
+    .specialisation {
+      font-size: 0.75em;
+      width: (100% / 3);
+      margin-left: 0.2em;
+      text-align: center;
+      background-color: $main-bg-colour;
+      text-transform: uppercase;
+    }
+    .card-profile-image {
+      width: 260px;
+      height: 240px;
+      margin: 0.4em;
+    }
+    .card-name {
+      font-family: 'Bebas Neue', cursive;
+      font-size: 2.6em;
+      text-transform: uppercase;
+    }
+  }
+}
+/* Responsive layout */
+@media (max-width: 1024px) {
+  .card-inner-wrapper {
+    flex-wrap: wrap;
+    width: 100%;
+    .item {
+      .card-profile-image {
+        width: 140px;
+        height: 120px;
+        margin: 0.2em;
+      }
+    }
+  }
+}

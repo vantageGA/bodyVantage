@@ -1,0 +1,27 @@
+@import '../../index.scss';
+
+.login-out-wrapper {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+  .login-out-text {
+    color: $rating-colour;
+    font-weight: bold;
+    position: relative;
+    font-size: 1em;
+    text-transform: uppercase;
+  }
+}
+
+.login-out-definition {
+  opacity: 0.8;
+  color: $link-colour;
+  text-transform: uppercase;
+
+  &.login-out-definition:hover {
+    cursor: pointer;
+    opacity: 1;
+    transition: opacity 0.6s ease-in-out;
+  }
+}

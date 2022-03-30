@@ -1,0 +1,37 @@
+@import '../../index.scss';
+@import '../../scssMixIn.scss';
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+.cookies-wrapper {
+  //   border: 1px solid $border-colour;
+  padding: 1em;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  //   background-color: black;
+
+  .link-wrapper {
+    // border: 1px solid $border-colour;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0.4rem;
+  }
+
+  .button-wrapper {
+    // border: 1px solid $border-colour;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0.4rem;
+  }
+}
+
+/* Responsive layout */
+@media (max-width: 812px) {
+  .cookies-wrapper {
+    width: 90%;
+  }
+}

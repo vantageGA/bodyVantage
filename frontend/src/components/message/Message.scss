@@ -1,0 +1,36 @@
+@import '../../index.scss';
+
+.message-wrapper {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 4px;
+  .error {
+    display: flex;
+    justify-content: space-between;
+    background-color: $danger;
+    width: 100%;
+    padding: inherit;
+    border-radius: 4px;
+  }
+  .success {
+    display: flex;
+    justify-content: space-between;
+    background-color: $success;
+    color: $main-bg-colour;
+    width: 100%;
+    padding: inherit;
+    border-radius: 4px;
+  }
+
+  .warning {
+    display: flex;
+    justify-content: space-between;
+    background-color: $warning;
+    width: 100%;
+    padding: inherit;
+    border-radius: 4px;
+  }
+  .message-icon {
+    cursor: pointer;
+  }
+}

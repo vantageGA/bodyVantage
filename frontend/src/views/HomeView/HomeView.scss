@@ -1,0 +1,56 @@
+@import '../../index.scss';
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+.main-heading {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 2.6em;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 0.2em;
+}
+.sub-heading {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 1.6em;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 0.1em;
+}
+.keyword-search {
+  // width: auto;
+}
+.keyword-length {
+  font-size: 1em;
+  // text-align: center;
+  font-size: 0.8em;
+}
+input[type='search']::placeholder {
+  text-align: center;
+}
+.home-view {
+  height: (
+    100% - #{($header-height + $footer-height)}
+  ); //This is for the background image
+
+  .card-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .card-inner-wrapper .item:first-child .specialisation {
+    border: 1px solid $border-colour-light;
+  }
+  /* Responsive layout */
+  @media (max-width: 812px) {
+    .card-wrapper {
+      flex-wrap: wrap;
+      flex-direction: column;
+      .card {
+        width: 100vw; /* and this */
+      }
+    }
+  }
+}

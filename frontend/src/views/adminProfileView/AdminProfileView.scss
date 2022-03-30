@@ -1,0 +1,89 @@
+@import '../../index.scss';
+@import '../../scssMixIn.scss';
+
+.admin-profile-view-wrapper {
+  $description-width: 52%;
+  .heading {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    background-color: $main-font-colour;
+    color: $main-bg-colour;
+    z-index: 100;
+    font-weight: bold;
+  }
+  .image {
+    margin: 0 auto;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+  }
+  .admin-keyword-search {
+    border-radius: 4px 4px 0 0; /*TL TR BR BL*/
+  }
+  .admin-profile-inner-wrapper {
+    display: flex;
+
+    padding: 0.75rem;
+    .sort-wrapper {
+      display: flex;
+      justify-content: space-around;
+
+      .arrow {
+        opacity: 0.4;
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
+  .admin-profile-inner-wrapper:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  Button {
+    margin: 0 auto;
+  }
+
+  .item {
+    height: auto;
+    overflow-y: auto;
+    text-align: center;
+    width: (100% / 6);
+    font-size: 0.8em;
+    border-left: 1px solid $border-colour;
+  }
+
+  .item + .wider-item {
+    text-align: left;
+    width: $description-width;
+    padding: 0 0.6em;
+  }
+  .review-item {
+    border: $border-colour 1px solid;
+    padding: 0.4em;
+    text-align: left;
+  }
+
+  h6 {
+    margin: 0;
+  }
+}
+
+/* Responsive layout */
+@media (max-width: 812px) {
+  .admin-profile-view-wrapper {
+    .heading {
+      display: none;
+    }
+    .admin-profile-inner-wrapper {
+      flex-direction: column;
+    }
+    .item {
+      width: 100% !important;
+    }
+    .item + .wider-item {
+      width: 100% !important;
+    }
+  }
+}

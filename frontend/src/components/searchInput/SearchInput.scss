@@ -1,0 +1,113 @@
+@import '../../index.scss';
+
+.search-input-wrapper {
+  width: 60%;
+  margin: 0 auto;
+  /* form starting stylings ------------------------------- */
+  input {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    font-size: 1rem;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 100%;
+    border: none;
+  }
+  input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.8);
+  }
+
+  /* LABEL ======================================= */
+  label {
+    color: $main-font-colour;
+    font-size: 0.7em;
+    font-weight: normal;
+    text-decoration: uppercase;
+    width: 100%;
+    margin: 0 auto;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+  }
+
+  /* active state */
+  input:focus ~ label,
+  input:valid ~ label {
+    top: -20px;
+    font-size: 14px;
+    color: $main-font-colour;
+  }
+
+  /* BOTTOM BARS ================================= */
+  .bar {
+    position: relative;
+    display: block;
+    width: 100%;
+    margin-top: 6px;
+    border-radius: 2px;
+  }
+  .bar:before,
+  .bar:after {
+    content: '';
+    height: 2px;
+    width: 0;
+    bottom: 1px;
+    position: absolute;
+    background: $main-font-colour;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+  }
+  .bar:before {
+    left: 50%;
+  }
+  .bar:after {
+    right: 50%;
+  }
+
+  /* active state */
+  input:focus ~ .bar:before,
+  input:focus ~ .bar:after {
+    width: 50%;
+  }
+
+  /* ANIMATIONS ================ */
+  @-webkit-keyframes inputHighlighter {
+    from {
+      background: $main-font-colour;
+    }
+    to {
+      width: 0;
+      background: transparent;
+    }
+  }
+  @-moz-keyframes inputHighlighter {
+    from {
+      background: $main-font-colour;
+    }
+    to {
+      width: 0;
+      background: transparent;
+    }
+  }
+  @keyframes inputHighlighter {
+    from {
+      background: $main-font-colour;
+    }
+    to {
+      width: 0;
+      background: transparent;
+    }
+  }
+}
+
+/* Responsive layout */
+@media (max-width: 812px) {
+  .search-input-wrapper {
+    width: 100%;
+    input {
+      width: 100%;
+    }
+  }
+}
