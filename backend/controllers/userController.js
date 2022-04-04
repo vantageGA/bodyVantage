@@ -83,19 +83,19 @@ const registerUser = asyncHandler(async (req, res) => {
 
     // send mail with defined transport object
     let info = await transporter.sendMail({
-      from: '"Info Check-A-Sport" <info@trilogywebsolutions.co.uk>', // sender address
+      from: '"Body Vantage" <software@bodyvantage.co.uk>', // sender address
       to: `${user.email}`, // list of receivers
       bcc: 'me@garyallin.uk',
-      subject: 'Check-A-Sport Registration', // Subject line
-      text: 'Check-A-Sport Registration', // plain text body
+      subject: 'Body Vantage Registration', // Subject line
+      text: 'Body Vantage Registration', // plain text body
       html: `
       <h1>Hi ${user.name}</h1>
-      <p>You have successfully registered with Check-A-Sport</p>
+      <p>You have successfully registered with Body Vantage</p>
       <p>Please Click on the link to verify your email.</p>
       <br>
       <h4>Please note, in order to get full functionality you must confirm your mail address with the link below.</h4>
       <p><a href=${link} id='link'>Click here to verify</a></p>
-      <p>Thank you Check-A-Sport management</p>
+      <p>Thank you. Body Vantage management</p>
           
        
       `, // html body

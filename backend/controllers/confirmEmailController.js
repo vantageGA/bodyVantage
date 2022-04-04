@@ -20,7 +20,11 @@ const updateConfirmEmail = asyncHandler(async (req, res) => {
   if (user) {
     user.isConfirmed = true;
     await user.save();
-    return res.status(200).send({ message: 'Account Verified' });
+    if (process.env.NODE_ENV === 'production') {
+      return res.redirect('https://bodyvantage.herokuapp.com/');
+    } else {
+      return res.status(200).send({ message: 'Account Verified' });
+    }
   } else {
     res.status(404);
     throw new Error('No user found');

@@ -13,9 +13,10 @@ const RegistrationView = () => {
   const nameRegEx = /^([\w])+\s+([\w\s])+$/i;
   const emailRegEx =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
-  const passwordRegEx = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/;
+  const passwordRegEx =
+    /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
   const passwordConfirmRegEx =
-    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/;
+    /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -70,6 +71,7 @@ const RegistrationView = () => {
           <form onSubmit={handleSubmit}>
             <InputField
               label="Name"
+              placeholder="Ben Smith"
               value={name}
               onChange={(e) => setName(e.target.value)}
               type="text"
@@ -78,7 +80,7 @@ const RegistrationView = () => {
               className={!nameRegEx.test(name) ? 'invalid' : 'entered'}
               error={
                 !nameRegEx.test(name) && name.length !== 0
-                  ? `Name field must start with an uppercase letter and contain at least 3 letters and have no white space.`
+                  ? `Name field must contain a first name and surname both of which must start with a capital letter.`
                   : null
               }
             />
@@ -105,7 +107,7 @@ const RegistrationView = () => {
               className={!passwordRegEx.test(password) ? 'invalid' : 'entered'}
               error={
                 !passwordRegEx.test(password) && password.length !== 0
-                  ? `Password must contain at least 1 uppercase letter and a number`
+                  ? `Password must contain at least l Capital letter, 1 number and 1 special character.`
                   : null
               }
               onChange={(e) => setPassword(e.target.value)}
@@ -125,7 +127,7 @@ const RegistrationView = () => {
               error={
                 !passwordConfirmRegEx.test(confirmPassword) &&
                 confirmPassword.length !== 0
-                  ? `Password must contain at least 1 uppercase letter and a number`
+                  ? `Password must contain at least l Capital letter, 1 number and 1 special character.`
                   : null
               }
               onChange={(e) => setConfirmPassword(e.target.value)}
