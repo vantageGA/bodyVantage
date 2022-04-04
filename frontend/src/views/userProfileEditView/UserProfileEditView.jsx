@@ -150,7 +150,7 @@ const UserProfileEditView = () => {
                 className={!nameRegEx.test(name) ? 'invalid' : 'entered'}
                 error={
                   !nameRegEx.test(name) && name.length !== 0
-                    ? `Name field must start with an uppercase letter and contain at least 3 letters.`
+                    ? `Name field must contain a first name and surname both of which must start with a capital letter.`
                     : null
                 }
               />

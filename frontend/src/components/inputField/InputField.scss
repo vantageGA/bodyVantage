@@ -68,7 +68,17 @@
   input[type='tel'].invalid {
     border-left: $secondary-bg-colour 4px solid;
   }
-
+  .input-icon-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    div {
+      font-size: 1.4em;
+      cursor: pointer;
+      padding-top: 6px;
+      color: $main-font-colour;
+    }
+  }
   margin-bottom: 0.4rem;
   margin-top: 0.4rem;
 }

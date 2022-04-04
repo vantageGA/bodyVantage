@@ -90,7 +90,7 @@ const HomeView = () => {
               type="search"
               value={keyword}
               handleSearch={handleSearch}
-              label="SEARCH FOR A PT AND LOCATION"
+              label="Search fat loss Guildford for example"
             />
           </div>
           {keyword.length > 0 ? (
