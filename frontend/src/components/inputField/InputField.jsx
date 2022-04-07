@@ -19,7 +19,7 @@ const InputField = ({
   const [onlyPassword, setOnlyPassword] = useState(true);
 
   useEffect(() => {
-    if (inputFocus.current.type === 'text') {
+    if (inputFocus.current.type === 'name') {
       inputFocus.current.focus();
     }
     if (inputFocus.current.type !== 'password') {
