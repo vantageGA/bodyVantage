@@ -1,6 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import generateToken from '../utils/generateToken.js';
 import User from '../models/userModel.js';
+import ProfileImages from '../models/profileImageModal.js';
 import nodemailer from 'nodemailer';
 
 // @description: Get All the users Profiles
@@ -140,10 +141,14 @@ const getUserProfile = asyncHandler(async (req, res) => {
 const updateUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
 
+  const profileImage = await ProfileImages.find({ user: req.params.id });
+  const profileImgLength = profileImage.length - 1;
+
   if (user) {
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
-    user.profileImage = req.body.profileImage || user.profileImage;
+    user.profileImage = profileImage[profileImgLength].avatar;
+    user.cloudinaryId = profileImage[profileImgLength].cloudinaryId;
 
     if (req.body.password) {
       user.password = req.body.password;
@@ -155,6 +160,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       name: updatedUser.name,
       email: updatedUser.email,
       profileImage: updatedUser.profileImage,
+      cloudinaryId: updatedUser.cloudinaryId,
       isAdmin: updatedUser.isAdmin,
       token: generateToken(updatedUser._id),
     });
