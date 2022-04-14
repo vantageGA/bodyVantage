@@ -3,14 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import './UserProfileEditView.scss';
 
-import axios from 'axios';
-
 import {
   getUserDetailsAction,
   updateUserProfileAction,
 } from '../../store/actions/userActions';
 import { USER_UPDATE_PROFILE_RESET } from '../../store/constants/userConstants';
 import { profileOfLoggedInUserAction } from '../../store/actions/profileActions';
+import { profileImageUploadAction } from '../../store/actions/imageUploadActions';
 
 import InputField from '../../components/inputField/InputField';
 import Button from '../../components/button/Button';
@@ -42,12 +41,15 @@ const UserProfileEditView = () => {
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [profileImage, setProfileImage] = useState('');
+
   const [uploading, setUploading] = useState(false);
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [hidePassword, setHidePassword] = useState(true);
   const [message, setMessage] = useState('');
+
+  const [previewImage, setPreviewImage] = useState('');
+  const [previewImageFile, setPreviewImageFile] = useState('');
 
   useEffect(() => {
     if (!userInfo) {
@@ -64,17 +66,17 @@ const UserProfileEditView = () => {
         dispatch(getUserDetailsAction(userInfo._id));
       } else {
         setName(user.name);
-        setProfileImage(profileImage);
         setEmail(user.email);
       }
     }
     dispatch(profileOfLoggedInUserAction());
+
     const abortConst = new AbortController();
     return () => {
       abortConst.abort();
       console.log('useEffect cleaned');
     };
-  }, [dispatch, navigate, user, userInfo, profileImage]);
+  }, [dispatch, navigate, user, userInfo]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -88,7 +90,6 @@ const UserProfileEditView = () => {
           updateUserProfileAction({
             id: user._id,
             name,
-            profileImage,
             email,
             password,
           }),
@@ -101,31 +102,32 @@ const UserProfileEditView = () => {
     }
   };
 
-  const uploadFileHandler = async (e) => {
-    const file = e.target.files[0];
-    const formData = new FormData();
-    formData.append('profileImage', file);
-    setUploading(true);
+  const previewFile = (imageFile) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(imageFile);
+    reader.onload = () => {
+      setPreviewImage(reader.result);
+    };
+  };
 
-    try {
-      const config = {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      };
+  const uploadFileHandler = (e) => {
+    const imageFile = e.target.files[0];
+    setPreviewImageFile(imageFile);
+    previewFile(imageFile);
+  };
 
-      const { data } = await axios.post(
-        'http://localhost:5000/api/profileUpload',
-        formData,
-        config,
-      );
+  const handleImageUpdate = (e) => {
+    e.preventDefault();
+    const formImageData = new FormData();
+    formImageData.append('profileImage', previewImageFile);
+    //Dispatch upload action here
+    dispatch(profileImageUploadAction(formImageData, userInfo._id));
+    setPreviewImage('');
+  };
 
-      setProfileImage(data);
-      setUploading(false);
-    } catch (error) {
-      console.log(error);
-      setUploading(false);
-    }
+  const handleCancelImageUpload = () => {
+    document.querySelector('#profileImage').value = '';
+    setPreviewImage('');
   };
 
   return (
@@ -138,7 +140,7 @@ const UserProfileEditView = () => {
       ) : (
         <>
           <fieldset className="fieldSet item">
-            <legend>Update USER form</legend>
+            <legend>UPDATE USER INFO</legend>
             <form onSubmit={handleSubmit}>
               <InputField
                 label="Name"
@@ -166,19 +168,6 @@ const UserProfileEditView = () => {
                     ? `Invalid email address.`
                     : null
                 }
-              />
-              <InputField
-                label="Profile Image"
-                type="text"
-                name="profileImage"
-                value={profileImage}
-                onChange={(e) => setProfileImage(e.target.value)}
-              />
-              {uploading ? <LoadingSpinner /> : null}
-              <InputField
-                type="file"
-                name="files"
-                onChange={uploadFileHandler}
               />
 
               <label>
@@ -242,15 +231,33 @@ const UserProfileEditView = () => {
           </fieldset>
 
           <fieldset className="fieldSet item">
-            <legend>{user.name} Profile</legend>
-
+            <legend>USER {user.name}</legend>
             <span className="small-text">ID: {user._id}</span>
-            <img
-              src={`../uploads/profiles/${user.profileImage}`}
-              alt={user.name}
-              className="image"
-            />
-
+            <img src={user.profileImage} alt={user.name} className="image" />
+            <form onSubmit={handleImageUpdate}>
+              <InputField
+                id="profileImage"
+                label="Change Profile Image"
+                type="file"
+                name="profileImage"
+                onChange={uploadFileHandler}
+              />
+              {previewImage ? (
+                <>
+                  Image Preview
+                  <img
+                    src={previewImage}
+                    alt="profile"
+                    style={{ width: '120px' }}
+                  />
+                  <button>I Like it</button>
+                  <button type="button" onClick={handleCancelImageUpload}>
+                    I Dont Like it
+                  </button>
+                </>
+              ) : null}
+              {uploading ? <LoadingSpinner /> : null}
+            </form>
             <p>Name: {user.name}</p>
             <p>Email address: {user.email}</p>
             <p>

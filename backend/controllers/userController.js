@@ -128,6 +128,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
       isAdmin: user.isAdmin,
       isConfirmed: user.isConfirmed,
       profileImage: user.profileImage,
+      cloudinaryId: user.cloudinaryId,
     });
   } else {
     res.status(404);
@@ -141,14 +142,14 @@ const getUserProfile = asyncHandler(async (req, res) => {
 const updateUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
 
-  const profileImage = await ProfileImages.find({ user: req.params.id });
-  const profileImgLength = profileImage.length - 1;
+  // const profileImage = await ProfileImages.find({ user: req.params.id });
+  // const profileImgLength = profileImage.length - 1;
 
   if (user) {
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
-    user.profileImage = profileImage[profileImgLength].avatar;
-    user.cloudinaryId = profileImage[profileImgLength].cloudinaryId;
+    // user.profileImage = profileImage[profileImgLength].avatar;
+    // user.cloudinaryId = profileImage[profileImgLength].cloudinaryId;
 
     if (req.body.password) {
       user.password = req.body.password;
@@ -159,8 +160,8 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       _id: updatedUser._id,
       name: updatedUser.name,
       email: updatedUser.email,
-      profileImage: updatedUser.profileImage,
-      cloudinaryId: updatedUser.cloudinaryId,
+      // profileImage: updatedUser.profileImage,
+      // cloudinaryId: updatedUser.cloudinaryId,
       isAdmin: updatedUser.isAdmin,
       token: generateToken(updatedUser._id),
     });

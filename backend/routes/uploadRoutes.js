@@ -65,13 +65,18 @@ router.post('/', protect, upload.single('profileImage'), async (req, res) => {
         cloudinaryId: result.public_id,
       });
 
+      //Update the user
+      user.profileImage = result.secure_url;
+      user.cloudinaryId = result.public_id;
+      await user.save();
+
       //Save user profile
       await profileImage.save();
       res.status(200).json(profileImage);
     }
   } catch (error) {
     res.status(401).json(error);
-    // throw new Error(`Image not uploaded. ${error}`);
+    throw new Error(`Image not uploaded. ${error}`);
   }
 });
 
