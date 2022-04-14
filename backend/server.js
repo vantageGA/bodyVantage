@@ -8,7 +8,7 @@ import contactFormRoutes from './routes/contactFormRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import confirmEmailRoutes from './routes/confirmEmailRoutes.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
-import imageUploaderRoutes from './routes/imageUploadRoutes.js';
+import userProfileImageUpload from './routes/imageUploadRoutes.js';
 import profileRoutes from './routes/profileRoutes.js';
 import authUserReview from './routes/userReviewRoutes.js';
 import userReviewRoutes from './routes/userReviewRoutes.js';
@@ -32,7 +32,7 @@ app.use('/api', authUserReview);
 // User REVIEWER routes
 app.use('/api', userReviewRoutes);
 //Profile Image upload rout
-app.use('/api', imageUploaderRoutes);
+app.use('/api', userProfileImageUpload);
 
 //create static folder
 const __dirname = path.resolve();
