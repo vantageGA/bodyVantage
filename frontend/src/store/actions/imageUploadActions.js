@@ -1,18 +1,17 @@
 import axios from 'axios';
 import {
-  PROFILE_IMAGE_UPLOAD_FAILURE,
-  PROFILE_IMAGE_UPLOAD_REQUEST,
-  PROFILE_IMAGE_UPLOAD_SUCCESS,
+  USER_PROFILE_IMAGE_UPLOAD_FAILURE,
+  USER_PROFILE_IMAGE_UPLOAD_REQUEST,
+  USER_PROFILE_IMAGE_UPLOAD_SUCCESS,
 } from '../constants/uploadImageConstants';
 
 import { getUserDetailsAction } from './userActions';
 
-export const profileImageUploadAction =
+export const userProfileImageUploadAction =
   (imageFormData, id) => async (dispatch, getState) => {
-    console.log('FFFFFFF', imageFormData, id);
     try {
       dispatch({
-        type: PROFILE_IMAGE_UPLOAD_REQUEST,
+        type: USER_PROFILE_IMAGE_UPLOAD_REQUEST,
       });
 
       const {
@@ -27,20 +26,20 @@ export const profileImageUploadAction =
       };
 
       const { data } = await axios.post(
-        '/api/profileUpload',
+        '/api/userProfileUpload',
         imageFormData,
         config,
       );
 
       dispatch({
-        type: PROFILE_IMAGE_UPLOAD_SUCCESS,
+        type: USER_PROFILE_IMAGE_UPLOAD_SUCCESS,
         payload: data,
       });
 
       dispatch(getUserDetailsAction(id));
     } catch (error) {
       dispatch({
-        type: PROFILE_IMAGE_UPLOAD_FAILURE,
+        type: USER_PROFILE_IMAGE_UPLOAD_FAILURE,
         payload:
           error.response && error.response.data.message
             ? error.response.data.message
