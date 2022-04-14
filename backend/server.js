@@ -32,7 +32,7 @@ app.use('/api', authUserReview);
 // User REVIEWER routes
 app.use('/api', userReviewRoutes);
 //Profile Image upload rout
-app.use('/api/userProfileUpload', imageUploadRoutes);
+app.use('/api/', imageUploadRoutes);
 
 //create static folder
 const __dirname = path.resolve();
