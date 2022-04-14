@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const InputField = ({
+  id,
   type,
   label,
   name,
@@ -51,6 +52,7 @@ const InputField = ({
         ) : null}
       </div>
       <input
+        id={id}
         ref={inputFocus}
         type={type}
         name={name}
