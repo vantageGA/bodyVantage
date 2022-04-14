@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const profileImageSchema = mongoose.Schema(
+const userProfileImageSchema = mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
@@ -22,6 +22,9 @@ const profileImageSchema = mongoose.Schema(
   },
 );
 
-const ProfileImages = mongoose.model('ProfileImages', profileImageSchema);
+const UserProfileImages = mongoose.model(
+  'UserProfileImages',
+  userProfileImageSchema,
+);
 
-export default ProfileImages;
+export default UserProfileImages;
