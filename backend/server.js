@@ -24,7 +24,7 @@ app.use(express.json()); // This needed to accept json data
 app.use('/api', confirmEmailRoutes);
 app.use('/api', contactFormRoutes);
 app.use('/api', userRoutes);
-app.use('/api', imageUploaderRoutes);
+
 // Profiles Routes
 app.use('/api', profileRoutes);
 // User Review routes
