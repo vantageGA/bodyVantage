@@ -9,7 +9,7 @@ import {
 } from '../../store/actions/userActions';
 import { USER_UPDATE_PROFILE_RESET } from '../../store/constants/userConstants';
 import { profileOfLoggedInUserAction } from '../../store/actions/profileActions';
-import { profileImageUploadAction } from '../../store/actions/imageUploadActions';
+import { userProfileImageUploadAction } from '../../store/actions/imageUploadActions';
 
 import InputField from '../../components/inputField/InputField';
 import Button from '../../components/button/Button';
@@ -116,17 +116,17 @@ const UserProfileEditView = () => {
     previewFile(imageFile);
   };
 
-  const handleImageUpdate = (e) => {
+  const handleUserProfileImageUpdate = (e) => {
     e.preventDefault();
     const formImageData = new FormData();
-    formImageData.append('profileImage', previewImageFile);
+    formImageData.append('userProfileImage', previewImageFile);
     //Dispatch upload action here
-    dispatch(profileImageUploadAction(formImageData, userInfo._id));
+    dispatch(userProfileImageUploadAction(formImageData, userInfo._id));
     setPreviewImage('');
   };
 
   const handleCancelImageUpload = () => {
-    document.querySelector('#profileImage').value = '';
+    document.querySelector('#userProfileImage').value = '';
     setPreviewImage('');
   };
 
@@ -234,12 +234,12 @@ const UserProfileEditView = () => {
             <legend>USER {user.name}</legend>
             <span className="small-text">ID: {user._id}</span>
             <img src={user.profileImage} alt={user.name} className="image" />
-            <form onSubmit={handleImageUpdate}>
+            <form onSubmit={handleUserProfileImageUpdate}>
               <InputField
-                id="profileImage"
-                label="Change Profile Image"
+                id="userProfileImage"
+                label="Change USER Profile Image"
                 type="file"
-                name="profileImage"
+                name="userProfileImage"
                 onChange={uploadFileHandler}
               />
               {previewImage ? (

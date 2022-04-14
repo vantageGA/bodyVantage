@@ -8,7 +8,7 @@ import contactFormRoutes from './routes/contactFormRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import confirmEmailRoutes from './routes/confirmEmailRoutes.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
-import uploaderRoutes from './routes/uploadRoutes.js';
+import imageUploaderRoutes from './routes/imageUploadRoutes.js';
 import profileRoutes from './routes/profileRoutes.js';
 import authUserReview from './routes/userReviewRoutes.js';
 import userReviewRoutes from './routes/userReviewRoutes.js';
@@ -24,7 +24,7 @@ app.use(express.json()); // This needed to accept json data
 app.use('/api', confirmEmailRoutes);
 app.use('/api', contactFormRoutes);
 app.use('/api', userRoutes);
-app.use('/api', uploaderRoutes);
+app.use('/api', imageUploaderRoutes);
 // Profiles Routes
 app.use('/api', profileRoutes);
 // User Review routes
@@ -32,7 +32,7 @@ app.use('/api', authUserReview);
 // User REVIEWER routes
 app.use('/api', userReviewRoutes);
 //Profile Image upload rout
-app.use('/api/profileUpload', uploaderRoutes);
+app.use('/api', imageUploaderRoutes);
 
 //create static folder
 const __dirname = path.resolve();
