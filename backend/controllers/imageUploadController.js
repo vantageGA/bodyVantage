@@ -38,6 +38,7 @@ const userProfileImageUpload = asyncHandler(async (req, res) => {
       user.profileImage = result.secure_url;
       user.cloudinaryId = result.public_id;
       await user.save();
+      res.status(200).json(user);
 
       //Save user profile
       await profileImage.save();
