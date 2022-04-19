@@ -36,6 +36,6 @@ const upload = multer({
 
 router
   .route('/userProfileUpload')
-  .post(upload.single('userProfileImage'), protect, userProfileImageUpload);
+  .post(upload.single('userProfileImage'), userProfileImageUpload);
 
 export default router;
