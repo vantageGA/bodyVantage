@@ -13,7 +13,7 @@ import './LoginFormView.scss';
 const LoginFormView = () => {
   const navigate = useNavigate();
 
-  const passwordRegEx = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/;
+  const passwordRegEx = /([^\s])/;
   const emailRegEx =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
 
@@ -63,10 +63,10 @@ const LoginFormView = () => {
               name={password}
               value={password}
               required
-              className={!passwordRegEx.test(password) ? 'invalid' : 'entered'}
+              className={!password.length ? 'invalid' : 'entered'}
               error={
                 !passwordRegEx.test(password) && password.length !== 0
-                  ? `Password must contain at least 1 uppercase letter and a number`
+                  ? `Password can not be empty`
                   : null
               }
               onChange={(e) => setPassword(e.target.value)}
@@ -76,9 +76,7 @@ const LoginFormView = () => {
               colour="transparent"
               text="submit"
               className="btn"
-              disabled={
-                !passwordRegEx.test(password) || !emailRegEx.test(email)
-              }
+              disabled={!password.length || !emailRegEx.test(email)}
             ></Button>
           </form>
         </fieldset>
