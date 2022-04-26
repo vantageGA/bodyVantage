@@ -41,8 +41,7 @@ const UserProfileEditView = () => {
 
   // Profile image upload
   const userProfileImage = useSelector((state) => state.userProfileImage);
-  const { loading: userProfileImageLoading, success: userProfileImageSuccess } =
-    userProfileImage;
+  const { loading: userProfileImageLoading } = userProfileImage;
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -238,7 +237,7 @@ const UserProfileEditView = () => {
             <legend>USER {user.name}</legend>
             <span className="small-text">ID: {user._id}</span>
             {userProfileImageLoading ? <LoadingSpinner /> : null}
-            {user.profileImage && userProfileImageSuccess ? (
+            {user.profileImage ? (
               <img src={user.profileImage} alt={user.name} className="image" />
             ) : (
               <p>'No profile image'</p>
