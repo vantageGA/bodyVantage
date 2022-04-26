@@ -39,10 +39,14 @@ const UserProfileEditView = () => {
   // Profile details in DB
   useSelector((state) => state.profileOfLoggedInUser);
 
+  // Profile image upload
+  const userProfileImage = useSelector((state) => state.userProfileImage);
+  const { loading: userProfileImageLoading, success: userProfileImageSuccess } =
+    userProfileImage;
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
 
-  const [uploading, setUploading] = useState(false);
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [hidePassword, setHidePassword] = useState(true);
@@ -121,7 +125,7 @@ const UserProfileEditView = () => {
     const formImageData = new FormData();
     formImageData.append('userProfileImage', previewImageFile);
     //Dispatch upload action here
-    dispatch(userProfileImageUploadAction(formImageData, userInfo._id));
+    dispatch(userProfileImageUploadAction(formImageData));
     setPreviewImage('');
   };
 
@@ -233,7 +237,13 @@ const UserProfileEditView = () => {
           <fieldset className="fieldSet item">
             <legend>USER {user.name}</legend>
             <span className="small-text">ID: {user._id}</span>
-            <img src={user.profileImage} alt={user.name} className="image" />
+            {userProfileImageLoading ? <LoadingSpinner /> : null}
+            {user.profileImage && userProfileImageSuccess ? (
+              <img src={user.profileImage} alt={user.name} className="image" />
+            ) : (
+              <p>'No profile image'</p>
+            )}
+
             <form onSubmit={handleUserProfileImageUpdate}>
               <InputField
                 id="userProfileImage"
@@ -244,7 +254,7 @@ const UserProfileEditView = () => {
               />
               {previewImage ? (
                 <>
-                  Image Preview GGG
+                  Image Preview
                   <img
                     src={previewImage}
                     alt="profile"
@@ -256,7 +266,6 @@ const UserProfileEditView = () => {
                   </button>
                 </>
               ) : null}
-              {uploading ? <LoadingSpinner /> : null}
             </form>
             <p>Name: {user.name}</p>
             <p>Email address: {user.email}</p>

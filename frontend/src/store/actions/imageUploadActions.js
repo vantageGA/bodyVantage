@@ -8,7 +8,7 @@ import {
 import { getUserDetailsAction } from './userActions';
 
 export const userProfileImageUploadAction =
-  (imageFormData, id) => async (dispatch, getState) => {
+  (imageFormData) => async (dispatch, getState) => {
     try {
       dispatch({
         type: USER_PROFILE_IMAGE_UPLOAD_REQUEST,
@@ -25,6 +25,8 @@ export const userProfileImageUploadAction =
         },
       };
 
+      console.log(userInfo);
+
       const { data } = await axios.post(
         '/api/userProfileUpload',
         imageFormData,
@@ -36,7 +38,7 @@ export const userProfileImageUploadAction =
         payload: data,
       });
 
-      dispatch(getUserDetailsAction(id));
+      dispatch(getUserDetailsAction(userInfo._id));
     } catch (error) {
       dispatch({
         type: USER_PROFILE_IMAGE_UPLOAD_FAILURE,
