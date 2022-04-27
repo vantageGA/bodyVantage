@@ -9,6 +9,8 @@ import {
   profileUpdateAction,
 } from '../../store/actions/profileActions';
 
+import { profileImageUploadAction } from '../../store/actions/imageUploadActions';
+
 import InputField from '../../components/inputField/InputField';
 import Button from '../../components/button/Button';
 import Message from '../../components/message/Message';
@@ -198,32 +200,65 @@ const ProfileEditView = () => {
     !telephoneNumberRegEx.test(telephoneNumber) ||
     keyWordSearch?.length <= 10;
 
-  const uploadFileHandler = async (e) => {
-    const file = e.target.files[0];
-    const formData = new FormData();
-    formData.append('profileImage', file);
-    setUploading(true);
+  // const uploadFileHandler = async (e) => {
+  //   const file = e.target.files[0];
+  //   const formData = new FormData();
+  //   formData.append('profileImage', file);
+  //   setUploading(true);
 
-    try {
-      const config = {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      };
+  //   try {
+  //     const config = {
+  //       headers: {
+  //         'Content-Type': 'multipart/form-data',
+  //       },
+  //     };
 
-      const { data } = await axios.post(
-        'http://localhost:5000/api/profileUpload',
-        formData,
-        config,
-      );
+  //     const { data } = await axios.post(
+  //       'http://localhost:5000/api/profileUpload',
+  //       formData,
+  //       config,
+  //     );
 
-      setProfileImage(data);
-      setUploading(false);
-    } catch (error) {
-      console.log(error);
-      setUploading(false);
-    }
+  //     setProfileImage(data);
+  //     setUploading(false);
+  //   } catch (error) {
+  //     console.log(error);
+  //     setUploading(false);
+  //   }
+  // };
+
+  // Profile image
+  const [previewImage, setPreviewImage] = useState('');
+  const [previewImageFile, setPreviewImageFile] = useState('');
+  const previewFile = (imageFile) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(imageFile);
+    reader.onload = () => {
+      setPreviewImage(reader.result);
+    };
   };
+
+  const uploadFileHandler = (e) => {
+    const imageFile = e.target.files[0];
+    setPreviewImageFile(imageFile);
+    previewFile(imageFile);
+  };
+
+  const handleProfileImageUpdate = (e) => {
+    e.preventDefault();
+    const formImageData = new FormData();
+    formImageData.append('profileImage', previewImageFile);
+    //Dispatch upload action here
+    dispatch(profileImageUploadAction(formImageData));
+    setPreviewImage('');
+  };
+
+  const handleCancelImageUpload = () => {
+    document.querySelector('#profileImage').value = '';
+    setPreviewImage('');
+  };
+
+  // USER Profile image
 
   const handleShowCombinations = () => {
     setShow(!show);
@@ -271,7 +306,6 @@ const ProfileEditView = () => {
                 className={name?.length === 0 ? 'invalid' : 'entered'}
                 error={name?.length === 0 ? `Name field cant be empty!` : null}
               />
-
               <InputField
                 label="Email"
                 type="email"
@@ -283,7 +317,7 @@ const ProfileEditView = () => {
                   !emailRegEx.test(email) ? `Invalid email address.` : null
                 }
               />
-
+              {/* XXXXXXX
               <InputField
                 label="Profile Image"
                 type="text"
@@ -296,8 +330,7 @@ const ProfileEditView = () => {
                 type="file"
                 name="files"
                 onChange={uploadFileHandler}
-              />
-
+              /> */}
               <div>
                 {description?.length < 10 ? (
                   <span className="small-text">
@@ -315,7 +348,6 @@ const ProfileEditView = () => {
                   />
                 </div>
               </div>
-
               <h3>Search Keyword(s)</h3>
               <div className="input-wrapper">
                 <InputField
@@ -446,7 +478,6 @@ const ProfileEditView = () => {
                   </div>
                 </div>
               </div>
-
               <h3>Specialisation Keyword(s)</h3>
               <div className="input-wrapper">
                 <InputField
@@ -517,7 +548,6 @@ const ProfileEditView = () => {
                   }
                 />
               </div>
-
               <h3>Specialisation</h3>
               <div className="input-border">
                 <label>Specialisation</label>
@@ -529,7 +559,6 @@ const ProfileEditView = () => {
                   }
                 />
               </div>
-
               <h3>Qualifications</h3>
               <div className="input-border">
                 <label>Qualifications</label>
@@ -541,7 +570,6 @@ const ProfileEditView = () => {
                   }
                 />
               </div>
-
               <h3>Location</h3>
               <div className="input-border">
                 <label>Location</label>
@@ -559,7 +587,6 @@ const ProfileEditView = () => {
                   }
                 />
               </div>
-
               <InputField
                 label="Telephone Number"
                 value={telephoneNumber}
@@ -579,7 +606,6 @@ const ProfileEditView = () => {
                     : null
                 }
               />
-
               <Button
                 type="submit"
                 colour="transparent"
@@ -609,11 +635,31 @@ const ProfileEditView = () => {
                 <p>Create: {moment(profile?.createdAt).fromNow()}</p>
                 <p>Updated: {moment(profile?.updatedAt).fromNow()}</p>
               </div>
-              <img
-                src={`../uploads/profiles/${profileImage}`}
-                alt={name}
-                className="image"
-              />
+
+              <img src={profileImage} alt={name} className="image" />
+              <form onSubmit={handleProfileImageUpdate}>
+                <InputField
+                  id="profileImage"
+                  label="Change PROFILE Image"
+                  type="file"
+                  name="profileImage"
+                  onChange={uploadFileHandler}
+                />
+                {previewImage ? (
+                  <>
+                    Image Preview
+                    <img
+                      src={previewImage}
+                      alt="profile"
+                      style={{ width: '120px' }}
+                    />
+                    <button>I Like it</button>
+                    <button type="button" onClick={handleCancelImageUpload}>
+                      I Dont Like it
+                    </button>
+                  </>
+                ) : null}
+              </form>
             </div>
 
             <h3>Description</h3>

@@ -51,6 +51,9 @@ const profileSchema = mongoose.Schema(
     profileImage: {
       type: String,
     },
+    cloudinaryId: {
+      type: String,
+    },
     description: {
       type: String,
     },
