@@ -105,6 +105,7 @@ const UserProfileEditView = () => {
     }
   };
 
+  // USER Profile image
   const previewFile = (imageFile) => {
     const reader = new FileReader();
     reader.readAsDataURL(imageFile);
@@ -132,6 +133,11 @@ const UserProfileEditView = () => {
     document.querySelector('#userProfileImage').value = '';
     setPreviewImage('');
   };
+
+  // USER Profile image
+  // PROFILE image
+
+  // PROFILE image
 
   return (
     <div className="user-profile-wrapper">
@@ -266,6 +272,7 @@ const UserProfileEditView = () => {
                 </>
               ) : null}
             </form>
+
             <p>Name: {user.name}</p>
             <p>Email address: {user.email}</p>
             <p>

@@ -138,7 +138,7 @@ const HomeView = () => {
                           }}
                         ></span>
                       }
-                      src={`uploads/profiles/${profile.profileImage}`}
+                      src={profile.profileImage}
                       alt={profile.name}
                       description={
                         <p

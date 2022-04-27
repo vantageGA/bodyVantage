@@ -50,7 +50,7 @@ const FullProfileView = () => {
                   ref={ref}
                   className="item bg-image"
                   style={{
-                    backgroundImage: `url(../uploads/profiles/${profile?.profileImage})`,
+                    backgroundImage: `url(${profile?.profileImage})`,
                   }}
                 >
                   <div className="specialisation-wrapper">
