@@ -35,7 +35,10 @@ import {
   adminReviewerDeleteReducer,
 } from './reducers/userReviewReducer';
 
-import { userProfileImageReducer } from './reducers/imageUploadReducers';
+import {
+  userProfileImageReducer,
+  profileImageReducer,
+} from './reducers/imageUploadReducers';
 
 import { cookiesReducer } from './reducers/cookiesReducer';
 
@@ -59,6 +62,7 @@ const reducer = combineReducers({
   profileDelete: profileDeleteReducer,
   profileVerifyQualification: profileVerifyQualificationReducer,
   profileDeleteReview: profileDeleteReviewReducer,
+  profileImage: profileImageReducer,
   userProfileImage: userProfileImageReducer,
   userReviewLogin: userReviewLoginReducer,
   userReviewId: userReviewIdReducer,
