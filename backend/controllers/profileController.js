@@ -49,7 +49,7 @@ const createProfile = asyncHandler(async (req, res) => {
     user: req.user._id,
     name: 'Sample name',
     email: 'sample1@mail.com',
-    profileImage: 'sample.png',
+    profileImage: 'uploads/profiles/sample.png',
     specialisation: 'sample Specialisation',
     location: 'Sample Location',
     qualifications: 'Sample QUALIFICATIONS',

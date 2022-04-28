@@ -98,7 +98,7 @@ const AdminView = () => {
                     <p>{userProfile.name}</p>
                     <img
                       className="image"
-                      src={`../uploads/profiles/${userProfile.profileImage}`}
+                      src={userProfile.profileImage}
                       alt={userProfile.name}
                     />
                     <p>{userProfile.email}</p>
