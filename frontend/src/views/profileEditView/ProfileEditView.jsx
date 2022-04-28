@@ -18,7 +18,6 @@ import LoadingSpinner from '../../components/loadingSpinner/LoadingSpinner';
 import Rating from '../../components/rating/Rating';
 
 import moment from 'moment';
-import axios from 'axios';
 import QuillEditor from '../../components/quillEditor/QuillEditor';
 
 const ProfileEditView = () => {
@@ -37,6 +36,10 @@ const ProfileEditView = () => {
   // Profile details in DB
   const profileState = useSelector((state) => state.profileOfLoggedInUser);
   const { loading, error, profile } = profileState;
+
+  // PROFILE image upload
+  const profileImageStore = useSelector((state) => state.profileImage);
+  const { loading: profileImageLoading } = profileImageStore;
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -200,33 +203,6 @@ const ProfileEditView = () => {
     !telephoneNumberRegEx.test(telephoneNumber) ||
     keyWordSearch?.length <= 10;
 
-  // const uploadFileHandler = async (e) => {
-  //   const file = e.target.files[0];
-  //   const formData = new FormData();
-  //   formData.append('profileImage', file);
-  //   setUploading(true);
-
-  //   try {
-  //     const config = {
-  //       headers: {
-  //         'Content-Type': 'multipart/form-data',
-  //       },
-  //     };
-
-  //     const { data } = await axios.post(
-  //       'http://localhost:5000/api/profileUpload',
-  //       formData,
-  //       config,
-  //     );
-
-  //     setProfileImage(data);
-  //     setUploading(false);
-  //   } catch (error) {
-  //     console.log(error);
-  //     setUploading(false);
-  //   }
-  // };
-
   // Profile image
   const [previewImage, setPreviewImage] = useState('');
   const [previewImageFile, setPreviewImageFile] = useState('');
@@ -317,20 +293,7 @@ const ProfileEditView = () => {
                   !emailRegEx.test(email) ? `Invalid email address.` : null
                 }
               />
-              {/* XXXXXXX
-              <InputField
-                label="Profile Image"
-                type="text"
-                name="profileImage"
-                value={profileImage ? profileImage : 'sample.jpg'}
-                onChange={(e) => setProfileImage(e.target.value)}
-              />
-              {uploading ? <LoadingSpinner /> : null}
-              <InputField
-                type="file"
-                name="files"
-                onChange={uploadFileHandler}
-              /> */}
+
               <div>
                 {description?.length < 10 ? (
                   <span className="small-text">
@@ -636,7 +599,13 @@ const ProfileEditView = () => {
                 <p>Updated: {moment(profile?.updatedAt).fromNow()}</p>
               </div>
 
-              <img src={profileImage} alt={name} className="image" />
+              {profileImageLoading ? <LoadingSpinner /> : null}
+              {profileImage ? (
+                <img src={profileImage} alt={name} className="image" />
+              ) : (
+                <p>'No profile image'</p>
+              )}
+
               <form onSubmit={handleProfileImageUpdate}>
                 <InputField
                   id="profileImage"

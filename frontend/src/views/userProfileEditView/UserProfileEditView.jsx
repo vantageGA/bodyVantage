@@ -39,7 +39,7 @@ const UserProfileEditView = () => {
   // Profile details in DB
   useSelector((state) => state.profileOfLoggedInUser);
 
-  // Profile image upload
+  // USER Profile image upload
   const userProfileImage = useSelector((state) => state.userProfileImage);
   const { loading: userProfileImageLoading } = userProfileImage;
 
