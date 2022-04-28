@@ -76,7 +76,7 @@ const HomeView = () => {
         {error ? <Message message={error} /> : null}
         <div
           style={{
-            backgroundImage: `url(uploads/profiles/${profiles[rndInt]?.profileImage})`,
+            backgroundImage: `url(${profiles[rndInt]?.profileImage})`,
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center',
             backgroundSize: 'cover',

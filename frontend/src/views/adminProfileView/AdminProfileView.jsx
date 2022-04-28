@@ -40,8 +40,6 @@ const AdminProfileView = () => {
   const profilesState = useSelector((state) => state.profilesAdmin);
   const { loading, error, success, profilesAdmin } = profilesState;
 
-  console.log('DDD', profilesAdmin);
-
   const handleDeleteProfile = (id) => {
     // Dispatch user delete action
     if (window.confirm(`Are you sure you want to delete ${id}`)) {
@@ -187,7 +185,7 @@ const AdminProfileView = () => {
                   <p>{profile.name}</p>
                   <img
                     className="image"
-                    src={`../uploads/profiles/${profile.profileImage}`}
+                    src={profile.profileImage}
                     alt={profile.name}
                   />
                   <p>{profile.email}</p>
