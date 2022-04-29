@@ -41,8 +41,7 @@ const Header = () => {
               route=""
               routeName={
                 <>
-                  <i className="fa-solid fa-house"></i>
-                  <div>HOME</div>
+                  <i className="fa-solid fa-house fa-2xl"></i>
                 </>
               }
             />
@@ -53,8 +52,7 @@ const Header = () => {
               route="contact"
               routeName={
                 <>
-                  <i className="fa-solid fa-envelope-open"></i>
-                  <div>CONTACT</div>
+                  <i className="fa-solid fa-envelope-open fa-2xl"></i>
                 </>
               }
             />
@@ -65,8 +63,7 @@ const Header = () => {
               route="about"
               routeName={
                 <>
-                  <i className="fa-solid fa-info"></i>
-                  <div>About</div>
+                  <i className="fa-solid fa-info fa-2xl"></i>
                 </>
               }
             />
@@ -78,8 +75,7 @@ const Header = () => {
                 route="user-profile-edit"
                 routeName={
                   <>
-                    <i className="fa-solid fa-screwdriver-wrench"></i>
-                    <div>Panel</div>
+                    <i className="fa-solid fa-screwdriver-wrench fa-2xl"></i>
                   </>
                 }
               />
@@ -100,8 +96,10 @@ const Header = () => {
                 <div className="members-login--wrapper">
                   {/* Use attribute = definition if its not a link */}
                   <LoginOut
-                    description={userInfo.name}
-                    definition="logout"
+                    description=""
+                    definition={
+                      <i className="fa-solid fa-user-minus fa-2xl"></i>
+                    }
                     onClick={handleLogout}
                   />
                 </div>
@@ -110,9 +108,11 @@ const Header = () => {
               <>
                 {!userReviewInfo ? (
                   <LoginOut
-                    description="login"
+                    description=""
                     route="login"
-                    routeDescription="members"
+                    routeDescription={
+                      <i className="fa-solid fa-user-plus fa-2xl"></i>
+                    }
                   />
                 ) : null}
               </>
