@@ -5,9 +5,11 @@
   color: $link-colour;
   text-transform: uppercase;
   margin-right: 0.4em;
+  width: 100%;
 
   &.link-comp:hover {
     opacity: 1;
     transition: opacity 0.6s ease-in-out;
+    color: $rating-colour;
   }
 }
