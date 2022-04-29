@@ -42,22 +42,22 @@
     border-left: greenyellow 4px solid;
   }
   input[type='text'].invalid {
-    border-left: $secondary-bg-colour 4px solid;
+    border-left: $rating-colour 4px solid;
   }
   input[type='email'].invalid {
-    border-left: $secondary-bg-colour 4px solid;
+    border-left: $rating-colour 4px solid;
   }
   input[type='password'].entered {
     border-left: greenyellow 4px solid;
   }
   input[type='password'].invalid {
-    border-left: $secondary-bg-colour 4px solid;
+    border-left: $rating-colour 4px solid;
   }
   input[type='search'].entered {
     border-left: greenyellow 4px solid;
   }
   input[type='search'].invalid {
-    border-left: $secondary-bg-colour 4px solid;
+    border-left: $rating-colour 4px solid;
   }
   input[type='search']::placeholder {
     text-align: center;
@@ -66,9 +66,10 @@
     border-left: greenyellow 4px solid;
   }
   input[type='tel'].invalid {
-    border-left: $secondary-bg-colour 4px solid;
+    border-left: $rating-colour 4px solid;
   }
   .input-icon-wrapper {
+    text-transform: uppercase;
     display: flex;
     justify-content: space-between;
     align-items: center;

@@ -67,7 +67,9 @@ const RegistrationView = () => {
         <LoadingSpinner />
       ) : (
         <fieldset className="fieldSet">
-          <legend>Members Registration form</legend>
+          <legend>
+            Members <span>Registration</span> form
+          </legend>
           <form onSubmit={handleSubmit}>
             <InputField
               label="Name"
