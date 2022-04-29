@@ -29,6 +29,8 @@ const ReviewerLoginView = () => {
   const [rating, setRating] = useState(5);
   let [showName, setShowName] = useState(false);
   const [comment, setComment] = useState('');
+  const [showWarning, setShowWaring] = useState(true);
+  const [acceptConditions, setAcceptConditions] = useState(false);
 
   const userReviewLogin = useSelector((state) => state.userReviewLogin);
   const { loading, error, userReviewInfo } = userReviewLogin;
@@ -43,6 +45,11 @@ const ReviewerLoginView = () => {
   const userId = useSelector((state) => state.userReviewId);
   const { userProfileId } = userId;
 
+  const handleAcceptConditions = () => {
+    setShowWaring(false);
+    setAcceptConditions(true);
+  };
+  console.log(acceptConditions);
   const handleSubmit = (e) => {
     e.preventDefault();
     // Dispatch login
@@ -59,6 +66,7 @@ const ReviewerLoginView = () => {
         comment,
         showName,
         userProfileId,
+        acceptConditions,
       }),
     );
     setRating(5);
@@ -129,21 +137,20 @@ const ReviewerLoginView = () => {
         )
       ) : (
         <>
-          <div
-            className="reviewer-wrapper"
-            style={{
-              backgroundImage: `url(uploads/profiles/${profile?.profileImage})`,
-              backgroundRepeat: 'no-repeat',
-              backgroundPosition: 'center',
-              backgroundSize: 'cover',
-            }}
-          >
+          <div className="reviewer-wrapper">
             {reviewError ? <Message message={reviewError} /> : null}
             {success ? (
               <Message message="Your review has been sent." success />
             ) : null}
-
-            <fieldset className="fieldSet item">
+            <fieldset
+              className="fieldSet item"
+              style={{
+                backgroundImage: `url(${profile?.profileImage})`,
+                backgroundRepeat: 'no-repeat',
+                backgroundPosition: 'center',
+                backgroundSize: 'cover',
+              }}
+            >
               <legend>PROFILE</legend>
               <div className="review-specialisation-wrapper">
                 <p className="review-specialisation">
@@ -221,80 +228,122 @@ const ReviewerLoginView = () => {
 
             <fieldset className="fieldSet item">
               <legend>Review {profile?.name}</legend>
-              <div className="review-specialisation-wrapper">
-                <p className="review-specialisation">
-                  {profile?.specialisationOne}
-                </p>
-                <p className="review-specialisation">
-                  {profile?.specialisationTwo}
-                </p>
-                <p className="review-specialisation">
-                  {profile?.specialisationThree}
-                </p>
-                <p className="review-specialisation">
-                  {profile?.specialisationFour}
-                </p>
-              </div>
 
-              <form onSubmit={handleReviewSubmit}>
-                <div>
-                  <div>
-                    <h3>Warning</h3>
-                    <p>Warning to info reviewer that this is a once off...</p>
-                  </div>
-                  <label>
-                    <input
-                      type="checkbox"
-                      checked={showName}
-                      onChange={() => setShowName((showName = !showName))}
-                    />
-                    <span className="userReviewInfo">
-                      {userReviewInfo?.name}
-                    </span>
-                    , by checking this box you are agreeing to display your name
-                    in the review.
-                  </label>
-                </div>
-                <div>
-                  <label>Rating </label>
+              {showWarning ? (
+                <>
+                  <h1>Reviewer Conditions</h1>
+                  <h3>When to write a review</h3>
+                  <p>
+                    You can write a review if you’ve had a recent, genuine
+                    experience.
+                  </p>
+                  <p>
+                    Reviews are your chance to share your experiences with
+                    others and give feedback to companies. Size doesn’t matter
+                    here, we think all experiences big and small are worth
+                    reviewing — whether it’s a phone call, an online enquiry.
+                  </p>
+                  <p>
+                    Just keep it fresh by writing about your experience that
+                    happened in the past 12 months.
+                  </p>
+                  <h3>Dont write a fake or biased review</h3>
+                  <p>
+                    Don’t make up an experience or write a review for someone
+                    else — leave it to them to write their own review. And if
+                    you’re closely associated with, work for, or are in
+                    competition with a particular company, you shouldn’t review
+                    it.
+                  </p>
+                  <h3>Keep proof of your experience</h3>
+                  <p>
+                    Hold onto documentation that shows you’ve had an experience
+                    with the company (for example, a receipt, order
+                    confirmation, screenshot of your chat with online customer
+                    service) because you might be asked to verify your
+                    experience.
+                  </p>
+                  <h3>Play nice</h3>
+                  <p>
+                    We expect you to be a respectful contributor to our
+                    platform. So play nice, don’t be a jerk. Don’t post anything
+                    harmful, hateful, discriminatory, defamatory or obscene. And
+                    don’t lie, bully, blackmail, make threats or do anything
+                    illegal.
+                  </p>
+                  <h3>The final say</h3>
+                  <p>
+                    These guidelines are just that: guiding principles. Please
+                    understand that we have the final say with regard to the
+                    interpretation and application of these guidelines, and we
+                    can update them at any time.
+                  </p>
 
-                  <div>
-                    <select
-                      value={rating}
-                      onChange={(e) => setRating(e.target.value)}
-                    >
-                      <option value="5">five</option>
-                      <option value="4">four</option>
-                      <option value="3">three</option>
-                      <option value="2">two</option>
-                      <option value="1">one</option>
-                    </select>
-                  </div>
-                </div>
+                  <button onClick={handleAcceptConditions}>
+                    Accept Review Guidelines
+                  </button>
+                </>
+              ) : (
+                <>
+                  <form onSubmit={handleReviewSubmit}>
+                    <div>
+                      <label>
+                        <input
+                          type="checkbox"
+                          checked={showName}
+                          onChange={() => setShowName((showName = !showName))}
+                        />
+                        <span className="userReviewInfo">
+                          {userReviewInfo?.name}
+                        </span>
+                        , by checking this box you are agreeing to display your
+                        name in the review.
+                      </label>
+                    </div>
+                    <div>
+                      <label>Rating </label>
 
-                <div>
-                  <label>Review</label>
-                  <textarea
-                    value={comment}
-                    onChange={(e) => setComment(e.target.value)}
-                    type="text"
-                    name="comment"
-                    required
-                    className={comment?.length <= 10 ? 'invalid' : 'entered'}
-                    error={
-                      comment?.length <= 10
-                        ? `comment field must contain at least 10 characters!`
-                        : null
-                    }
-                  />
-                </div>
-                <Button
-                  colour="transparent"
-                  text="submit"
-                  className="btn"
-                  disabled={!rating || (comment.length <= 10 && success)}
-                ></Button>
-              </form>
+                      <div>
+                        <select
+                          value={rating}
+                          onChange={(e) => setRating(e.target.value)}
+                        >
+                          <option value="5">5 Stars</option>
+                          <option value="4">4 Stars</option>
+                          <option value="3">3 Stars</option>
+                          <option value="2">2 Stars</option>
+                          <option value="1">1 Star</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label>Review</label>
+                      <textarea
+                        value={comment}
+                        onChange={(e) => setComment(e.target.value)}
+                        type="text"
+                        name="comment"
+                        required
+                        className={
+                          comment?.length <= 10 ? 'invalid' : 'entered'
+                        }
+                        error={
+                          comment?.length <= 10
+                            ? `comment field must contain at least 10 characters!`
+                            : null
+                        }
+                      />
+                    </div>
+                    <Button
+                      colour="transparent"
+                      text="submit"
+                      className="btn"
+                      disabled={!rating || (comment.length <= 10 && success)}
+                    ></Button>
+                  </form>
+                </>
+              )}
             </fieldset>
           </div>
         </>

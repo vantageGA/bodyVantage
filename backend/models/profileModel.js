@@ -27,6 +27,10 @@ const reviewsSchema = mongoose.Schema(
     userProfileId: {
       type: String,
     },
+    hasAccepted: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,
