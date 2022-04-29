@@ -47,7 +47,11 @@ const InputField = ({
             onClick={() => handleShowHidePw()}
             title={!showPassword ? 'SHOW PASSWORD' : 'HIDE PASSWORD'}
           >
-            {!showPassword ? <FaEye /> : <FaEyeSlash />}
+            {!showPassword ? (
+              <FaEye className="icon-colour" />
+            ) : (
+              <FaEyeSlash className="icon-colour" />
+            )}
           </div>
         ) : null}
       </div>

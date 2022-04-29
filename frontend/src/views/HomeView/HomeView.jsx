@@ -72,7 +72,7 @@ const HomeView = () => {
   return (
     <>
       <fieldset className="fieldSet">
-        <legend>Home</legend>
+        <legend></legend>
         {error ? <Message message={error} /> : null}
         <div
           style={{
