@@ -95,10 +95,13 @@ const Header = () => {
               <div className="user-info-wrapper">
                 <div className="members-login--wrapper">
                   {/* Use attribute = definition if its not a link */}
+
                   <LoginOut
-                    description=""
+                    description="LOGOUT"
                     definition={
-                      <i className="fa-solid fa-user-minus fa-2xl"></i>
+                      <span className="members-login-text">
+                        {userInfo.name}
+                      </span>
                     }
                     onClick={handleLogout}
                   />
