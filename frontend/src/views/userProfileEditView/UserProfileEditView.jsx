@@ -149,7 +149,9 @@ const UserProfileEditView = () => {
       ) : (
         <>
           <fieldset className="fieldSet item">
-            <legend>UPDATE USER PROFILE</legend>
+            <legend>
+              UPDATE <span>USER</span>
+            </legend>
             <form onSubmit={handleSubmit}>
               <InputField
                 label="Name"
@@ -240,7 +242,10 @@ const UserProfileEditView = () => {
           </fieldset>
 
           <fieldset className="fieldSet item">
-            <legend>USER: {user.name}</legend>
+            <legend>
+              {' '}
+              <span>USER</span> SUMMARY: {user.name}
+            </legend>
             <span className="small-text">ID: {user._id}</span>
             {userProfileImageLoading ? <LoadingSpinner /> : null}
             {user.profileImage ? (
@@ -334,7 +339,9 @@ const UserProfileEditView = () => {
           ) : null}
 
           <fieldset className="fieldSet item">
-            <legend>UPDATE PROFILE</legend>
+            <legend>
+              UPDATE <span>PROFILE</span>
+            </legend>
             <p>
               Click <LinkComp route="profile-edit" routeName="here" /> to edit
               your profile.

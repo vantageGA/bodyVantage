@@ -265,7 +265,9 @@ const ProfileEditView = () => {
       ) : (
         <div className="profile-edit-wrapper">
           <fieldset className="fieldSet item">
-            <legend>Update PROFILE</legend>
+            <legend>
+              Update <span>PROFILE</span>{' '}
+            </legend>
             <p>
               Please note that the more complete your profile is the better it
               will feature when it is searched....
