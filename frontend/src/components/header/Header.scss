@@ -20,6 +20,9 @@ header {
     width: 100%;
     height: 50px;
     gap: 0.5rem;
+    .is-active {
+      color: $rating-colour;
+    }
   }
   .large-tabs:hover {
     background-color: $fieldSet-bg-colour;

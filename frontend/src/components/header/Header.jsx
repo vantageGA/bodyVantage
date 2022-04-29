@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
 import './Header.scss';
 
 import LinkComp from '../linkComp/LinkComp';
@@ -37,36 +37,30 @@ const Header = () => {
         </legend>
         <nav className="nav-wrapper">
           <div className="large-tabs">
-            <LinkComp
-              route=""
-              routeName={
-                <>
-                  <i className="fa-solid fa-house fa-2xl"></i>
-                </>
-              }
-            />
+            <NavLink
+              to="/"
+              className={(nav) => (nav.isActive ? 'is-active' : '')}
+            >
+              <i className="fa-solid fa-house fa-2xl"></i>
+            </NavLink>
           </div>
 
           <div className="large-tabs">
-            <LinkComp
-              route="contact"
-              routeName={
-                <>
-                  <i className="fa-solid fa-envelope-open fa-2xl"></i>
-                </>
-              }
-            />
+            <NavLink
+              to="/contact"
+              className={(nav) => (nav.isActive ? 'is-active' : '')}
+            >
+              <i className="fa-solid fa-envelope-open fa-2xl"></i>
+            </NavLink>
           </div>
 
           <div className="large-tabs">
-            <LinkComp
-              route="about"
-              routeName={
-                <>
-                  <i className="fa-solid fa-info fa-2xl"></i>
-                </>
-              }
-            />
+            <NavLink
+              to="/about"
+              className={(nav) => (nav.isActive ? 'is-active' : '')}
+            >
+              <i className="fa-solid fa-info fa-2xl"></i>
+            </NavLink>
           </div>
 
           {userInfo ? (
