@@ -204,7 +204,8 @@ const deleteReview = asyncHandler(async (req, res) => {
 // @route: POST /api/profiles/:id/reviews
 // @access: Private
 const createProfileReview = asyncHandler(async (req, res) => {
-  const { rating, comment, showName, userProfileId } = req.body;
+  const { rating, comment, showName, userProfileId, acceptConditions } =
+    req.body;
 
   const reviewerProfile = await UserReviewer.findById(req.params.id);
   const profile = await Profile.find({ user: userProfileId });
@@ -221,6 +222,7 @@ const createProfileReview = asyncHandler(async (req, res) => {
       rating: Number(rating),
       comment,
       userProfileId: reviewerProfile.userProfileId,
+      hasAccepted: acceptConditions,
     };
 
     profile[0].reviews.push(review);

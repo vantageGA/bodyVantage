@@ -50,7 +50,6 @@ const ProfileEditView = () => {
   const [location, setLocation] = useState('');
   const [telephoneNumber, setTelephoneNumber] = useState('');
   const [keyWordSearch, setkeyWordSearch] = useState('');
-  const [uploading, setUploading] = useState(false);
   const [show, setShow] = useState(false);
 
   const [keyWordSearchOne, setkeyWordSearchOne] = useState('');
