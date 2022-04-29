@@ -8,7 +8,7 @@ const AboutView = () => {
     <div className="about-wrapper">
       <fieldset className="fieldSet">
         <legend>About Us</legend>
-        <h1>About Us</h1>
+
         <p>
           BodyVantage is a personal wellbeing website for the pubic to enable
           them to search and connect with listed specialised and experienced

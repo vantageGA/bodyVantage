@@ -40,14 +40,15 @@ header {
 
   .members-login--wrapper {
     display: flex;
-    flex-direction: column;
-    text-align: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
 
     .members-login-text {
-      position: relative;
-      top: 6px;
-      font-size: 0.6em;
+      // margin-top: 2px;
+      font-size: 1em;
+      font-weight: bold;
       text-transform: uppercase;
+      color: $rating-colour;
     }
   }
 }
