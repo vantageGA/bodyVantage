@@ -1,14 +1,12 @@
 @import '../../index.scss';
 
 .link-comp {
-  opacity: 0.8;
-  color: $link-colour;
+  color: $main-font-colour;
   text-transform: uppercase;
   margin-right: 0.4em;
   width: 100%;
 
   &.link-comp:hover {
-    opacity: 1;
     transition: opacity 0.6s ease-in-out;
     color: $rating-colour;
   }

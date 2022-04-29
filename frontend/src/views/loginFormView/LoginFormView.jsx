@@ -42,7 +42,7 @@ const LoginFormView = () => {
         <LoadingSpinner />
       ) : (
         <fieldset className="fieldSet">
-          <legend>Login form</legend>
+          <legend>Members Login form</legend>
           <form onSubmit={handleSubmit}>
             <InputField
               label="Email"
