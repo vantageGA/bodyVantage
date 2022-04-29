@@ -83,14 +83,14 @@ const HomeView = () => {
             paddingBottom: '1rem',
           }}
         >
-          <div className="main-heading">Welcome to BODY-VANTAGE</div>
-          <div className="sub-heading">Find a trainer near you</div>
+          {/* <div className="main-heading">Welcome to BODY-VANTAGE</div> */}
+          <div className="main-heading">Find a trainer near you</div>
           <div>
             <SearchInput
               type="search"
               value={keyword}
               handleSearch={handleSearch}
-              label="Search fat loss Guildford for example"
+              label="Search 'fat loss Guildford' for example"
             />
           </div>
           {keyword.length > 0 ? (
