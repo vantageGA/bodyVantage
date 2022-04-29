@@ -159,7 +159,7 @@ textarea {
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
 }
 textarea.invalid {
-  border-left: $secondary-bg-colour 4px solid;
+  border-left: $rating-colour 4px solid;
   min-height: 50px;
 }
 textarea.entered {
