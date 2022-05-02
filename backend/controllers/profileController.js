@@ -45,10 +45,13 @@ const getProfileById = asyncHandler(async (req, res) => {
 // @route: POST /api/profiles
 // @access: Private and Admin
 const createProfile = asyncHandler(async (req, res) => {
+  // This is to create a unique email address to avoid duplicates as per the Model requirements.
+  const uniqueSampleMail = req.user._id.toString();
+  // This is to create a unique email address to avoid duplicates as per the Model requirements.
   const profile = new Profile({
     user: req.user._id,
     name: 'Sample name',
-    email: 'sample1@mail.com',
+    email: `${uniqueSampleMail}@mail.com`,
     profileImage: 'uploads/profiles/sample.png',
     specialisation: 'sample Specialisation',
     location: 'Sample Location',
@@ -56,18 +59,18 @@ const createProfile = asyncHandler(async (req, res) => {
     isQualificationsVerified: false,
     telephoneNumber: '12345678901',
     keyWordSearch: 'Sample, fitness,massage,London, sports massage, etc',
-    keyWordSearchOne: 'one',
-    keyWordSearchTwo: 'two',
-    keyWordSearchThree: 'three',
-    keyWordSearchFour: 'four',
-    keyWordSearchFive: 'five',
-    specialisationOne: 'Specialisation One',
-    specialisationTwo: 'Specialisation Two',
-    specialisationThree: 'Specialisation Three',
-    specialisationFour: 'Specialisation Four',
+    keyWordSearchOne: 'Fitness',
+    keyWordSearchTwo: 'Fitness',
+    keyWordSearchThree: 'Fitness',
+    keyWordSearchFour: 'Fitness',
+    keyWordSearchFive: 'Fitness',
+    specialisationOne: 'Fitness One',
+    specialisationTwo: 'Fitness Two',
+    specialisationThree: 'Fitness Three',
+    specialisationFour: 'Fitness Four',
     rating: 0,
     showName: false,
-    description: 'Sample Description',
+    description: 'Sample Description Sample Description Sample Description',
     numReviews: 0,
   });
 
