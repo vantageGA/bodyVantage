@@ -8,7 +8,7 @@ const Footer = () => {
       <fieldset className="fieldSet">
         <div className="footer-wrapper">
           <div>Developed by Gary Allin</div>
-          <div>CopyRight &copy; Check-A-Sport</div>
+          <div>CopyRight &copy; Body-Vantage</div>
         </div>
         <div className="date-time">
           <DateTime />

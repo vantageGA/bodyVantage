@@ -9,29 +9,30 @@ import Message from '../../components/message/Message';
 import Card from '../../components/card/Card';
 
 const HomeView = () => {
-  const [keyword, setKeyword] = useState('');
-  const [rndInt, setRndInt] = useState(null);
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(profilesAction());
+  }, [dispatch]);
 
   const profilesState = useSelector((state) => state.profiles);
   const { loading, error, profiles } = profilesState;
 
-  useEffect(() => {
-    dispatch(profilesAction());
-    setRndInt(Math.floor(Math.random() * profiles.length));
-  }, [dispatch, profiles.length]);
+  const [keyword, setKeyword] = useState('');
+  const [rndInt] = useState(Math.floor(Math.random() * profiles?.length));
+
+  const randImg = profiles ? profiles[rndInt]?.profileImage : null;
 
   const searchedProfiles = profiles.filter((profile) => {
     if (
-      profile.name ||
-      profile.description ||
-      profile.location ||
-      profile.specialisation ||
-      profile.keyWordSearch
+      profile?.name ||
+      profile?.description ||
+      profile?.location ||
+      profile?.specialisation ||
+      profile?.keyWordSearch
     ) {
-      const description = profile.description;
-      const name = profile.name;
-      const location = profile.location;
+      const description = profile?.description;
+      const name = profile?.name;
+      const location = profile?.location;
       const specialisation = profile?.specialisation;
       const keyWordSearch = profile?.keyWordSearch;
 
@@ -74,9 +75,10 @@ const HomeView = () => {
       <fieldset className="fieldSet">
         <legend></legend>
         {error ? <Message message={error} /> : null}
+
         <div
           style={{
-            backgroundImage: `url(${profiles[rndInt]?.profileImage})`,
+            backgroundImage: `url(${randImg})`,
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center',
             backgroundSize: 'cover',

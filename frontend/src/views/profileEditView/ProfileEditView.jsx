@@ -322,10 +322,10 @@ const ProfileEditView = () => {
                   name="keyWordSearchOne"
                   required
                   className={
-                    keyWordSearchOne?.length <= 3 ? 'invalid' : 'entered'
+                    keyWordSearchOne?.length < 3 ? 'invalid' : 'entered'
                   }
                   error={
-                    keyWordSearchOne?.length <= 3
+                    keyWordSearchOne?.length < 3
                       ? `keyWord Search field must contain at least 3 characters!`
                       : null
                   }
@@ -338,10 +338,10 @@ const ProfileEditView = () => {
                   name="keyWordSearchTwo"
                   required
                   className={
-                    keyWordSearchTwo?.length <= 3 ? 'invalid' : 'entered'
+                    keyWordSearchTwo?.length < 3 ? 'invalid' : 'entered'
                   }
                   error={
-                    keyWordSearchTwo?.length <= 3
+                    keyWordSearchTwo?.length < 3
                       ? `keyWord Search field must contain at least 3 characters!`
                       : null
                   }
@@ -354,10 +354,10 @@ const ProfileEditView = () => {
                   name="keyWordSearchThree"
                   required
                   className={
-                    keyWordSearchThree?.length <= 3 ? 'invalid' : 'entered'
+                    keyWordSearchThree?.length < 3 ? 'invalid' : 'entered'
                   }
                   error={
-                    keyWordSearchThree?.length <= 3
+                    keyWordSearchThree?.length < 3
                       ? `keyWord Search field must contain at least 3 characters!`
                       : null
                   }
@@ -370,10 +370,10 @@ const ProfileEditView = () => {
                   name="keyWordSearchFour"
                   required
                   className={
-                    keyWordSearchFour?.length <= 3 ? 'invalid' : 'entered'
+                    keyWordSearchFour?.length < 3 ? 'invalid' : 'entered'
                   }
                   error={
-                    keyWordSearchFour?.length <= 3
+                    keyWordSearchFour?.length < 3
                       ? `keyWord Search field must contain at least 3 characters!`
                       : null
                   }
@@ -386,10 +386,10 @@ const ProfileEditView = () => {
                   name="keyWordSearchFive"
                   required
                   className={
-                    keyWordSearchFive?.length <= 3 ? 'invalid' : 'entered'
+                    keyWordSearchFive?.length < 3 ? 'invalid' : 'entered'
                   }
                   error={
-                    keyWordSearchFive?.length <= 3
+                    keyWordSearchFive?.length < 3
                       ? `keyWord Search field must contain at least 3 characters!`
                       : null
                   }
