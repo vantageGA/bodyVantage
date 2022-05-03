@@ -45,32 +45,31 @@ const getProfileById = asyncHandler(async (req, res) => {
 // @route: POST /api/profiles
 // @access: Private and Admin
 const createProfile = asyncHandler(async (req, res) => {
-  // This is to create a unique email address to avoid duplicates as per the Model requirements.
-  const uniqueSampleMail = req.user._id.toString();
-  // This is to create a unique email address to avoid duplicates as per the Model requirements.
   const profile = new Profile({
     user: req.user._id,
-    name: 'Sample name',
-    email: `${uniqueSampleMail}@mail.com`,
+    name: '',
+    email: ``,
+    faceBook: ``,
+    instagram: ``,
     profileImage: 'uploads/profiles/sample.png',
-    specialisation: 'sample Specialisation',
-    location: 'Sample Location',
-    qualifications: 'Sample QUALIFICATIONS',
+    specialisation: '',
+    location: '',
+    qualifications: '',
     isQualificationsVerified: false,
-    telephoneNumber: '12345678901',
-    keyWordSearch: 'Sample, fitness,massage,London, sports massage, etc',
-    keyWordSearchOne: 'Fitness',
-    keyWordSearchTwo: 'Fitness',
-    keyWordSearchThree: 'Fitness',
-    keyWordSearchFour: 'Fitness',
-    keyWordSearchFive: 'Fitness',
-    specialisationOne: 'Fitness One',
-    specialisationTwo: 'Fitness Two',
-    specialisationThree: 'Fitness Three',
-    specialisationFour: 'Fitness Four',
+    telephoneNumber: '',
+    keyWordSearch: '',
+    keyWordSearchOne: '',
+    keyWordSearchTwo: '',
+    keyWordSearchThree: '',
+    keyWordSearchFour: '',
+    keyWordSearchFive: '',
+    specialisationOne: '',
+    specialisationTwo: '',
+    specialisationThree: '',
+    specialisationFour: '',
     rating: 0,
     showName: false,
-    description: 'Sample Description Sample Description Sample Description',
+    description: '',
     numReviews: 0,
   });
 
@@ -100,6 +99,8 @@ const updateProfile = asyncHandler(async (req, res) => {
     user,
     name,
     email,
+    faceBook,
+    instagram,
     profileImage,
     description,
     qualifications,
@@ -132,6 +133,8 @@ const updateProfile = asyncHandler(async (req, res) => {
     searchId[0].user = req.params.id;
     searchId[0].name = name;
     searchId[0].email = email;
+    searchId[0].faceBook = faceBook;
+    searchId[0].instagram = instagram;
     searchId[0].profileImage = profileImage;
     searchId[0].description = description;
     searchId[0].qualifications = qualifications;
