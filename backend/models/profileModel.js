@@ -52,6 +52,12 @@ const profileSchema = mongoose.Schema(
       required: false,
       unique: true,
     },
+    faceBook: {
+      type: String,
+    },
+    instagram: {
+      type: String,
+    },
     profileImage: {
       type: String,
     },

@@ -16,7 +16,7 @@
 
 .login-out-definition {
   opacity: 0.8;
-  color: $link-colour;
+  color: $rating-colour;
   text-transform: uppercase;
 
   &.login-out-definition:hover {
@@ -25,4 +25,8 @@
     transition: opacity 0.6s ease-in-out;
     color: $rating-colour;
   }
+}
+
+.login-out-wrapper .link-comp {
+  color: $main-font-colour;
 }
