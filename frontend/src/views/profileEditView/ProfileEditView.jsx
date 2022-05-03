@@ -20,6 +20,9 @@ import Rating from '../../components/rating/Rating';
 import moment from 'moment';
 import QuillEditor from '../../components/quillEditor/QuillEditor';
 
+import FB from '../../assets/icons/facebook-logo.jpg';
+import Instagram from '../../assets/icons/Instagram_icon.png';
+
 const ProfileEditView = () => {
   const emailRegEx =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
@@ -43,6 +46,8 @@ const ProfileEditView = () => {
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [faceBook, setFaceBook] = useState('');
+  const [instagram, setInstagram] = useState('');
   const [profileImage, setProfileImage] = useState('');
   const [description, setDescription] = useState('');
   const [specialisation, setSpecialisation] = useState('');
@@ -73,6 +78,8 @@ const ProfileEditView = () => {
 
     setName(profile?.name);
     setEmail(profile?.email);
+    setFaceBook(profile.faceBook);
+    setInstagram(profile.instagram);
     setProfileImage(profile?.profileImage);
     setDescription(profile?.description);
     setSpecialisation(profile?.specialisation);
@@ -154,6 +161,8 @@ const ProfileEditView = () => {
           profileUpdateAction({
             name,
             email,
+            faceBook,
+            instagram,
             profileImage,
             description,
             specialisation,
@@ -197,10 +206,10 @@ const ProfileEditView = () => {
     name?.length === 0 ||
     !emailRegEx.test(email) ||
     description?.length < 10 ||
-    specialisation?.length <= 10 ||
-    location?.length <= 10 ||
+    specialisation?.length < 10 ||
+    location?.length < 10 ||
     !telephoneNumberRegEx.test(telephoneNumber) ||
-    keyWordSearch?.length <= 10;
+    keyWordSearch?.length < 10;
 
   // Profile image
   const [previewImage, setPreviewImage] = useState('');
@@ -275,10 +284,11 @@ const ProfileEditView = () => {
             <form onSubmit={handleSubmit}>
               <InputField
                 label="Name"
-                value={name}
                 onChange={(e) => setName(e.target.value)}
                 type="text"
                 name="name"
+                placeholder="Ben Smith"
+                value={name}
                 required
                 className={name?.length === 0 ? 'invalid' : 'entered'}
                 error={name?.length === 0 ? `Name field cant be empty!` : null}
@@ -287,6 +297,7 @@ const ProfileEditView = () => {
                 label="Email"
                 type="email"
                 name="email"
+                placeholder="ben@mail.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className={!emailRegEx.test(email) ? 'invalid' : 'entered'}
@@ -295,14 +306,34 @@ const ProfileEditView = () => {
                 }
               />
 
+              <InputField
+                label="Facebook USERNAME"
+                type="text"
+                name="faceBook"
+                value={faceBook}
+                placeholder="fiscalfitness"
+                onChange={(e) => setFaceBook(e.target.value)}
+                className="entered"
+              />
+
+              <InputField
+                label="Instagram USERNAME"
+                type="text"
+                name="instagram"
+                value={instagram}
+                placeholder="zachfiscalfitness"
+                onChange={(e) => setInstagram(e.target.value)}
+                className="entered"
+              />
+
               <div>
+                <h3>Description </h3>
                 {description?.length < 10 ? (
                   <span className="small-text">
-                    must have at least {description.length} characters.
+                    Description must have at least {description.length}{' '}
+                    characters.
                   </span>
                 ) : null}
-
-                <h3>Description </h3>
                 <div className="input-wrapper">
                   <label>Brief Description of yourself </label>
                   <QuillEditor
@@ -452,10 +483,10 @@ const ProfileEditView = () => {
                   name="specialisationOne"
                   required
                   className={
-                    specialisationOne?.length <= 3 ? 'invalid' : 'entered'
+                    specialisationOne?.length < 3 ? 'invalid' : 'entered'
                   }
                   error={
-                    specialisationOne?.length <= 3
+                    specialisationOne?.length < 3
                       ? `Specialisation field must contain at least 3 characters!`
                       : null
                   }
@@ -469,10 +500,10 @@ const ProfileEditView = () => {
                   name="specialisationTwo"
                   required
                   className={
-                    specialisationTwo?.length <= 3 ? 'invalid' : 'entered'
+                    specialisationTwo?.length < 3 ? 'invalid' : 'entered'
                   }
                   error={
-                    specialisationTwo?.length <= 3
+                    specialisationTwo?.length < 3
                       ? `Specialisation field must contain at least 3 characters!`
                       : null
                   }
@@ -486,10 +517,10 @@ const ProfileEditView = () => {
                   name="specialisationThree"
                   required
                   className={
-                    specialisationThree?.length <= 3 ? 'invalid' : 'entered'
+                    specialisationThree?.length < 3 ? 'invalid' : 'entered'
                   }
                   error={
-                    specialisationThree?.length <= 3
+                    specialisationThree?.length < 3
                       ? `Specialisation field must contain at least 3 characters!`
                       : null
                   }
@@ -503,10 +534,10 @@ const ProfileEditView = () => {
                   name="specialisationFour"
                   required
                   className={
-                    specialisationFour?.length <= 3 ? 'invalid' : 'entered'
+                    specialisationFour?.length < 3 ? 'invalid' : 'entered'
                   }
                   error={
-                    specialisationFour?.length <= 3
+                    specialisationFour?.length < 3
                       ? `Specialisation field must contain at least 3 characters!`
                       : null
                   }
@@ -576,7 +607,7 @@ const ProfileEditView = () => {
                 text="submit"
                 className="btn"
                 title="Submit"
-                disabled={isDisabled}
+                disabled={false}
               ></Button>
             </form>
           </fieldset>
@@ -586,6 +617,7 @@ const ProfileEditView = () => {
           <fieldset className="fieldSet item">
             <legend>Profile</legend>
             <h3>Profile Summary</h3>
+
             <div className="summary-wrapper">
               <div>
                 <p>Name: {name}</p>
@@ -596,6 +628,30 @@ const ProfileEditView = () => {
                   </a>
                 </p>
                 <p>Mobile: {telephoneNumber}</p>
+                {!faceBook && !instagram ? (
+                  <p>Social media not set.</p>
+                ) : (
+                  <>
+                    <div className="social-media-wrapper">
+                      {faceBook ? (
+                        <img
+                          className="social-media-icons size"
+                          src={FB}
+                          alt="Facebook"
+                        />
+                      ) : null}
+
+                      {instagram ? (
+                        <img
+                          className="social-media-icons size"
+                          src={Instagram}
+                          alt="Instagram"
+                        />
+                      ) : null}
+                    </div>
+                  </>
+                )}
+
                 <p>Create: {moment(profile?.createdAt).fromNow()}</p>
                 <p>Updated: {moment(profile?.updatedAt).fromNow()}</p>
               </div>
@@ -631,7 +687,6 @@ const ProfileEditView = () => {
                 ) : null}
               </form>
             </div>
-
             <h3>Description</h3>
             <div className="summary-wrapper">
               <p
@@ -640,12 +695,10 @@ const ProfileEditView = () => {
                 }}
               ></p>
             </div>
-
             <h3>Location</h3>
             <div className="summary-wrapper">
               <p>{location}</p>
             </div>
-
             <h3>Specialisation</h3>
             <div className="summary-wrapper">
               <p
@@ -654,7 +707,6 @@ const ProfileEditView = () => {
                 }}
               ></p>
             </div>
-
             <h3>Qualifications</h3>
             <div className="summary-wrapper">
               <p
@@ -680,7 +732,6 @@ const ProfileEditView = () => {
                 )}
               </p>
             </div>
-
             <h3>Rating</h3>
             <div className="summary-wrapper">
               <Rating
@@ -688,7 +739,6 @@ const ProfileEditView = () => {
                 text={`  from ${profile?.numReviews} reviews`}
               />
             </div>
-
             {/* <h4>Keyword Summary</h4>
             <p className="search-algorithm">
               Search algorithm: {profile?.keyWordSearch}

@@ -20,6 +20,10 @@
   .quill {
     background-color: rgba(255, 255, 255, 0.6);
   }
+  .quill.invalid {
+    border-left: $rating-colour 4px solid;
+    min-height: 120px;
+  }
   .ql-editor:focus {
     background-color: rgba(255, 255, 255, 1);
     color: $main-bg-colour;
@@ -34,6 +38,18 @@
     padding: 0.5em;
     justify-content: space-between;
     align-items: center;
+
+    .social-media-wrapper {
+      display: flex;
+
+      .social-media-icons {
+        border-radius: 50%;
+      }
+      .size {
+        width: 32px;
+        height: 32px;
+      }
+    }
   }
   .search-algorithm {
     max-height: 200px;

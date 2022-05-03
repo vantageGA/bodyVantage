@@ -14,6 +14,9 @@ import Review from '../../components/review/Review';
 
 import moment from 'moment';
 
+import FB from '../../assets/icons/facebook-logo.jpg';
+import Instagram from '../../assets/icons/Instagram_icon.png';
+
 const FullProfileView = () => {
   const [divHeight, setDivHeight] = useState(0);
   const [nameHeight, setNameHeight] = useState(0);
@@ -207,9 +210,9 @@ const FullProfileView = () => {
                   </div>
                   <div>
                     <h1>Contact Details</h1>
-                    <p>Mobile number: {profile?.telephoneNumber}</p>
+                    <p>Mobile: {profile?.telephoneNumber}</p>
                     <p>
-                      email:{' '}
+                      Email:{' '}
                       <a
                         href={`mailto: ${profile?.email}`}
                         target="_blank"
@@ -218,6 +221,42 @@ const FullProfileView = () => {
                         {profile?.email}
                       </a>
                     </p>
+
+                    {!profile?.faceBook && !profile?.instagram ? (
+                      <p>Social media not set.</p>
+                    ) : (
+                      <>
+                        <div className="social-media-wrapper">
+                          {profile?.faceBook ? (
+                            <a
+                              href={`https://www.facebook.com/${profile?.faceBook}`}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              <img
+                                className="social-media-icons size"
+                                src={FB}
+                                alt="Facebook"
+                              />
+                            </a>
+                          ) : null}
+
+                          {profile?.instagram ? (
+                            <a
+                              href={`https://www.instagram.com/${profile?.instagram}`}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              <img
+                                className="social-media-icons size"
+                                src={Instagram}
+                                alt="Instagram"
+                              />
+                            </a>
+                          ) : null}
+                        </div>
+                      </>
+                    )}
                   </div>
                   <div>
                     <h1>Location</h1>
