@@ -1,0 +1,14 @@
+@import '../../index.scss';
+
+.social-media-wrapper {
+  display: flex;
+  gap: 0.5em;
+
+  .social-media-icons {
+    border-radius: 50%;
+  }
+  .size {
+    width: 64px !important;
+    height: 64px !important;
+  }
+}
