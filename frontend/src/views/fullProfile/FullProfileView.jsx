@@ -14,8 +14,8 @@ import Review from '../../components/review/Review';
 
 import moment from 'moment';
 
-import FB from '../../assets/icons/facebook-logo.jpg';
-import Instagram from '../../assets/icons/Instagram_icon.png';
+import FaceBookComponent from '../../components/socialMedia/faceBook/FaceBookComponent';
+import InstagramComponent from '../../components/socialMedia/Instagram/InstagramComponent';
 
 const FullProfileView = () => {
   const [divHeight, setDivHeight] = useState(0);
@@ -228,31 +228,15 @@ const FullProfileView = () => {
                       <>
                         <div className="social-media-wrapper">
                           {profile?.faceBook ? (
-                            <a
-                              href={`https://www.facebook.com/${profile?.faceBook}`}
-                              target="_blank"
-                              rel="noreferrer"
-                            >
-                              <img
-                                className="social-media-icons size"
-                                src={FB}
-                                alt="Facebook"
-                              />
-                            </a>
+                            <FaceBookComponent
+                              faceBookUserName={profile?.faceBook}
+                            />
                           ) : null}
 
                           {profile?.instagram ? (
-                            <a
-                              href={`https://www.instagram.com/${profile?.instagram}`}
-                              target="_blank"
-                              rel="noreferrer"
-                            >
-                              <img
-                                className="social-media-icons size"
-                                src={Instagram}
-                                alt="Instagram"
-                              />
-                            </a>
+                            <InstagramComponent
+                              instagramUserName={profile?.instagram}
+                            />
                           ) : null}
                         </div>
                       </>
