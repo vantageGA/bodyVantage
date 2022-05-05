@@ -20,8 +20,9 @@ import Rating from '../../components/rating/Rating';
 import moment from 'moment';
 import QuillEditor from '../../components/quillEditor/QuillEditor';
 
-import FB from '../../assets/icons/facebook-logo.jpg';
-import Instagram from '../../assets/icons/Instagram_icon.png';
+import FaceBookComponent from '../../components/socialMedia/faceBook/FaceBookComponent';
+import InstagramComponent from '../../components/socialMedia/Instagram/InstagramComponent';
+import InfoComponent from '../../components/info/InfoComponent';
 
 const ProfileEditView = () => {
   const emailRegEx =
@@ -68,6 +69,8 @@ const ProfileEditView = () => {
   const [specialisationThree, setSpecialisationThree] = useState('');
   const [specialisationFour, setSpecialisationFour] = useState('');
 
+  const [showHelp, setShowHelp] = useState(false);
+
   useEffect(() => {
     if (!userInfo) {
       navigate('/login');
@@ -78,8 +81,8 @@ const ProfileEditView = () => {
 
     setName(profile?.name);
     setEmail(profile?.email);
-    setFaceBook(profile.faceBook);
-    setInstagram(profile.instagram);
+    setFaceBook(profile?.faceBook);
+    setInstagram(profile?.instagram);
     setProfileImage(profile?.profileImage);
     setDescription(profile?.description);
     setSpecialisation(profile?.specialisation);
@@ -248,6 +251,10 @@ const ProfileEditView = () => {
     setShow(!show);
   };
 
+  const handleHelp = () => {
+    setShowHelp(!showHelp);
+  };
+
   return (
     <>
       {error ? <Message message={error} /> : null}
@@ -279,9 +286,23 @@ const ProfileEditView = () => {
             </legend>
             <p>
               Please note that the more complete your profile is the better it
-              will feature when it is searched....
+              will feature when it is searched.
             </p>
+
+            <Button
+              type="button"
+              colour="transparent"
+              text={!showHelp ? 'SHOW HELP' : 'HIDE HELP'}
+              className="btn"
+              title={!showHelp ? 'SHOW HELP' : 'HIDE HELP'}
+              disabled={false}
+              onClick={handleHelp}
+            ></Button>
+
             <form onSubmit={handleSubmit}>
+              {showHelp ? (
+                <InfoComponent description="Name that the public will see." />
+              ) : null}
               <InputField
                 label="Name"
                 onChange={(e) => setName(e.target.value)}
@@ -293,6 +314,9 @@ const ProfileEditView = () => {
                 className={name?.length === 0 ? 'invalid' : 'entered'}
                 error={name?.length === 0 ? `Name field cant be empty!` : null}
               />
+              {showHelp ? (
+                <InfoComponent description="Email address the public will see." />
+              ) : null}{' '}
               <InputField
                 label="Email"
                 type="email"
@@ -305,7 +329,6 @@ const ProfileEditView = () => {
                   !emailRegEx.test(email) ? `Invalid email address.` : null
                 }
               />
-
               <InputField
                 label="Facebook USERNAME"
                 type="text"
@@ -315,7 +338,6 @@ const ProfileEditView = () => {
                 onChange={(e) => setFaceBook(e.target.value)}
                 className="entered"
               />
-
               <InputField
                 label="Instagram USERNAME"
                 type="text"
@@ -325,7 +347,14 @@ const ProfileEditView = () => {
                 onChange={(e) => setInstagram(e.target.value)}
                 className="entered"
               />
-
+              <Button
+                type="submit"
+                colour="transparent"
+                text="Save changes"
+                className="btn"
+                title="Save changes"
+                disabled={false}
+              ></Button>
               <div>
                 <h3>Description </h3>
                 {description?.length < 10 ? (
@@ -334,6 +363,7 @@ const ProfileEditView = () => {
                     characters.
                   </span>
                 ) : null}
+
                 <div className="input-wrapper">
                   <label>Brief Description of yourself </label>
                   <QuillEditor
@@ -342,245 +372,305 @@ const ProfileEditView = () => {
                     className={description?.length < 10 ? 'invalid' : 'entered'}
                   />
                 </div>
+                <Button
+                  type="submit"
+                  colour="transparent"
+                  text="Save changes"
+                  className="btn"
+                  title="Save changes"
+                  disabled={false}
+                ></Button>
               </div>
-              <h3>Search Keyword(s)</h3>
-              <div className="input-wrapper">
-                <InputField
-                  placeholder="keyword"
-                  value={keyWordSearchOne}
-                  onChange={(e) => setkeyWordSearchOne(e.target.value)}
-                  type="text"
-                  name="keyWordSearchOne"
-                  required
-                  className={
-                    keyWordSearchOne?.length < 3 ? 'invalid' : 'entered'
-                  }
-                  error={
-                    keyWordSearchOne?.length < 3
-                      ? `keyWord Search field must contain at least 3 characters!`
-                      : null
-                  }
-                />
-                <InputField
-                  placeholder="keyword"
-                  value={keyWordSearchTwo}
-                  onChange={(e) => setkeyWordSearchTwo(e.target.value)}
-                  type="text"
-                  name="keyWordSearchTwo"
-                  required
-                  className={
-                    keyWordSearchTwo?.length < 3 ? 'invalid' : 'entered'
-                  }
-                  error={
-                    keyWordSearchTwo?.length < 3
-                      ? `keyWord Search field must contain at least 3 characters!`
-                      : null
-                  }
-                />
-                <InputField
-                  placeholder="keyword"
-                  value={keyWordSearchThree}
-                  onChange={(e) => setkeyWordSearchThree(e.target.value)}
-                  type="text"
-                  name="keyWordSearchThree"
-                  required
-                  className={
-                    keyWordSearchThree?.length < 3 ? 'invalid' : 'entered'
-                  }
-                  error={
-                    keyWordSearchThree?.length < 3
-                      ? `keyWord Search field must contain at least 3 characters!`
-                      : null
-                  }
-                />
-                <InputField
-                  placeholder="keyword"
-                  value={keyWordSearchFour}
-                  onChange={(e) => setkeyWordSearchFour(e.target.value)}
-                  type="text"
-                  name="keyWordSearchFour"
-                  required
-                  className={
-                    keyWordSearchFour?.length < 3 ? 'invalid' : 'entered'
-                  }
-                  error={
-                    keyWordSearchFour?.length < 3
-                      ? `keyWord Search field must contain at least 3 characters!`
-                      : null
-                  }
-                />
-                <InputField
-                  placeholder="keyword"
-                  value={keyWordSearchFive}
-                  onChange={(e) => setkeyWordSearchFive(e.target.value)}
-                  type="text"
-                  name="keyWordSearchFive"
-                  required
-                  className={
-                    keyWordSearchFive?.length < 3 ? 'invalid' : 'entered'
-                  }
-                  error={
-                    keyWordSearchFive?.length < 3
-                      ? `keyWord Search field must contain at least 3 characters!`
-                      : null
-                  }
-                />
-
-                <div>
-                  <hr className="style-one" />
-
-                  <h3>keywords search (Generated)</h3>
+              <div>
+                <h3>Search Keyword(s)</h3>
+                <div className="input-wrapper">
+                  <InputField
+                    placeholder="keyword"
+                    value={keyWordSearchOne}
+                    onChange={(e) => setkeyWordSearchOne(e.target.value)}
+                    type="text"
+                    name="keyWordSearchOne"
+                    required
+                    className={
+                      keyWordSearchOne?.length < 3 ? 'invalid' : 'entered'
+                    }
+                    error={
+                      keyWordSearchOne?.length < 3
+                        ? `keyWord Search field must contain at least 3 characters!`
+                        : null
+                    }
+                  />
+                  <InputField
+                    placeholder="keyword"
+                    value={keyWordSearchTwo}
+                    onChange={(e) => setkeyWordSearchTwo(e.target.value)}
+                    type="text"
+                    name="keyWordSearchTwo"
+                    required
+                    className={
+                      keyWordSearchTwo?.length < 3 ? 'invalid' : 'entered'
+                    }
+                    error={
+                      keyWordSearchTwo?.length < 3
+                        ? `keyWord Search field must contain at least 3 characters!`
+                        : null
+                    }
+                  />
+                  <InputField
+                    placeholder="keyword"
+                    value={keyWordSearchThree}
+                    onChange={(e) => setkeyWordSearchThree(e.target.value)}
+                    type="text"
+                    name="keyWordSearchThree"
+                    required
+                    className={
+                      keyWordSearchThree?.length < 3 ? 'invalid' : 'entered'
+                    }
+                    error={
+                      keyWordSearchThree?.length < 3
+                        ? `keyWord Search field must contain at least 3 characters!`
+                        : null
+                    }
+                  />
+                  <InputField
+                    placeholder="keyword"
+                    value={keyWordSearchFour}
+                    onChange={(e) => setkeyWordSearchFour(e.target.value)}
+                    type="text"
+                    name="keyWordSearchFour"
+                    required
+                    className={
+                      keyWordSearchFour?.length < 3 ? 'invalid' : 'entered'
+                    }
+                    error={
+                      keyWordSearchFour?.length < 3
+                        ? `keyWord Search field must contain at least 3 characters!`
+                        : null
+                    }
+                  />
+                  <InputField
+                    placeholder="keyword"
+                    value={keyWordSearchFive}
+                    onChange={(e) => setkeyWordSearchFive(e.target.value)}
+                    type="text"
+                    name="keyWordSearchFive"
+                    required
+                    className={
+                      keyWordSearchFive?.length < 3 ? 'invalid' : 'entered'
+                    }
+                    error={
+                      keyWordSearchFive?.length < 3
+                        ? `keyWord Search field must contain at least 3 characters!`
+                        : null
+                    }
+                  />
+                  <Button
+                    type="submit"
+                    colour="transparent"
+                    text="Save changes"
+                    className="btn"
+                    title="Save changes"
+                    disabled={false}
+                  ></Button>
                   <div>
-                    {keyWordSearch?.length < 10 ? (
-                      <span className="small-text">
-                        must have at least {keyWordSearch.length} characters.
-                      </span>
-                    ) : null}
-                    Our Algorithm has generated {Number(keyWordSearch?.length)}{' '}
-                    words with {Math.floor(keyWordSearch?.length / 5)}{' '}
-                    combinations. This includes keywords that have been taken
-                    from your description and including your name.
-                    <Button
-                      type="button"
-                      colour="transparent"
-                      text={show ? 'Hide Combinations' : 'View Combinations'}
-                      className="btn"
-                      title="View Combinations"
-                      disabled={false}
-                      onClick={handleShowCombinations}
-                    ></Button>
-                    {show ? (
-                      <>
-                        <label>READ ONLY: </label>
-                        <textarea
-                          readOnly
-                          value={keyWordSearch}
-                          onChange={(e) => setkeyWordSearch(e.target.value)}
-                          type="text"
-                          name="keyWordSearch"
-                          required
-                          className={
-                            keyWordSearch?.length <= 10 ? 'invalid' : 'entered'
-                          }
-                          error={
-                            keyWordSearch?.length <= 10
-                              ? `keyWord Search field must contain at least 10 characters!`
-                              : null
-                          }
-                        />
-                      </>
-                    ) : null}
+                    <hr className="style-one" />
+
+                    <h3>keywords search (Generated)</h3>
+                    <div>
+                      {keyWordSearch?.length < 10 ? (
+                        <span className="small-text">
+                          must have at least {keyWordSearch.length} characters.
+                        </span>
+                      ) : null}
+                      Our Algorithm has generated{' '}
+                      {Number(keyWordSearch?.length)} words with{' '}
+                      {Math.floor(keyWordSearch?.length / 5)} combinations. This
+                      includes keywords that have been taken from your
+                      description and including your name.
+                      <Button
+                        type="button"
+                        colour="transparent"
+                        text={show ? 'Hide Combinations' : 'View Combinations'}
+                        className="btn"
+                        title="View Combinations"
+                        disabled={false}
+                        onClick={handleShowCombinations}
+                      ></Button>
+                      {show ? (
+                        <>
+                          <label>READ ONLY: </label>
+                          <textarea
+                            readOnly
+                            value={keyWordSearch}
+                            onChange={(e) => setkeyWordSearch(e.target.value)}
+                            type="text"
+                            name="keyWordSearch"
+                            required
+                            className={
+                              keyWordSearch?.length <= 10
+                                ? 'invalid'
+                                : 'entered'
+                            }
+                            error={
+                              keyWordSearch?.length <= 10
+                                ? `keyWord Search field must contain at least 10 characters!`
+                                : null
+                            }
+                          />
+                        </>
+                      ) : null}
+                    </div>
                   </div>
                 </div>
               </div>
-              <h3>Specialisation Keyword(s)</h3>
-              <div className="input-wrapper">
-                <InputField
-                  placeholder="Specialisation"
-                  value={specialisationOne}
-                  onChange={(e) => setSpecialisationOne(e.target.value)}
-                  type="text"
-                  name="specialisationOne"
-                  required
-                  className={
-                    specialisationOne?.length < 3 ? 'invalid' : 'entered'
-                  }
-                  error={
-                    specialisationOne?.length < 3
-                      ? `Specialisation field must contain at least 3 characters!`
-                      : null
-                  }
-                />
+              <div>
+                <h3>Specialisation Keyword(s)</h3>
+                <div className="input-wrapper">
+                  <InputField
+                    placeholder="Specialisation"
+                    value={specialisationOne}
+                    onChange={(e) => setSpecialisationOne(e.target.value)}
+                    type="text"
+                    name="specialisationOne"
+                    required
+                    className={
+                      specialisationOne?.length < 3 ? 'invalid' : 'entered'
+                    }
+                    error={
+                      specialisationOne?.length < 3
+                        ? `Specialisation field must contain at least 3 characters!`
+                        : null
+                    }
+                  />
 
-                <InputField
-                  placeholder="Specialisation"
-                  value={specialisationTwo}
-                  onChange={(e) => setSpecialisationTwo(e.target.value)}
-                  type="text"
-                  name="specialisationTwo"
-                  required
-                  className={
-                    specialisationTwo?.length < 3 ? 'invalid' : 'entered'
-                  }
-                  error={
-                    specialisationTwo?.length < 3
-                      ? `Specialisation field must contain at least 3 characters!`
-                      : null
-                  }
-                />
+                  <InputField
+                    placeholder="Specialisation"
+                    value={specialisationTwo}
+                    onChange={(e) => setSpecialisationTwo(e.target.value)}
+                    type="text"
+                    name="specialisationTwo"
+                    required
+                    className={
+                      specialisationTwo?.length < 3 ? 'invalid' : 'entered'
+                    }
+                    error={
+                      specialisationTwo?.length < 3
+                        ? `Specialisation field must contain at least 3 characters!`
+                        : null
+                    }
+                  />
 
-                <InputField
-                  placeholder="Specialisation"
-                  value={specialisationThree}
-                  onChange={(e) => setSpecialisationThree(e.target.value)}
-                  type="text"
-                  name="specialisationThree"
-                  required
-                  className={
-                    specialisationThree?.length < 3 ? 'invalid' : 'entered'
-                  }
-                  error={
-                    specialisationThree?.length < 3
-                      ? `Specialisation field must contain at least 3 characters!`
-                      : null
-                  }
-                />
+                  <InputField
+                    placeholder="Specialisation"
+                    value={specialisationThree}
+                    onChange={(e) => setSpecialisationThree(e.target.value)}
+                    type="text"
+                    name="specialisationThree"
+                    required
+                    className={
+                      specialisationThree?.length < 3 ? 'invalid' : 'entered'
+                    }
+                    error={
+                      specialisationThree?.length < 3
+                        ? `Specialisation field must contain at least 3 characters!`
+                        : null
+                    }
+                  />
 
-                <InputField
-                  placeholder="Specialisation"
-                  value={specialisationFour}
-                  onChange={(e) => setSpecialisationFour(e.target.value)}
-                  type="text"
-                  name="specialisationFour"
-                  required
-                  className={
-                    specialisationFour?.length < 3 ? 'invalid' : 'entered'
-                  }
-                  error={
-                    specialisationFour?.length < 3
-                      ? `Specialisation field must contain at least 3 characters!`
-                      : null
-                  }
-                />
+                  <InputField
+                    placeholder="Specialisation"
+                    value={specialisationFour}
+                    onChange={(e) => setSpecialisationFour(e.target.value)}
+                    type="text"
+                    name="specialisationFour"
+                    required
+                    className={
+                      specialisationFour?.length < 3 ? 'invalid' : 'entered'
+                    }
+                    error={
+                      specialisationFour?.length < 3
+                        ? `Specialisation field must contain at least 3 characters!`
+                        : null
+                    }
+                  />
+                </div>
+                <Button
+                  type="submit"
+                  colour="transparent"
+                  text="Save changes"
+                  className="btn"
+                  title="Save changes"
+                  disabled={false}
+                ></Button>
               </div>
-              <h3>Specialisation</h3>
-              <div className="input-border">
-                <label>Specialisation</label>
-                <QuillEditor
-                  value={specialisation}
-                  onChange={setSpecialisation}
-                  className={
-                    specialisation?.length < 10 ? 'invalid' : 'entered'
-                  }
-                />
+              <div>
+                <h3>Specialisation</h3>
+                <div className="input-border">
+                  <label>Specialisation</label>
+                  <QuillEditor
+                    value={specialisation}
+                    onChange={setSpecialisation}
+                    className={
+                      specialisation?.length < 10 ? 'invalid' : 'entered'
+                    }
+                  />
+                </div>
+                <Button
+                  type="submit"
+                  colour="transparent"
+                  text="Save changes"
+                  className="btn"
+                  title="Save changes"
+                  disabled={false}
+                ></Button>
               </div>
-              <h3>Qualifications</h3>
-              <div className="input-border">
-                <label>Qualifications</label>
-                <QuillEditor
-                  value={qualifications}
-                  onChange={setQualifications}
-                  className={
-                    qualifications?.length < 10 ? 'invalid' : 'entered'
-                  }
-                />
+              <div>
+                <h3>Qualifications</h3>
+                <div className="input-border">
+                  <label>Qualifications</label>
+                  <QuillEditor
+                    value={qualifications}
+                    onChange={setQualifications}
+                    className={
+                      qualifications?.length < 10 ? 'invalid' : 'entered'
+                    }
+                  />
+                </div>
+                <Button
+                  type="submit"
+                  colour="transparent"
+                  text="Save changes"
+                  className="btn"
+                  title="Save changes"
+                  disabled={false}
+                ></Button>
               </div>
-              <h3>Location</h3>
-              <div className="input-border">
-                <label>Location</label>
-                <textarea
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-                  type="text"
-                  name="location"
-                  required
-                  className={location?.length <= 10 ? 'invalid' : 'entered'}
-                  error={
-                    location?.length <= 10
-                      ? `Location field must contain at least 10 characters!`
-                      : null
-                  }
-                />
+              <div>
+                <h3>Location</h3>
+                <div className="input-border">
+                  <label>Location</label>
+                  <textarea
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                    type="text"
+                    name="location"
+                    required
+                    className={location?.length <= 10 ? 'invalid' : 'entered'}
+                    error={
+                      location?.length <= 10
+                        ? `Location field must contain at least 10 characters!`
+                        : null
+                    }
+                  />
+                </div>
+                <Button
+                  type="submit"
+                  colour="transparent"
+                  text="Save changes"
+                  className="btn"
+                  title="Save changes"
+                  disabled={false}
+                ></Button>
               </div>
               <InputField
                 label="Telephone Number"
@@ -604,9 +694,9 @@ const ProfileEditView = () => {
               <Button
                 type="submit"
                 colour="transparent"
-                text="submit"
+                text="save changes"
                 className="btn"
-                title="Submit"
+                title="Save changes"
                 disabled={false}
               ></Button>
             </form>
@@ -632,21 +722,13 @@ const ProfileEditView = () => {
                   <p>Social media not set.</p>
                 ) : (
                   <>
-                    <div className="social-media-wrapper">
+                    <div>
                       {faceBook ? (
-                        <img
-                          className="social-media-icons size"
-                          src={FB}
-                          alt="Facebook"
-                        />
+                        <FaceBookComponent faceBookUserName={faceBook} />
                       ) : null}
 
                       {instagram ? (
-                        <img
-                          className="social-media-icons size"
-                          src={Instagram}
-                          alt="Instagram"
-                        />
+                        <InstagramComponent instagramUserName={instagram} />
                       ) : null}
                     </div>
                   </>
@@ -739,16 +821,6 @@ const ProfileEditView = () => {
                 text={`  from ${profile?.numReviews} reviews`}
               />
             </div>
-            {/* <h4>Keyword Summary</h4>
-            <p className="search-algorithm">
-              Search algorithm: {profile?.keyWordSearch}
-            </p> */}
-            {/* <p>Keyword search One: {profile?.keyWordSearchOne}</p>
-            <p>Keyword search Two: {profile?.keyWordSearchTwo}</p>
-            <p>Keyword search Three: {profile?.keyWordSearchThree}</p>
-            <p>Keyword search Four: {profile?.Four}</p>
-            <p>Keyword search Five: {profile?.five}</p>
-            <p>Keyword search Six: {profile?.six}</p> */}
           </fieldset>
         </div>
       )}

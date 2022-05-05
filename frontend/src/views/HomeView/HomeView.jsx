@@ -78,7 +78,7 @@ const HomeView = () => {
 
         <div
           style={{
-            backgroundImage: `url(${randImg})`,
+            backgroundImage: profiles.length > 0 ? `url(${randImg})` : null,
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center',
             backgroundSize: 'cover',
@@ -102,7 +102,6 @@ const HomeView = () => {
             </div>
           ) : null}
         </div>
-
         <div className="home-view">
           {keyword.length > 0 ? (
             <div className="card-wrapper">
