@@ -53,7 +53,13 @@ const FullProfileView = () => {
                   ref={ref}
                   className="item bg-image"
                   style={{
-                    backgroundImage: `url(${profile?.profileImage})`,
+                    backgroundImage: profile
+                      ? `url(${profile?.profileImage})`
+                      : null,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'center',
+                    backgroundSize: 'cover',
+                    paddingBottom: '1rem',
                   }}
                 >
                   <div className="specialisation-wrapper">
@@ -89,7 +95,6 @@ const FullProfileView = () => {
                     <p>Create: {moment(profile?.createdAt).fromNow()}</p>
                   </div>
                 </div>
-
                 <div className="item">
                   <div className="specialisation-wrapper">
                     <div className="specialisation">
@@ -151,7 +156,6 @@ const FullProfileView = () => {
                     )}
                   </div>
                 </div>
-
                 <div className="item">
                   <div className="specialisation-wrapper">
                     <div className="specialisation">
