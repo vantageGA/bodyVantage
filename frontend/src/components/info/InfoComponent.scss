@@ -1,0 +1,27 @@
+@import '../../index.scss';
+
+.info-wrapper {
+  .bubble {
+    position: relative;
+    background: $main-font-colour;
+    color: $main-bg-colour;
+    text-align: center;
+    width: auto;
+    height: auto;
+    border-radius: 4px;
+    padding: 0.2em 0px;
+  }
+  .bubble:after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 0;
+    z-index: 1;
+    border-style: solid;
+    border-color: $main-font-colour transparent;
+    border-width: 20px 20px 0;
+    bottom: -20px;
+    left: 50%;
+    margin-left: -20px;
+  }
+}

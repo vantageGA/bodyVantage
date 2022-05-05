@@ -347,6 +347,13 @@ const UserProfileEditView = () => {
               your profile.
             </p>
           </fieldset>
+          <fieldset className="fieldSet item">
+            <legend>
+              <span>PROFILE</span> Statistics
+            </legend>
+            <p>Number of clicks on your profile</p>
+            <p>Time spent on viewing your profile</p>
+          </fieldset>
         </>
       )}
     </div>

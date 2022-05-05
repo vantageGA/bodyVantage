@@ -38,19 +38,8 @@
     padding: 0.5em;
     justify-content: space-between;
     align-items: center;
-
-    .social-media-wrapper {
-      display: flex;
-
-      .social-media-icons {
-        border-radius: 50%;
-      }
-      .size {
-        width: 32px;
-        height: 32px;
-      }
-    }
   }
+
   .search-algorithm {
     max-height: 200px;
     overflow-y: auto;
