@@ -34,7 +34,7 @@ const FullProfileView = () => {
     setDivHeight(ref.current.offsetHeight);
     setNameHeight(refName.current.offsetHeight);
     return () => {
-      console.log('Full Profile cleanup');
+      // console.log('Full Profile cleanup');
     };
   }, [dispatch, id, profile?.user]);
 
@@ -93,6 +93,10 @@ const FullProfileView = () => {
                       {moment(profile?.updatedAt).fromNow()}
                     </p>
                     <p>Create: {moment(profile?.createdAt).fromNow()}</p>
+                    <p>
+                      {profile?.name} has had {profile?.profileClickCounter}{' '}
+                      views.
+                    </p>
                   </div>
                 </div>
                 <div className="item">

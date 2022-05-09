@@ -12,6 +12,9 @@
 
   .item {
     width: calc(50% - #{10px}); /* and this */
+    .profile-click-count {
+      color: $rating-colour;
+    }
   }
   .image {
     width: 120px;

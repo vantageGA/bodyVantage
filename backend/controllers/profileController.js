@@ -91,6 +91,28 @@ const getProfile = asyncHandler(async (req, res) => {
   }
 });
 
+// @description: Update Profile CLICKS
+// @route: PUT /api/profile-clicks
+// @access: PUBLIC
+const updateProfileClicks = asyncHandler(async (req, res) => {
+  const { _id, profileClickCounter } = req.body;
+
+  // Find profile
+  const profile = await Profile.find({
+    _id,
+  });
+
+  if (profile) {
+    profile[0].profileClickCounter =
+      profile[0].profileClickCounter + profileClickCounter;
+    const updatedProfile = await profile[0].save();
+    res.json(updatedProfile);
+  } else {
+    res.status(404);
+    throw new Error('User Not found');
+  }
+});
+
 // @description: Update Profile
 // @route: PUT /api/profile
 // @access: PRIVATE
@@ -274,4 +296,5 @@ export {
   createProfileReview,
   updateProfileQualificationToTrue,
   deleteReview,
+  updateProfileClicks,
 };

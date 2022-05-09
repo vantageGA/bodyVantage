@@ -6,6 +6,9 @@ import {
   PROFILE_BY_ID_FAILURE,
   PROFILE_BY_ID_REQUEST,
   PROFILE_BY_ID_SUCCESS,
+  PROFILE_CLICK_COUNTER_FAILURE,
+  PROFILE_CLICK_COUNTER_REQUEST,
+  PROFILE_CLICK_COUNTER_SUCCESS,
   PROFILE_CREATE_FAILURE,
   PROFILE_CREATE_REQUEST,
   PROFILE_CREATE_SUCCESS,
@@ -284,6 +287,34 @@ export const profileVerifyQualificationAction =
     } catch (error) {
       dispatch({
         type: PROFILE_VERIFY_QUALIFICATION_FAILURE,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+
+// Profile click counter action
+export const profileClickCounterAction =
+  (_id, profileClickCounter) => async (dispatch) => {
+    try {
+      dispatch({
+        type: PROFILE_CLICK_COUNTER_REQUEST,
+      });
+
+      const data = await axios.put(`/api/profile-clicks`, {
+        _id,
+        profileClickCounter: profileClickCounter,
+      });
+
+      // Send data to endpoint to update DB
+
+      dispatch({ type: PROFILE_CLICK_COUNTER_SUCCESS, payload: data });
+      dispatch(profilesAdminAction());
+    } catch (error) {
+      dispatch({
+        type: PROFILE_CLICK_COUNTER_FAILURE,
         payload:
           error.response && error.response.data.message
             ? error.response.data.message
