@@ -6,6 +6,9 @@ import {
   PROFILE_BY_ID_FAILURE,
   PROFILE_BY_ID_REQUEST,
   PROFILE_BY_ID_SUCCESS,
+  PROFILE_CLICK_COUNTER_FAILURE,
+  PROFILE_CLICK_COUNTER_REQUEST,
+  PROFILE_CLICK_COUNTER_SUCCESS,
   PROFILE_CREATE_FAILURE,
   PROFILE_CREATE_REQUEST,
   PROFILE_CREATE_RESET,
@@ -186,6 +189,25 @@ export const profileVerifyQualificationReducer = (state = {}, action) => {
         success: true,
       };
     case PROFILE_VERIFY_QUALIFICATION_FAILURE:
+      return { ...state, loading: false, error: action.payload };
+    default:
+      return { ...state };
+  }
+};
+
+// Profile Click counter
+export const profileClickCounterReducer = (state = {}, action) => {
+  switch (action.type) {
+    case PROFILE_CLICK_COUNTER_REQUEST:
+      return { ...state, loading: true };
+    case PROFILE_CLICK_COUNTER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        clicks: action.payload,
+      };
+    case PROFILE_CLICK_COUNTER_FAILURE:
       return { ...state, loading: false, error: action.payload };
     default:
       return { ...state };

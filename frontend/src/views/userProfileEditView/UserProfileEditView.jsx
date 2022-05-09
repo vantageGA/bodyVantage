@@ -39,6 +39,10 @@ const UserProfileEditView = () => {
   // Profile details in DB
   useSelector((state) => state.profileOfLoggedInUser);
 
+  // Profile details in DB
+  const profileState = useSelector((state) => state.profileOfLoggedInUser);
+  const { profile } = profileState;
+
   // USER Profile image upload
   const userProfileImage = useSelector((state) => state.userProfileImage);
   const { loading: userProfileImageLoading } = userProfileImage;
@@ -351,7 +355,13 @@ const UserProfileEditView = () => {
             <legend>
               <span>PROFILE</span> Statistics
             </legend>
-            <p>Number of clicks on your profile</p>
+            <p>
+              Your profile has been Clicked{' '}
+              <span className="profile-click-count">
+                {profile?.profileClickCounter}
+              </span>{' '}
+              times.
+            </p>
             <p>Time spent on viewing your profile</p>
           </fieldset>
         </>

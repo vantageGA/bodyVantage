@@ -37,6 +37,22 @@ const reviewsSchema = mongoose.Schema(
   },
 );
 
+// const clickCountSchema = mongoose.Schema(
+//   {
+//     user: {
+//       type: mongoose.Schema.Types.ObjectId,
+//       required: true,
+//       ref: 'User',
+//     },
+//     clickCount: {
+//       type: Number,
+//     },
+//   },
+//   {
+//     timestamps: true,
+//   },
+// );
+
 const profileSchema = mongoose.Schema(
   {
     user: {
@@ -115,6 +131,7 @@ const profileSchema = mongoose.Schema(
       type: String,
     },
     reviews: [reviewsSchema],
+    profileClickCounter: { type: Number, default: 0 },
     rating: {
       type: Number,
       default: 0,
