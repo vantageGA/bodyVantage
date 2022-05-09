@@ -112,46 +112,46 @@ const HomeView = () => {
                   <div key={profile?._id}>
                     <Card
                       specialisationOne={
-                        profile.specialisationOne.length
-                          ? profile.specialisationOne
+                        profile?.specialisationOne.length
+                          ? profile?.specialisationOne
                           : 'Personal Trainer'
                       }
                       specialisationTwo={
-                        profile.specialisationTwo.length
-                          ? profile.specialisationTwo
+                        profile?.specialisationTwo.length
+                          ? profile?.specialisationTwo
                           : 'Personal Trainer'
                       }
                       specialisationThree={
-                        profile.specialisationThree.length
-                          ? profile.specialisationThree
+                        profile?.specialisationThree.length
+                          ? profile?.specialisationThree
                           : 'Personal Trainer'
                       }
                       specialisationFour={
-                        profile.specialisationFour.length
-                          ? profile.specialisationFour
+                        profile?.specialisationFour.length
+                          ? profile?.specialisationFour
                           : 'Personal Trainer'
                       }
-                      id={profile._id}
+                      id={profile?._id}
                       name={
                         <span
                           dangerouslySetInnerHTML={{
-                            __html: highlightKeywordMatch(profile.name),
+                            __html: highlightKeywordMatch(profile?.name),
                           }}
                         ></span>
                       }
-                      src={profile.profileImage}
-                      alt={profile.name}
+                      src={profile?.profileImage}
+                      alt={profile?.name}
                       description={
                         <p
                           dangerouslySetInnerHTML={{
-                            __html: profile.description.slice(0, 180) + '...',
+                            __html: profile?.description.slice(0, 180) + '...',
                           }}
                         ></p>
                       }
-                      rating={profile.rating}
+                      rating={profile?.rating}
                       number
                       of
-                      reviews={profile.numReviews}
+                      reviews={profile?.numReviews}
                     />
                   </div>
                 ),

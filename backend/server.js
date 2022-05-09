@@ -36,6 +36,8 @@ app.use('/api', userReviewRoutes);
 app.use('/api/userProfileUpload', imageUploadRoutes);
 //PROFILE image upload route
 app.use('/api/profileUpload', profileImageRoutes);
+//PROFILE click count
+app.use('/api/profile-clicks', profileRoutes);
 
 //create static folder
 const __dirname = path.resolve();
