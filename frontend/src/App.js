@@ -21,16 +21,8 @@ import Cookies from './components/cookies/Cookies';
 import AboutView from './views/aboutView/AboutView';
 import FaqsView from './views/faqsView/FaqsView';
 
-import ReactGA from 'react-ga';
-import { useEffect } from 'react';
-
 // Change the display width by removing the --fluid after the container class
 const App = () => {
-  ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_TRACKING_CODE);
-  useEffect(() => {
-    ReactGA.pageview(window.location.pathname + window.location.search);
-  }, []);
-
   return (
     <Router>
       <div className="container--fluid">
