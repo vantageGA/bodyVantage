@@ -19,6 +19,9 @@ import {
   PROFILE_DELETE_REVIEW_SUCCESS,
   PROFILE_DELETE_SUCCESS,
   PROFILE_FAILURE,
+  PROFILE_IMAGES_FAILURE,
+  PROFILE_IMAGES_REQUEST,
+  PROFILE_IMAGES_SUCCESS,
   PROFILE_OF_LOGGED_IN_USER_FAILURE,
   PROFILE_OF_LOGGED_IN_USER_REQUEST,
   PROFILE_OF_LOGGED_IN_USER_SUCCESS,
@@ -322,3 +325,34 @@ export const profileClickCounterAction =
       });
     }
   };
+
+// Get Profile Images for ProfileImage model
+export const profileImagesAction = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: PROFILE_IMAGES_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get(`/api/profile-images`, config);
+    dispatch({ type: PROFILE_IMAGES_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: PROFILE_IMAGES_FAILURE,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
