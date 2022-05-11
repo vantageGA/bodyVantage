@@ -1,5 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import Profile from '../models/profileModel.js';
+import ProfileImages from '../models/profileImageModel.js';
 import UserReviewer from '../models/userReviewerModel.js';
 
 // @description: Get All the Profiles
@@ -285,6 +286,22 @@ const updateProfileQualificationToTrue = asyncHandler(async (req, res) => {
   }
 });
 
+// @description: Get profile images
+// @route: GET /api/profile-images
+// @access: Private
+const getAllProfileImages = asyncHandler(async (req, res) => {
+  const profileImages = await ProfileImages.find({
+    user: req.user._id.toString(),
+  });
+
+  if (profileImages) {
+    res.json(profileImages);
+  } else {
+    res.status(404);
+    throw new Error('No profile images found');
+  }
+});
+
 export {
   getAllProfiles,
   getAllProfilesAdmin,
@@ -297,4 +314,5 @@ export {
   updateProfileQualificationToTrue,
   deleteReview,
   updateProfileClicks,
+  getAllProfileImages,
 };
