@@ -11,6 +11,7 @@ import {
   updateProfileQualificationToTrue,
   deleteReview,
   updateProfileClicks,
+  getAllProfileImages,
 } from '../controllers/profileController.js';
 
 import { protect, admin } from '../middleware/authMiddleware.js';
@@ -35,5 +36,8 @@ router
 
 //Delete a single review route
 router.route('/profile/review/admin/:id').delete(protect, admin, deleteReview);
+
+// GET all profile images
+router.route('/profile-images').get(protect, getAllProfileImages);
 
 export default router;
