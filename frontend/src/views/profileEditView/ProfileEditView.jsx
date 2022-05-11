@@ -7,6 +7,7 @@ import {
   profileOfLoggedInUserAction,
   createProfileAction,
   profileUpdateAction,
+  profileImagesAction,
 } from '../../store/actions/profileActions';
 
 import { profileImageUploadAction } from '../../store/actions/imageUploadActions';
@@ -44,6 +45,17 @@ const ProfileEditView = () => {
   // PROFILE image upload
   const profileImageStore = useSelector((state) => state.profileImage);
   const { loading: profileImageLoading } = profileImageStore;
+
+  // PROFILE images
+  const profileImagesState = useSelector((state) => state.profileImages);
+  const {
+    loading: profileImagesLoading,
+    success,
+    error: profileImagesError,
+    profileImages,
+  } = profileImagesState;
+
+  console.log(profileImagesError);
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -90,17 +102,17 @@ const ProfileEditView = () => {
     setLocation(profile?.location);
     setTelephoneNumber(profile?.telephoneNumber);
     setkeyWordSearch(profile?.keyWordSearch);
-
     setkeyWordSearchOne(profile?.keyWordSearchOne);
     setkeyWordSearchTwo(profile?.keyWordSearchTwo);
     setkeyWordSearchThree(profile?.keyWordSearchThree);
     setkeyWordSearchFour(profile?.keyWordSearchFour);
     setkeyWordSearchFive(profile?.keyWordSearchFive);
-
     setSpecialisationOne(profile?.specialisationOne);
     setSpecialisationTwo(profile?.specialisationTwo);
     setSpecialisationThree(profile?.specialisationThree);
     setSpecialisationFour(profile?.specialisationFour);
+
+    dispatch(profileImagesAction());
 
     const abortConst = new AbortController();
     return () => {
