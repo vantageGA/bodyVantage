@@ -20,6 +20,10 @@ import {
   PROFILE_DELETE_REVIEW_SUCCESS,
   PROFILE_DELETE_SUCCESS,
   PROFILE_FAILURE,
+  PROFILE_IMAGES_FAILURE,
+  PROFILE_IMAGES_REQUEST,
+  PROFILE_IMAGES_RESET,
+  PROFILE_IMAGES_SUCCESS,
   PROFILE_OF_LOGGED_IN_USER_FAILURE,
   PROFILE_OF_LOGGED_IN_USER_REQUEST,
   PROFILE_OF_LOGGED_IN_USER_SUCCESS,
@@ -209,6 +213,25 @@ export const profileClickCounterReducer = (state = {}, action) => {
       };
     case PROFILE_CLICK_COUNTER_FAILURE:
       return { ...state, loading: false, error: action.payload };
+    default:
+      return { ...state };
+  }
+};
+// Get Profile Images for ProfileImage model
+export const profileImagesReducer = (state = { profileImages: [] }, action) => {
+  switch (action.type) {
+    case PROFILE_IMAGES_REQUEST:
+      return { ...state, loading: true };
+    case PROFILE_IMAGES_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        profileImages: action.payload,
+      };
+    case PROFILE_IMAGES_FAILURE:
+      return { ...state, loading: false, error: action.payload };
+    case PROFILE_IMAGES_RESET:
+      return { profileImages: [] };
     default:
       return { ...state };
   }
