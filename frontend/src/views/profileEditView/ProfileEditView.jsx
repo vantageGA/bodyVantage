@@ -763,6 +763,7 @@ const ProfileEditView = () => {
                 ) : null}
               </form>
             </div>
+            {console.log('xxx', profileImages)}
             <h3>ALL your Profile Images</h3>
             <div className="profile-images-wrapper">
               {profileImagesError ? (
@@ -771,6 +772,7 @@ const ProfileEditView = () => {
               {profileImages ? (
                 profileImages.map((image) => (
                   <div key={image?._id}>
+                    {image._id}
                     <img
                       src={image?.avatar}
                       className="profile-image-size"
