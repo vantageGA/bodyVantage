@@ -31,6 +31,18 @@
   .input-border {
     border: 1px solid $border-colour;
   }
+  .profile-images-wrapper {
+    border: 1px solid $border-colour;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0.5em;
+    justify-content: space-between;
+    align-items: center;
+    .profile-image-size {
+      width: 120px;
+      height: 120px;
+    }
+  }
   .summary-wrapper {
     border: 1px solid $border-colour;
     display: flex;

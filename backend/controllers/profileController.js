@@ -292,7 +292,7 @@ const updateProfileQualificationToTrue = asyncHandler(async (req, res) => {
 const getAllProfileImages = asyncHandler(async (req, res) => {
   const profileImages = await ProfileImages.find({
     user: req.user._id.toString(),
-  });
+  }).sort({ _id: -1 });
 
   if (profileImages) {
     res.json(profileImages);
