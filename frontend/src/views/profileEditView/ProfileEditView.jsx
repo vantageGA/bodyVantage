@@ -48,14 +48,7 @@ const ProfileEditView = () => {
 
   // PROFILE images
   const profileImagesState = useSelector((state) => state.profileImages);
-  const {
-    loading: profileImagesLoading,
-    success,
-    error: profileImagesError,
-    profileImages,
-  } = profileImagesState;
-
-  console.log(profileImagesError);
+  const { error: profileImagesError, profileImages } = profileImagesState;
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -216,15 +209,6 @@ const ProfileEditView = () => {
     // const removeDuplicates = Array.from(new Set(pure.split(' '))).toString();
     // console.log(removeDuplicates.toString());
   };
-
-  const isDisabled =
-    name?.length === 0 ||
-    !emailRegEx.test(email) ||
-    description?.length < 10 ||
-    specialisation?.length < 10 ||
-    location?.length < 10 ||
-    !telephoneNumberRegEx.test(telephoneNumber) ||
-    keyWordSearch?.length < 10;
 
   // Profile image
   const [previewImage, setPreviewImage] = useState('');
@@ -749,14 +733,12 @@ const ProfileEditView = () => {
                 <p>Create: {moment(profile?.createdAt).fromNow()}</p>
                 <p>Updated: {moment(profile?.updatedAt).fromNow()}</p>
               </div>
-
               {profileImageLoading ? <LoadingSpinner /> : null}
               {profileImage ? (
                 <img src={profileImage} alt={name} className="image" />
               ) : (
                 <p>'No profile image'</p>
               )}
-
               <form onSubmit={handleProfileImageUpdate}>
                 <InputField
                   id="profileImage"
@@ -780,6 +762,25 @@ const ProfileEditView = () => {
                   </>
                 ) : null}
               </form>
+            </div>
+            <h3>ALL your Profile Images</h3>
+            <div className="profile-images-wrapper">
+              {profileImagesError ? (
+                <p>There was an error loading images</p>
+              ) : null}
+              {profileImages ? (
+                profileImages.map((image) => (
+                  <div key={image?._id}>
+                    <img
+                      src={image?.avatar}
+                      className="profile-image-size"
+                      alt=""
+                    />
+                  </div>
+                ))
+              ) : (
+                <p>'No profile image'</p>
+              )}
             </div>
             <h3>Description</h3>
             <div className="summary-wrapper">

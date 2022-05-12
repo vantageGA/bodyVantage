@@ -32,10 +32,10 @@ const Cookies = () => {
             <h1>Cookies, Terms & Conditions</h1>
             <p>By using our website you are agreeing to our cookies policy.</p>
             <div className="link-wrapper">
-              <p>
+              <p onClick={handleDismiss}>
                 <LinkComp route="cookies" routeName="Cookies Policy" />
               </p>
-              <p>
+              <p onClick={handleDismiss}>
                 <LinkComp route="privacy" routeName="Privacy Policy" />
               </p>
             </div>
@@ -43,7 +43,7 @@ const Cookies = () => {
             <div>
               <span className="small-text">
                 Please email{' '}
-                <a href="mailto:zack@fisicalfitness.co.uk"> MANAGEMENT </a> with
+                <a href="mailto:zack@bodyvantage.co.uk"> MANAGEMENT </a> with
                 any queries you might have.
               </span>
             </div>
