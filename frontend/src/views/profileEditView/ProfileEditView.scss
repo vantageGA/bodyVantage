@@ -36,11 +36,29 @@
     display: flex;
     flex-wrap: wrap;
     padding: 0.5em;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
+    gap: 0.1em;
     .profile-image-size {
-      width: 120px;
-      height: 120px;
+      width: 160px;
+      height: 160px;
+    }
+    .profile-image-delete {
+      position: relative;
+      top: 14px;
+      color: $danger;
+      background-color: $main-font-colour;
+      text-transform: capitalize;
+      text-align: center;
+      opacity: 0.8;
+      border-radius: 50%;
+      padding: 0.2em;
+      font-size: 1.2em;
+      &:hover {
+        cursor: pointer;
+        font-weight: bold;
+        opacity: 1;
+      }
     }
   }
   .summary-wrapper {
