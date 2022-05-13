@@ -12,6 +12,7 @@ import {
   deleteReview,
   updateProfileClicks,
   getAllProfileImages,
+  deleteProfileImage,
 } from '../controllers/profileController.js';
 
 import { protect, admin } from '../middleware/authMiddleware.js';
@@ -39,5 +40,7 @@ router.route('/profile/review/admin/:id').delete(protect, admin, deleteReview);
 
 // GET all profile images
 router.route('/profile-images').get(protect, getAllProfileImages);
+//Delete a single PROFILE image
+router.route('/profile-image/:id').delete(protect, deleteProfileImage);
 
 export default router;

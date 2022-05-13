@@ -73,7 +73,7 @@ const HomeView = () => {
   return (
     <>
       <fieldset className="fieldSet">
-        <legend></legend>
+        <legend>Find a trainer near you</legend>
         {error ? <Message message={error} /> : null}
 
         <div

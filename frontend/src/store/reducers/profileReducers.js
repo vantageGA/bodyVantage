@@ -20,6 +20,9 @@ import {
   PROFILE_DELETE_REVIEW_SUCCESS,
   PROFILE_DELETE_SUCCESS,
   PROFILE_FAILURE,
+  PROFILE_IMAGES_DELETE_FAILURE,
+  PROFILE_IMAGES_DELETE_REQUEST,
+  PROFILE_IMAGES_DELETE_SUCCESS,
   PROFILE_IMAGES_FAILURE,
   PROFILE_IMAGES_REQUEST,
   PROFILE_IMAGES_RESET,
@@ -232,6 +235,24 @@ export const profileImagesReducer = (state = { profileImages: [] }, action) => {
       return { ...state, loading: false, error: action.payload };
     case PROFILE_IMAGES_RESET:
       return { profileImages: [] };
+    default:
+      return { ...state };
+  }
+};
+// DELETE Profile Images for ProfileImage model
+export const profileImageDeleteReducer = (state = {}, action) => {
+  switch (action.type) {
+    case PROFILE_IMAGES_DELETE_REQUEST:
+      return { ...state, loading: true };
+    case PROFILE_IMAGES_DELETE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+      };
+    case PROFILE_IMAGES_DELETE_FAILURE:
+      return { ...state, loading: false, error: action.payload };
+
     default:
       return { ...state };
   }

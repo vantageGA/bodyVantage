@@ -301,6 +301,28 @@ const getAllProfileImages = asyncHandler(async (req, res) => {
     throw new Error('No profile images found');
   }
 });
+// @description: Delete a single PROFILE Image
+// @route: DELETE /api/profile-image/:id
+// @access: PRIVATE
+const deleteProfileImage = asyncHandler(async (req, res) => {
+  const profileImages = await ProfileImages.find({
+    user: req.user._id.toString(),
+  });
+
+  const profile = profileImages.filter((profile) => {
+    if (profile._id.toString() === req.params.id) {
+      return profile;
+    }
+  });
+
+  if (profile) {
+    await profile[0].remove();
+    res.json({ message: 'Profile Image successfully removed' });
+  } else {
+    res.status(404);
+    throw new Error('Profile Not Found');
+  }
+});
 
 export {
   getAllProfiles,
@@ -315,4 +337,5 @@ export {
   deleteReview,
   updateProfileClicks,
   getAllProfileImages,
+  deleteProfileImage,
 };
