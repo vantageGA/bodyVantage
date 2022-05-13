@@ -8,6 +8,7 @@ import {
   createProfileAction,
   profileUpdateAction,
   profileImagesAction,
+  deleteProfileImageAction,
 } from '../../store/actions/profileActions';
 
 import { profileImageUploadAction } from '../../store/actions/imageUploadActions';
@@ -242,6 +243,13 @@ const ProfileEditView = () => {
   };
 
   // USER Profile image
+
+  const handleProfileImageDelete = (id) => {
+    // Dispatch PROFILE  delete action
+    if (window.confirm(`Are you sure you want to delete image`)) {
+      dispatch(deleteProfileImageAction(id));
+    }
+  };
 
   const handleShowCombinations = () => {
     setShow(!show);
@@ -763,7 +771,7 @@ const ProfileEditView = () => {
                 ) : null}
               </form>
             </div>
-            {console.log('xxx', profileImages)}
+
             <h3>ALL your Profile Images</h3>
             <div className="profile-images-wrapper">
               {profileImagesError ? (
@@ -772,7 +780,13 @@ const ProfileEditView = () => {
               {profileImages ? (
                 profileImages.map((image) => (
                   <div key={image?._id}>
-                    {image._id}
+                    <span
+                      className="profile-image-delete"
+                      onClick={() => handleProfileImageDelete(image?._id)}
+                      title="Delete"
+                    >
+                      X
+                    </span>
                     <img
                       src={image?.avatar}
                       className="profile-image-size"

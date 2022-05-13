@@ -317,7 +317,7 @@ const deleteProfileImage = asyncHandler(async (req, res) => {
 
   if (profile) {
     await profile[0].remove();
-    res.json({ message: 'Profile successfully removed' });
+    res.json({ message: 'Profile Image successfully removed' });
   } else {
     res.status(404);
     throw new Error('Profile Not Found');
