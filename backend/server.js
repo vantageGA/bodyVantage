@@ -36,6 +36,8 @@ app.use('/api', userReviewRoutes);
 app.use('/api/userProfileUpload', imageUploadRoutes);
 //PROFILE image upload route
 app.use('/api/profileUpload', profileImageRoutes);
+//PROFILE image delete route
+app.use('/api', imageUploadRoutes);
 //PROFILE click count
 app.use('/api/profile-clicks', profileRoutes);
 

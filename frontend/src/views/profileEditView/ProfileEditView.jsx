@@ -8,10 +8,12 @@ import {
   createProfileAction,
   profileUpdateAction,
   profileImagesAction,
-  deleteProfileImageAction,
 } from '../../store/actions/profileActions';
 
-import { profileImageUploadAction } from '../../store/actions/imageUploadActions';
+import {
+  profileImageUploadAction,
+  deleteProfileImageAction,
+} from '../../store/actions/imageUploadActions';
 
 import InputField from '../../components/inputField/InputField';
 import Button from '../../components/button/Button';
