@@ -25,7 +25,6 @@ import {
   profileVerifyQualificationReducer,
   profileDeleteReviewReducer,
   profileImagesReducer,
-  profileImageDeleteReducer,
 } from './reducers/profileReducers';
 
 import {
@@ -40,6 +39,7 @@ import {
 import {
   userProfileImageReducer,
   profileImageReducer,
+  profileImageDeleteReducer,
 } from './reducers/imageUploadReducers';
 
 import { cookiesReducer } from './reducers/cookiesReducer';

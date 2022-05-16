@@ -5,6 +5,7 @@ import cloudinary from 'cloudinary';
 import UserProfileImages from '../models/imageUploadModal.js';
 import User from '../models/userModel.js';
 import { protect } from '../middleware/authMiddleware.js';
+import { deleteProfileImage } from '../controllers/imageUploadController.js';
 
 const router = express.Router();
 
@@ -87,5 +88,8 @@ router.post(
     }
   },
 );
+
+//Delete a single PROFILE image
+router.route('/profile-image/:id').delete(protect, deleteProfileImage);
 
 export default router;
