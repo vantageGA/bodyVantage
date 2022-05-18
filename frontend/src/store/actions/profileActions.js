@@ -20,8 +20,11 @@ import {
   PROFILE_DELETE_SUCCESS,
   PROFILE_FAILURE,
   PROFILE_IMAGES_FAILURE,
+  PROFILE_IMAGES_PUBLIC_REQUEST,
   PROFILE_IMAGES_REQUEST,
   PROFILE_IMAGES_SUCCESS,
+  PROFILE_IMAGES__PUBLIC_FAILURE,
+  PROFILE_IMAGES__PUBLIC_SUCCESS,
   PROFILE_OF_LOGGED_IN_USER_FAILURE,
   PROFILE_OF_LOGGED_IN_USER_REQUEST,
   PROFILE_OF_LOGGED_IN_USER_SUCCESS,
@@ -349,6 +352,26 @@ export const profileImagesAction = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: PROFILE_IMAGES_FAILURE,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+// Get Profile Images for ProfileImage model 'PUBLIC'
+export const profileImagesPublicAction = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: PROFILE_IMAGES_PUBLIC_REQUEST,
+    });
+
+    const { data } = await axios.get(`/api/profile-images/${id}`);
+    dispatch({ type: PROFILE_IMAGES__PUBLIC_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: PROFILE_IMAGES__PUBLIC_FAILURE,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message
