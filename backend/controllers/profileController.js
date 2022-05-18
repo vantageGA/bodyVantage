@@ -302,6 +302,22 @@ const getAllProfileImages = asyncHandler(async (req, res) => {
   }
 });
 
+// @description: Get profile images Public
+// @route: GET /api/profile-images-public/:id
+// @access: Public
+const getAllProfileImagesPublic = asyncHandler(async (req, res) => {
+  const profileImages = await ProfileImages.find({
+    user: req.params.id,
+  }).sort({ _id: -1 });
+
+  if (profileImages) {
+    res.json(profileImages);
+  } else {
+    res.status(404);
+    throw new Error('No profile images found');
+  }
+});
+
 export {
   getAllProfiles,
   getAllProfilesAdmin,
@@ -315,4 +331,5 @@ export {
   deleteReview,
   updateProfileClicks,
   getAllProfileImages,
+  getAllProfileImagesPublic,
 };

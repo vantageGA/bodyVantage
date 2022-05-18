@@ -7,11 +7,6 @@
   .item {
     flex: 1; /*grow*/
     padding: 0.5em;
-    img {
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-    }
 
     .specialisation-wrapper {
       display: flex;
@@ -49,6 +44,21 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+  }
+  .profile-image-public-wrapper {
+    display: flex;
+    flex: 1; /*grow*/
+    img {
+      opacity: 0.6;
+      display: flex;
+      width: 60px;
+      height: 60px;
+      &:hover {
+        border: 1px solid $main-font-colour;
+        cursor: pointer;
+        opacity: 1;
+      }
+    }
   }
 }
 

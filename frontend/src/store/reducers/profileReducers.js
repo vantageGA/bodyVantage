@@ -21,9 +21,12 @@ import {
   PROFILE_DELETE_SUCCESS,
   PROFILE_FAILURE,
   PROFILE_IMAGES_FAILURE,
+  PROFILE_IMAGES_PUBLIC_REQUEST,
   PROFILE_IMAGES_REQUEST,
   PROFILE_IMAGES_RESET,
   PROFILE_IMAGES_SUCCESS,
+  PROFILE_IMAGES__PUBLIC_FAILURE,
+  PROFILE_IMAGES__PUBLIC_SUCCESS,
   PROFILE_OF_LOGGED_IN_USER_FAILURE,
   PROFILE_OF_LOGGED_IN_USER_REQUEST,
   PROFILE_OF_LOGGED_IN_USER_SUCCESS,
@@ -232,6 +235,28 @@ export const profileImagesReducer = (state = { profileImages: [] }, action) => {
       return { ...state, loading: false, error: action.payload };
     case PROFILE_IMAGES_RESET:
       return { profileImages: [] };
+    default:
+      return { ...state };
+  }
+};
+
+// Get Profile Images for ProfileImage model 'PUBLIC'
+export const profileImagesPublicReducer = (
+  state = { profileImages: [] },
+  action,
+) => {
+  switch (action.type) {
+    case PROFILE_IMAGES_PUBLIC_REQUEST:
+      return { ...state, loading: true };
+    case PROFILE_IMAGES__PUBLIC_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        profileImages: action.payload,
+      };
+    case PROFILE_IMAGES__PUBLIC_FAILURE:
+      return { ...state, loading: false, error: action.payload };
+
     default:
       return { ...state };
   }

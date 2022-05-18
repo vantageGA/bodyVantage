@@ -3,7 +3,10 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import './FullProfileView.scss';
 
-import { profileByIdAction } from '../../store/actions/profileActions';
+import {
+  profileByIdAction,
+  profileImagesPublicAction,
+} from '../../store/actions/profileActions';
 import { userReviewIdAction } from '../../store/actions/userReviewActions';
 
 import Message from '../../components/message/Message';
@@ -20,6 +23,7 @@ import InstagramComponent from '../../components/socialMedia/Instagram/Instagram
 const FullProfileView = () => {
   const [divHeight, setDivHeight] = useState(0);
   const [nameHeight, setNameHeight] = useState(0);
+  const [profileImageIndex, setProfileImageIndex] = useState(0);
   const ref = useRef(null);
   const refName = useRef(null);
   const dispatch = useDispatch();
@@ -30,13 +34,25 @@ const FullProfileView = () => {
 
   useEffect(() => {
     dispatch(profileByIdAction(id));
+    dispatch(profileImagesPublicAction(profile?.user));
     dispatch(userReviewIdAction(profile?.user));
     setDivHeight(ref.current.offsetHeight);
     setNameHeight(refName.current.offsetHeight);
     return () => {
-      // console.log('Full Profile cleanup');
+      console.log('Full Profile cleanup');
     };
   }, [dispatch, id, profile?.user]);
+
+  const profileImagesPublic = useSelector((state) => state.profileImagesPublic);
+  const {
+    loading: profileImageLoading,
+    profileImages,
+    error: profileImageError,
+  } = profileImagesPublic;
+
+  const handleProfileImage = (index) => {
+    setProfileImageIndex(index);
+  };
 
   return (
     <div>
@@ -53,9 +69,10 @@ const FullProfileView = () => {
                   ref={ref}
                   className="item bg-image"
                   style={{
-                    backgroundImage: profile
-                      ? `url(${profile?.profileImage})`
-                      : null,
+                    backgroundImage:
+                      profileImages.length > 0
+                        ? `url(${profileImages[profileImageIndex]?.avatar})`
+                        : null,
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: 'center',
                     backgroundSize: 'cover',
@@ -86,7 +103,7 @@ const FullProfileView = () => {
 
                   <div
                     className="full-profile-time"
-                    style={{ bottom: `-${divHeight - nameHeight * 2}px` }}
+                    style={{ bottom: `-${divHeight - nameHeight * 2.2}px` }}
                   >
                     <p>
                       Profile last updated:{' '}
@@ -121,6 +138,32 @@ const FullProfileView = () => {
                       __html: profile?.description,
                     }}
                   ></p>
+
+                  <div>
+                    <h1>Profile Images</h1>
+                    {profileImages ? (
+                      <div className="profile-image-public-wrapper">
+                        {profileImages.map((image, index) =>
+                          profileImageLoading ? (
+                            <LoadingSpinner />
+                          ) : (
+                            <span
+                              key={image._id}
+                              onClick={() => handleProfileImage(index)}
+                            >
+                              <img
+                                src={image.avatar}
+                                alt={image.name}
+                                title={`Click to preview`}
+                              />
+                            </span>
+                          ),
+                        )}
+                      </div>
+                    ) : profileImageError ? (
+                      { error }
+                    ) : null}
+                  </div>
 
                   <h1>Specialisation</h1>
                   <p
@@ -180,7 +223,7 @@ const FullProfileView = () => {
                     {profile?.reviews.length > 0 ? (
                       <>
                         <h1>Reviews</h1>
-                        {profile.reviews.map((review) => (
+                        {profile?.reviews.map((review) => (
                           <div key={review._id}>
                             <Review
                               reviewer={
