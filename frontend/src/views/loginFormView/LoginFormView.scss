@@ -2,4 +2,9 @@
 @import '../../scssMixIn.scss';
 
 .login-form-wrapper {
+  .login-form-inner-wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
 }

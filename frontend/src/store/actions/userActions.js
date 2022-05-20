@@ -12,6 +12,9 @@ import {
   USER_DETAILS_FAILURE,
   USER_DETAILS_REQUEST,
   USER_DETAILS_SUCCESS,
+  USER_FORGOT_PASSWORD_FAILURE,
+  USER_FORGOT_PASSWORD_REQUEST,
+  USER_FORGOT_PASSWORD_SUCCESS,
   USER_FULL_DETAILS_BY_ID_FAILURE,
   USER_FULL_DETAILS_BY_ID_REQUEST,
   USER_FULL_DETAILS_BY_ID_SUCCESS,
@@ -22,6 +25,9 @@ import {
   USER_REGISTER_FAILURE,
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
+  USER_UPDATE_PASSWORD_FAILURE,
+  USER_UPDATE_PASSWORD_REQUEST,
+  USER_UPDATE_PASSWORD_SUCCESS,
   USER_UPDATE_PROFILE_FAILURE,
   USER_UPDATE_PROFILE_REQUEST,
   USER_UPDATE_PROFILE_SUCCESS,
@@ -195,7 +201,6 @@ export const userProfileByIdAction = (id) => async (dispatch) => {
   try {
     dispatch({ type: USER_FULL_DETAILS_BY_ID_REQUEST });
     const { data } = await axios.get(`/api/user/profile/${id}`);
-
     dispatch({ type: USER_FULL_DETAILS_BY_ID_SUCCESS, payload: data });
   } catch (error) {
     dispatch({
@@ -266,6 +271,50 @@ export const userAddRemoveAdminAction =
     } catch (error) {
       dispatch({
         type: USER_ADD_REMOVE_ADMIN_FAILURE,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+
+// Request new password if forgotten
+export const userForgotPasswordAction = (email) => async (dispatch) => {
+  try {
+    dispatch({
+      type: USER_FORGOT_PASSWORD_REQUEST,
+    });
+    const { data } = await axios.post('/api/user-forgot-password', { email });
+    dispatch({ type: USER_FORGOT_PASSWORD_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({
+      type: USER_FORGOT_PASSWORD_FAILURE,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
+// UPDATE new password if forgotten
+export const updateUserPasswordAction =
+  (userUpdatedInfo) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: USER_UPDATE_PASSWORD_REQUEST,
+      });
+
+      const { data } = await axios.put(
+        `/api/user-update-password`,
+        userUpdatedInfo,
+      );
+      console.log('DDD', data);
+      dispatch({ type: USER_UPDATE_PASSWORD_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({
+        type: USER_UPDATE_PASSWORD_FAILURE,
         payload:
           error.response && error.response.data.message
             ? error.response.data.message

@@ -8,6 +8,8 @@ import {
   getUserProfileById,
   deleteUser,
   updateIsAdmin,
+  userForgotPassword,
+  updateUserProfilePassword,
 } from '../controllers/userController.js';
 
 import { protect, admin } from '../middleware/authMiddleware.js';
@@ -30,5 +32,8 @@ router
   .route('/users')
   .post(registerUser)
   .get(protect, admin, getAllUsersProfile);
+
+router.route('/user-forgot-password').post(userForgotPassword);
+router.route('/user-update-password').put(updateUserProfilePassword);
 
 export default router;
