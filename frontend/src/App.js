@@ -5,6 +5,8 @@ import Footer from './components/footer/Footer';
 import HomeView from './views/HomeView/HomeView';
 import ContactFormView from './views/contactFormView/ContactFormView';
 import LoginFormView from './views/loginFormView/LoginFormView';
+import ForgotPassword from './views/forgotPassword/ForgotPassword';
+import ResetPassword from './views/resetPassword/ResetPassword';
 import ErrorView from './views/errorView/ErrorView';
 import RegistrationView from './views/registrationView/RegistrationView';
 import FullProfileView from './views/fullProfile/FullProfileView';
@@ -49,8 +51,9 @@ const App = () => {
             <Route path="/cookies" element={<CookiesView />} />
             <Route path="/privacy" element={<PrivacyView />} />
             <Route path="/login" element={<LoginFormView />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/registration" element={<RegistrationView />} />
-
+            <Route path="/reset-password/:token" element={<ResetPassword />} />
             <Route path="/admin-users" element={<AdminUserView />} />
             <Route path="/admin-profiles" element={<AdminProfileView />} />
             <Route path="/admin-reviewers" element={<AdminReviewersView />} />

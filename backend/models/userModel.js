@@ -32,6 +32,9 @@ const userSchema = mongoose.Schema(
     cloudinaryId: {
       type: String,
     },
+    resetPasswordToken: {
+      type: String,
+    },
   },
   {
     timestamps: true,
