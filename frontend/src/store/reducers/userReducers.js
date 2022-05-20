@@ -13,6 +13,9 @@ import {
   USER_DETAILS_REQUEST,
   USER_DETAILS_RESET,
   USER_DETAILS_SUCCESS,
+  USER_FORGOT_PASSWORD_FAILURE,
+  USER_FORGOT_PASSWORD_REQUEST,
+  USER_FORGOT_PASSWORD_SUCCESS,
   USER_FULL_DETAILS_BY_ID_FAILURE,
   USER_FULL_DETAILS_BY_ID_REQUEST,
   USER_FULL_DETAILS_BY_ID_SUCCESS,
@@ -23,6 +26,9 @@ import {
   USER_REGISTER_FAILURE,
   USER_REGISTER_REQUEST,
   USER_REGISTER_SUCCESS,
+  USER_UPDATE_PASSWORD_FAILURE,
+  USER_UPDATE_PASSWORD_REQUEST,
+  USER_UPDATE_PASSWORD_SUCCESS,
   USER_UPDATE_PROFILE_FAILURE,
   USER_UPDATE_PROFILE_REQUEST,
   USER_UPDATE_PROFILE_RESET,
@@ -115,7 +121,6 @@ export const userUpdateProfileReducer = (state = {}, action) => {
       return { ...state, loading: false, error: action.payload };
     case USER_UPDATE_PROFILE_RESET:
       return { userInfo: {} };
-
     default:
       return { ...state };
   }
@@ -165,6 +170,43 @@ export const userAddRemoveAdminReducer = (state = {}, action) => {
         success: true,
       };
     case USER_ADD_REMOVE_ADMIN_FAILURE:
+      return { ...state, loading: false, error: action.payload };
+    default:
+      return { ...state };
+  }
+};
+
+// Request new password if forgotten
+export const userForgotPasswordReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_FORGOT_PASSWORD_REQUEST:
+      return { ...state, loading: true };
+    case USER_FORGOT_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+      };
+    case USER_FORGOT_PASSWORD_FAILURE:
+      return { ...state, loading: false, error: action.payload };
+    default:
+      return { ...state };
+  }
+};
+
+// UPDATE new password if forgotten
+export const userUpdatePasswordReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_UPDATE_PASSWORD_REQUEST:
+      return { ...state, loading: true };
+    case USER_UPDATE_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        message: action.payload,
+      };
+    case USER_UPDATE_PASSWORD_FAILURE:
       return { ...state, loading: false, error: action.payload };
     default:
       return { ...state };

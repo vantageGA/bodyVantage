@@ -1,7 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import generateToken from '../utils/generateToken.js';
 import User from '../models/userModel.js';
-import ProfileImages from '../models/imageUploadModal.js';
 import nodemailer from 'nodemailer';
 
 // @description: Get All the users Profiles
@@ -207,6 +206,86 @@ const updateIsAdmin = asyncHandler(async (req, res) => {
   }
 });
 
+const userForgotPassword = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+  const user = await User.findOne({ email: email });
+
+  if (user) {
+    const token = generateToken(user._id);
+
+    const link = `${process.env.RESET_PASSWORD_LOCAL_URL}/reset-password/${token}`;
+
+    console.log('link', link);
+
+    user.resetPasswordToken = token;
+    await user.save();
+
+    // create reusable transporter object using the default SMTP transport
+    let transporter = nodemailer.createTransport({
+      host: process.env.MAILER_HOST,
+      port: 587,
+      secure: false, // true for 465, false for other ports
+      auth: {
+        user: process.env.MAILER_USER,
+        pass: process.env.MAILER_PW,
+      },
+      tls: {
+        rejectUnauthorized: false,
+      },
+    });
+
+    // send mail with defined transport object
+    let info = await transporter.sendMail({
+      from: '"Body Vantage" <software@bodyvantage.co.uk>', // sender address
+      to: `me@garyallin.uk`, // list of receivers
+      bcc: 'info@bodyvantage.co.uk',
+      subject: 'Body Vantage password re-set request', // Subject line
+      text: 'Body Vantage password re-set request', // plain text body
+      html: `
+      <h1>Body Vantage password re-set request</h1>
+      <p>You can re-set you password by clicking the link below</p>     
+      <br>      
+      <a href=${link} id='link'>Click here to reset your password.</a>
+      <p>Thank you. Body Vantage management</p>
+          
+       
+      `, // html body
+    });
+
+    console.log('Message sent: %s', info.messageId);
+    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+
+    // Preview only available when sending through an Ethereal account
+    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+    // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+
+    res.status(200).json('success');
+  } else {
+    res.status(409);
+    throw new Error('Sorry, no match could be found for that email.');
+  }
+});
+
+// @description: UPdate User PASSWORD
+// @route: PUT /api/user-update-password
+// @access: PUBLIC
+const updateUserProfilePassword = asyncHandler(async (req, res) => {
+  const { resetPasswordToken, password } = req.body;
+  const user = await User.findOne({
+    resetPasswordToken: resetPasswordToken,
+  });
+  if (user) {
+    if (password) {
+      user.password = password;
+    }
+    await user.save();
+    res.status(201).json('Password Successfully updated.');
+  } else {
+    res.status(404);
+    throw new Error('No user found');
+  }
+});
+
 export {
   authUser,
   getUserProfile,
@@ -216,4 +295,6 @@ export {
   getUserProfileById,
   deleteUser,
   updateIsAdmin,
+  userForgotPassword,
+  updateUserProfilePassword,
 };

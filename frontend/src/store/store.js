@@ -12,6 +12,8 @@ import {
   userProfileByIdReducer,
   userDeleteReducer,
   userAddRemoveAdminReducer,
+  userForgotPasswordReducer,
+  userUpdatePasswordReducer,
 } from './reducers/userReducers';
 
 import {
@@ -51,6 +53,8 @@ const reducer = combineReducers({
   users: usersReducer,
   userLogin: userLoginReducer,
   userRegistration: userRegistrationReducer,
+  userForgotPassword: userForgotPasswordReducer,
+  userUpdatePassword: userUpdatePasswordReducer,
   userDetails: userDetailsReducer,
   userProfileById: userProfileByIdReducer,
   userUpdateProfile: userUpdateProfileReducer,
