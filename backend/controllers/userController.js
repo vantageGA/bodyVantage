@@ -212,11 +212,7 @@ const userForgotPassword = asyncHandler(async (req, res) => {
 
   if (user) {
     const token = generateToken(user._id);
-
     const link = `${process.env.RESET_PASSWORD_LOCAL_URL}/reset-password/${token}`;
-
-    console.log('link', link);
-
     user.resetPasswordToken = token;
     await user.save();
 
@@ -237,7 +233,7 @@ const userForgotPassword = asyncHandler(async (req, res) => {
     // send mail with defined transport object
     let info = await transporter.sendMail({
       from: '"Body Vantage" <software@bodyvantage.co.uk>', // sender address
-      to: `me@garyallin.uk`, // list of receivers
+      to: `${user.email}`, // list of receivers
       bcc: 'info@bodyvantage.co.uk',
       subject: 'Body Vantage password re-set request', // Subject line
       text: 'Body Vantage password re-set request', // plain text body
