@@ -292,6 +292,20 @@ const FullProfileView = () => {
                         </div>
                       </>
                     )}
+                    {!profile?.websiteUrl ? (
+                      <p>No website.</p>
+                    ) : (
+                      <>
+                        My website:{' '}
+                        <a
+                          href={`https://www.${profile?.websiteUrl}`}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          {profile?.websiteUrl}
+                        </a>
+                      </>
+                    )}
                   </div>
                   <div>
                     <h1>Location</h1>
