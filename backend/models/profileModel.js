@@ -74,6 +74,9 @@ const profileSchema = mongoose.Schema(
     instagram: {
       type: String,
     },
+    websiteUrl: {
+      type: String,
+    },
     profileImage: {
       type: String,
     },
