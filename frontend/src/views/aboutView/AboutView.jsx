@@ -29,9 +29,9 @@ const AboutView = () => {
           your industry profile.
         </p>
 
-        <p>
+        <div>
           As a registered <BodyVantage /> member you:
-          <lo>
+          <ul>
             <li>
               can showcase your business to the public and convert enquiries
               into clients
@@ -40,17 +40,17 @@ const AboutView = () => {
             <li>are allowed unlimited service updates</li>
             <li>can personalise your profile</li>
             <li>can add client reviews</li>
-          </lo>
-        </p>
-        <p>
+          </ul>
+        </div>
+        <div>
           <BodyVantage /> enables their visitors to search:
-          <lo>
+          <ul>
             <li>for vetted and recognised wellbeing members/providers</li>
             <li>in a location of their choice</li>
             <li>member wellbeing offerings and reviews</li>
             <li>for member contact details and make enquiries</li>
-          </lo>
-        </p>
+          </ul>
+        </div>
       </fieldset>
       <div>
         <p>
