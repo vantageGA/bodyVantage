@@ -57,6 +57,7 @@ const ProfileEditView = () => {
   const [email, setEmail] = useState('');
   const [faceBook, setFaceBook] = useState('');
   const [instagram, setInstagram] = useState('');
+  const [websiteUrl, setWebsiteUrl] = useState('');
   const [profileImage, setProfileImage] = useState('');
   const [description, setDescription] = useState('');
   const [specialisation, setSpecialisation] = useState('');
@@ -91,6 +92,7 @@ const ProfileEditView = () => {
     setEmail(profile?.email);
     setFaceBook(profile?.faceBook);
     setInstagram(profile?.instagram);
+    setWebsiteUrl(profile?.websiteUrl);
     setProfileImage(profile?.profileImage);
     setDescription(profile?.description);
     setSpecialisation(profile?.specialisation);
@@ -174,6 +176,7 @@ const ProfileEditView = () => {
             email,
             faceBook,
             instagram,
+            websiteUrl,
             profileImage,
             description,
             specialisation,
@@ -351,6 +354,15 @@ const ProfileEditView = () => {
                 value={instagram}
                 placeholder="zachfiscalfitness"
                 onChange={(e) => setInstagram(e.target.value)}
+                className="entered"
+              />
+              <InputField
+                label="Website URL"
+                type="text"
+                name="websiteUrl"
+                value={websiteUrl}
+                placeholder="zachfiscalfitness.co.uk"
+                onChange={(e) => setWebsiteUrl(e.target.value)}
                 className="entered"
               />
               <Button

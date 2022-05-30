@@ -124,6 +124,7 @@ const updateProfile = asyncHandler(async (req, res) => {
     email,
     faceBook,
     instagram,
+    websiteUrl,
     profileImage,
     description,
     qualifications,
@@ -158,6 +159,7 @@ const updateProfile = asyncHandler(async (req, res) => {
     searchId[0].email = email;
     searchId[0].faceBook = faceBook;
     searchId[0].instagram = instagram;
+    searchId[0].websiteUrl = websiteUrl;
     searchId[0].profileImage = profileImage;
     searchId[0].description = description;
     searchId[0].qualifications = qualifications;
