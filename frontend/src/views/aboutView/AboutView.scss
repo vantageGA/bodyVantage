@@ -2,4 +2,7 @@
 @import '../../scssMixIn.scss';
 
 .about-wrapper {
+  lo li {
+    list-style-type: '> ';
+  }
 }
