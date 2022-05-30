@@ -1,5 +1,5 @@
-import React from 'react';
 import './AboutView.scss';
+import BodyVantage from '../../components/bodyVantage/BodyVantage';
 
 import LinkComp from '../../components/linkComp/LinkComp';
 
@@ -10,42 +10,46 @@ const AboutView = () => {
         <legend>About Us</legend>
 
         <p>
-          BodyVantage is a personal wellbeing website for the pubic to enable
-          them to search and connect with listed specialised and experienced
-          wellbeing providers throughout the UK.
+          <BodyVantage /> is a personal wellbeing website which enables you to
+          search and connect with specialised and experienced wellbeing
+          providers throughout the UK.
         </p>
 
         <p>
-          BodyVantage believes in enabling the public through their site to
-          confidently search for suitable wellbeing members in their area who
-          have been vetted by BodyVantage as recognised providers.
+          I noticed a gap in the health and wellbeing industry, where there was
+          a wealth of industry experience out there, but the public were not
+          aware of the providers in their location and that there had to be a
+          better way to put the public in touch with the right wellbeing
+          providers.
         </p>
 
         <p>
-          This platform will allow the registered BodyVantage members to
-          advertise their services as providers to the public with contact
-          details. The BodyVantage members will be allowed unlimited service
-          updates and personalisation of their member profile. Members will also
-          be able to add client reviews. This site gives members the opportunity
-          to showcase their business to the public and to convert enquiries into
-          clients
+          Act today by becoming a <BodyVantage /> member, this will enable you
+          to reach more potential clients while growing and taking ownership of
+          your industry profile.
         </p>
 
         <p>
-          I started this this business as I noticed a gap in the health and
-          wellbeing industry, where there was a wealth of industry experience
-          out there, but the public were not aware of the providers in their
-          area. I felt there had to be a better way to put the public in touch
-          with the right wellbeing providers.
+          As a registered <BodyVantage /> member you:
+          <lo>
+            <li>
+              can showcase your business to the public and convert enquiries
+              into clients
+            </li>
+            <li>can advertise your various wellbeing services to the public</li>
+            <li>are allowed unlimited service updates</li>
+            <li>can personalise your profile</li>
+            <li>can add client reviews</li>
+          </lo>
         </p>
         <p>
-          BodyVantage is continuously growing their established list of
-          wellbeing contacts throughout the UK.
-        </p>
-        <p>
-          Take action today by becoming a BodyVantage member which will enable
-          you to reach more potential clients while growing and taking ownership
-          of your industry profile.{' '}
+          <BodyVantage /> enables their visitors to search:
+          <lo>
+            <li>for vetted and recognised wellbeing members/providers</li>
+            <li>in a location of their choice</li>
+            <li>member wellbeing offerings and reviews</li>
+            <li>for member contact details and make enquiries</li>
+          </lo>
         </p>
       </fieldset>
       <div>
