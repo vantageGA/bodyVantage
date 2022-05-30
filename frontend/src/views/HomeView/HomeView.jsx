@@ -97,8 +97,11 @@ const HomeView = () => {
           </div>
           {keyword.length > 0 ? (
             <div className="keyword-length">
-              We found {searchedProfiles.length} profiles that match your search
-              criteria.
+              We found{' '}
+              <span className="keyword-length-highlight">
+                {searchedProfiles.length}
+              </span>{' '}
+              profile[s] that match your search criteria.
             </div>
           ) : null}
         </div>

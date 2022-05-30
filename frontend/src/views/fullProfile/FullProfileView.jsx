@@ -140,7 +140,7 @@ const FullProfileView = () => {
                   ></p>
 
                   <div>
-                    <h1>Profile Images</h1>
+                    <h3>Profile Images</h3>
                     {profileImages ? (
                       <div className="profile-image-public-wrapper">
                         {profileImages.map((image, index) =>

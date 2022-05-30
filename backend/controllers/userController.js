@@ -211,7 +211,7 @@ const userForgotPassword = asyncHandler(async (req, res) => {
   const user = await User.findOne({ email: email });
 
   if (user) {
-    const token = generateToken(user._id);
+    const token = generateToken(user._id, { expiresIn: '60s' });
     const link = `${process.env.RESET_PASSWORD_LOCAL_URL}/reset-password/${token}`;
     user.resetPasswordToken = token;
     await user.save();
@@ -239,9 +239,9 @@ const userForgotPassword = asyncHandler(async (req, res) => {
       text: 'Body Vantage password re-set request', // plain text body
       html: `
       <h1>Body Vantage password re-set request</h1>
-      <p>You can re-set you password by clicking the link below</p>     
-      <br>      
+      <p>You can re-set you password by clicking the link below</p>
       <a href=${link} id='link'>Click here to reset your password.</a>
+      <h3 style="color: red;">PLEASE DELETE THIS EMAIL AFTER YOU HAVE RESET YOUR PASSWORD!!</h3>
       <p>Thank you. Body Vantage management</p>
           
        

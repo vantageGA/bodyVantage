@@ -22,6 +22,7 @@ const ForgotPassword = () => {
     e.preventDefault();
     // Dispatch login
     dispatch(userForgotPasswordAction(email));
+    setEmail('');
   };
 
   return (
@@ -34,35 +35,33 @@ const ForgotPassword = () => {
         />
       ) : null}
 
-      {success ? null : (
-        <fieldset className="fieldSet">
-          <legend>
-            Members <span>Forgot Password</span> form
-          </legend>
-          <form onSubmit={handleSubmit}>
-            <InputField
-              label="Your registration email"
-              type="email"
-              name={email}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className={!emailRegEx.test(email) ? 'invalid' : 'entered'}
-              error={
-                !emailRegEx.test(email) && email.length !== 0
-                  ? `Invalid email address.`
-                  : null
-              }
-            />
+      <fieldset className="fieldSet">
+        <legend>
+          Members <span>Forgot Password</span> form
+        </legend>
+        <form onSubmit={handleSubmit}>
+          <InputField
+            label="Your registered email address"
+            type="email"
+            name={email}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className={!emailRegEx.test(email) ? 'invalid' : 'entered'}
+            error={
+              !emailRegEx.test(email) && email.length !== 0
+                ? `Invalid email address.`
+                : null
+            }
+          />
 
-            <Button
-              colour="transparent"
-              text="submit"
-              className="btn"
-              disabled={!emailRegEx.test(email)}
-            ></Button>
-          </form>
-        </fieldset>
-      )}
+          <Button
+            colour="transparent"
+            text="submit"
+            className="btn"
+            disabled={!emailRegEx.test(email)}
+          ></Button>
+        </form>
+      </fieldset>
     </div>
   );
 };
