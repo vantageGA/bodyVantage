@@ -20,8 +20,12 @@
 }
 .keyword-length {
   font-size: 1em;
-  // text-align: center;
-  font-size: 0.8em;
+
+  .keyword-length-highlight {
+    background-color: $rating-colour;
+    font-size: 1em;
+    padding: 0.2em;
+  }
 }
 input[type='search']::placeholder {
   text-align: center;
