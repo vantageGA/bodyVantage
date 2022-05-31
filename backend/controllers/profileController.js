@@ -2,6 +2,8 @@ import asyncHandler from 'express-async-handler';
 import Profile from '../models/profileModel.js';
 import ProfileImages from '../models/profileImageModel.js';
 import UserReviewer from '../models/userReviewerModel.js';
+import nodemailer from 'nodemailer';
+import User from '../models/userModel.js';
 
 // @description: Get All the Profiles
 // @route: GET /api/profiles
@@ -241,6 +243,9 @@ const createProfileReview = asyncHandler(async (req, res) => {
   const reviewerProfile = await UserReviewer.findById(req.params.id);
   const profile = await Profile.find({ user: userProfileId });
 
+  //Find the user that was reviewed
+  const user = await User.findById(userProfileId);
+
   // check if review exists
   const arrayOfId = profile[0].reviews.map((review) => review.user.toString());
   const allReadyReviewed = arrayOfId.includes(req.params.id);
@@ -263,6 +268,50 @@ const createProfileReview = asyncHandler(async (req, res) => {
       profile[0].reviews.length;
 
     await profile[0].save();
+
+    // Send email to user telling thm that a review has been created
+    let transporter = nodemailer.createTransport({
+      host: process.env.MAILER_HOST,
+      port: 587,
+      secure: false, // true for 465, false for other ports
+      auth: {
+        user: process.env.MAILER_USER,
+        pass: process.env.MAILER_PW,
+      },
+      tls: {
+        rejectUnauthorized: false,
+      },
+    });
+
+    // send mail with defined transport object
+    let info = await transporter.sendMail({
+      from: '"Body Vantage" <info@bodyvantage.co.uk>', // sender address
+      to: `${user.email}`, // list of receivers
+      bcc: 'info@bodyvantage.co.uk',
+      subject: 'Body Vantage REVIEW', // Subject line
+      text: 'Body Vantage REVIEW', // plain text body
+      html: `
+      <h1>Hi ${user.name}</h1>
+      <p>${review.name}, has submitted the following review about your service:</p>
+      <p>"${review.comment}"</p>
+      <p>This review has been published and will show on your profile page.</p>
+      <h3>If you feel that this review is un-related or fake please contact BodyVantage management ASAP!</h3>
+
+      <p>Thank you. Body Vantage management</p>
+          
+       
+      `, // html body
+    });
+
+    console.log('Message sent: %s', info.messageId);
+    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+
+    // Preview only available when sending through an Ethereal account
+    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+    // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+
+    // Send email to user telling thm that a review has been created
+
     res.status(201).json({ message: 'Review added successfully' });
   } else {
     res.status(404);
