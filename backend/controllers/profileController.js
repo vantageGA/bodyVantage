@@ -250,7 +250,7 @@ const createProfileReview = asyncHandler(async (req, res) => {
   const arrayOfId = profile[0].reviews.map((review) => review.user.toString());
   const allReadyReviewed = arrayOfId.includes(req.params.id);
 
-  if (reviewerProfile && !allReadyReviewed) {
+  if (reviewerProfile && !allReadyReviewed && user) {
     const review = {
       user: req.params.id,
       name: reviewerProfile.name,
