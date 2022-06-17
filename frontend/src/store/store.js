@@ -37,6 +37,7 @@ import {
   userReviewerRegistrationReducer,
   createReviewReducer,
   adminReviewerDeleteReducer,
+  userReviewersDetailsReducer,
 } from './reducers/userReviewReducer';
 
 import {
@@ -78,6 +79,7 @@ const reducer = combineReducers({
   userReviewId: userReviewIdReducer,
   userReviewerRegistration: userReviewerRegistrationReducer,
   userAdminReviewersDetails: userAdminReviewersDetailsReducer,
+  userReviewersDetails: userReviewersDetailsReducer,
   adminReviewerDelete: adminReviewerDeleteReducer,
   createReview: createReviewReducer,
 });
@@ -86,10 +88,17 @@ const userInfoFromStorage = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo'))
   : null;
 
+const reviewerInfoFromStorage = localStorage.getItem('userReviewInfo')
+  ? JSON.parse(localStorage.getItem('userReviewInfo'))
+  : null;
+
 const middleware = [thunk];
 
 const initialState = {
-  userLogin: { userInfo: userInfoFromStorage },
+  userLogin: {
+    userInfo: userInfoFromStorage,
+    userReviewInfo: reviewerInfoFromStorage,
+  },
 };
 
 const store = createStore(
