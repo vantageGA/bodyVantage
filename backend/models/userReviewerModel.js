@@ -16,6 +16,15 @@ const userReviewerSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    isConfirmed: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+    hasSubmittedReview: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,

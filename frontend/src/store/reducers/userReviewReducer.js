@@ -6,6 +6,9 @@ import {
   USER_ADMIN_REVIEWER_DETAILS_REQUEST,
   USER_ADMIN_REVIEWER_DETAILS_RESET,
   USER_ADMIN_REVIEWER_DETAILS_SUCCESS,
+  USER_REVIEWER_DETAILS_FAILURE,
+  USER_REVIEWER_DETAILS_REQUEST,
+  USER_REVIEWER_DETAILS_SUCCESS,
   USER_REVIEWER_REGISTER_FAILURE,
   USER_REVIEWER_REGISTER_REQUEST,
   USER_REVIEWER_REGISTER_SUCCESS,
@@ -40,6 +43,24 @@ export const userAdminReviewersDetailsReducer = (
       return { ...state, loading: false, error: action.payload };
     case USER_ADMIN_REVIEWER_DETAILS_RESET:
       return { reviewers: [] };
+    default:
+      return { ...state };
+  }
+};
+
+// Get all the reviewers user details
+export const userReviewersDetailsReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_REVIEWER_DETAILS_REQUEST:
+      return { ...state, loading: true };
+    case USER_REVIEWER_DETAILS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        reviewer: action.payload,
+      };
+    case USER_REVIEWER_DETAILS_FAILURE:
+      return { ...state, loading: false, error: action.payload };
     default:
       return { ...state };
   }
