@@ -7,6 +7,9 @@ import {
   USER_ADMIN_REVIEWER_DETAILS_FAILURE,
   USER_ADMIN_REVIEWER_DETAILS_REQUEST,
   USER_ADMIN_REVIEWER_DETAILS_SUCCESS,
+  USER_REVIEWER_DETAILS_FAILURE,
+  USER_REVIEWER_DETAILS_REQUEST,
+  USER_REVIEWER_DETAILS_SUCCESS,
   USER_REVIEWER_REGISTER_FAILURE,
   USER_REVIEWER_REGISTER_REQUEST,
   USER_REVIEWER_REGISTER_SUCCESS,
@@ -46,6 +49,38 @@ export const userAdminReviewersDetailsAction =
     } catch (error) {
       dispatch({
         type: USER_ADMIN_REVIEWER_DETAILS_FAILURE,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
+
+// Get all reviewers details PUBLIC
+export const userReviewersDetailsAction =
+  (id) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: USER_REVIEWER_DETAILS_REQUEST,
+      });
+
+      const {
+        userReviewLogin: { userReviewInfo },
+      } = getState();
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userReviewInfo.token}`,
+        },
+      };
+
+      const { data } = await axios.get(`/api/reviewer/public/${id}`, config);
+      dispatch({ type: USER_REVIEWER_DETAILS_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({
+        type: USER_REVIEWER_DETAILS_FAILURE,
         payload:
           error.response && error.response.data.message
             ? error.response.data.message

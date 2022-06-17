@@ -1,5 +1,6 @@
 import asyncHandler from 'express-async-handler';
 import User from '../models/userModel.js';
+import UserReviewer from '../models/userReviewerModel.js';
 import jwt from 'jsonwebtoken';
 
 // @description: Confirmation Email
@@ -31,4 +32,33 @@ const updateConfirmEmail = asyncHandler(async (req, res) => {
   }
 });
 
-export { updateConfirmEmail };
+// @description: Confirmation REVIEWER Email
+// @route: GET /api/verifyReviewer/id
+// @access: public
+const updateConfirmReviewerEmail = asyncHandler(async (req, res) => {
+  // const token = req.params.id;
+  const decodedToken = jwt.verify(
+    req.params.id,
+    process.env.JWT_SECRET,
+    function (err, decoded) {
+      return decoded.id;
+    },
+  );
+
+  const userReviewer = await UserReviewer.findById(decodedToken);
+
+  if (userReviewer) {
+    userReviewer.isConfirmed = true;
+    await userReviewer.save();
+    if (process.env.NODE_ENV === 'production') {
+      return res.redirect('https://bodyvantage.herokuapp.com/');
+    } else {
+      return res.status(200).send({ message: 'Account Verified' });
+    }
+  } else {
+    res.status(404);
+    throw new Error('No Reviewer found');
+  }
+});
+
+export { updateConfirmEmail, updateConfirmReviewerEmail };

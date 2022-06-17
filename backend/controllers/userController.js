@@ -83,9 +83,9 @@ const registerUser = asyncHandler(async (req, res) => {
 
     // send mail with defined transport object
     let info = await transporter.sendMail({
-      from: '"Body Vantage" <software@bodyvantage.co.uk>', // sender address
+      from: '"Body Vantage" <info@bodyvantage.co.uk>', // sender address
       to: `${user.email}`, // list of receivers
-      bcc: 'me@garyallin.uk',
+      bcc: 'info@bodyvantage.co.uk',
       subject: 'Body Vantage Registration', // Subject line
       text: 'Body Vantage Registration', // plain text body
       html: `

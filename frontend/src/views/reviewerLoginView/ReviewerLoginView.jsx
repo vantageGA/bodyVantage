@@ -14,13 +14,14 @@ import Review from '../../components/review/Review';
 import {
   userReviewLoginAction,
   createUserReviewAction,
+  userReviewersDetailsAction,
 } from '../../store/actions/userReviewActions';
 
 import moment from 'moment';
 
 const ReviewerLoginView = () => {
   const dispatch = useDispatch();
-  const passwordRegEx = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/;
+  const passwordRegEx = /([^\s])/;
   const emailRegEx =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
 
@@ -31,7 +32,9 @@ const ReviewerLoginView = () => {
   const [comment, setComment] = useState('');
   const [showWarning, setShowWaring] = useState(true);
   const [acceptConditions, setAcceptConditions] = useState(false);
+  const [noUserProfile, setNoUserProfile] = useState('');
 
+  // Info stored in local storage
   const userReviewLogin = useSelector((state) => state.userReviewLogin);
   const { loading, error, userReviewInfo } = userReviewLogin;
 
@@ -45,15 +48,31 @@ const ReviewerLoginView = () => {
   const userId = useSelector((state) => state.userReviewId);
   const { userProfileId } = userId;
 
+  const userReviewersDetails = useSelector(
+    (state) => state.userReviewersDetails,
+  );
+  const { reviewer } = userReviewersDetails;
+
   const handleAcceptConditions = () => {
+    if (userReviewInfo) {
+      dispatch(userReviewersDetailsAction(userReviewInfo._id));
+    }
     setShowWaring(false);
-    setAcceptConditions(true);
+    if (reviewer?.isConfirmed) {
+      setAcceptConditions(true);
+    }
   };
-  console.log(acceptConditions);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Dispatch login
-    dispatch(userReviewLoginAction(email, password, userProfileId));
+
+    if (profile) {
+      dispatch(userReviewLoginAction(email, password, profile?.user));
+    } else {
+      setNoUserProfile(
+        'You have not selected a user to review or you email address has not been confirmed',
+      );
+    }
   };
 
   const handleReviewSubmit = (e) => {
@@ -61,7 +80,7 @@ const ReviewerLoginView = () => {
 
     // Dispatch reviewer comment of trainer
     dispatch(
-      createUserReviewAction(userReviewInfo._id, {
+      createUserReviewAction(userReviewInfo?._id, {
         rating,
         comment,
         showName,
@@ -76,6 +95,7 @@ const ReviewerLoginView = () => {
   return (
     <div className="user-review-login-wrapper">
       {error ? <Message message={error} /> : null}
+      {noUserProfile ? <Message message={noUserProfile} /> : null}
 
       {!userReviewInfo ? (
         loading ? (
@@ -109,7 +129,7 @@ const ReviewerLoginView = () => {
                   }
                   error={
                     !passwordRegEx.test(password) && password.length !== 0
-                      ? `Password must contain at least 1 uppercase letter and a number`
+                      ? `Password can not be empty`
                       : null
                   }
                   onChange={(e) => setPassword(e.target.value)}
@@ -139,6 +159,9 @@ const ReviewerLoginView = () => {
         <>
           <div className="reviewer-wrapper">
             {reviewError ? <Message message={reviewError} /> : null}
+            {reviewer?.isConfirmed === false ? (
+              <Message message="PLEASE CONFIRM YOUR EMAIL ADDRESS" />
+            ) : null}
             {success ? (
               <Message message="Your review has been sent." success />
             ) : null}
@@ -279,9 +302,13 @@ const ReviewerLoginView = () => {
                     can update them at any time.
                   </p>
 
-                  <button onClick={handleAcceptConditions}>
-                    Accept Review Guidelines
-                  </button>
+                  <Button
+                    colour="transparent"
+                    text="Accept Review Guidelines"
+                    className="btn"
+                    onClick={handleAcceptConditions}
+                    disabled={false}
+                  ></Button>
                 </>
               ) : (
                 <>
@@ -339,7 +366,12 @@ const ReviewerLoginView = () => {
                       colour="transparent"
                       text="submit"
                       className="btn"
-                      disabled={!rating || (comment.length <= 10 && success)}
+                      disabled={
+                        !rating ||
+                        (comment.length <= 10 &&
+                          success &&
+                          !reviewer?.isConfirmed)
+                      }
                     ></Button>
                   </form>
                 </>

@@ -14,9 +14,10 @@ const ReviewerRegisterView = () => {
   const nameRegEx = /^([\w])+\s+([\w\s])+$/i;
   const emailRegEx =
     /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
-  const passwordRegEx = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/;
+  const passwordRegEx =
+    /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!"£$%^&*()#~@])[A-Za-z\d!"£$%^&*()#~@]{6,}$/;
   const passwordConfirmRegEx =
-    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/;
+    /(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!"£$%^&*()#~@])[A-Za-z\d!"£$%^&*()#~@]{6,}$/;
 
   const dispatch = useDispatch();
 
@@ -28,7 +29,6 @@ const ReviewerRegisterView = () => {
 
   const userId = useSelector((state) => state.userReviewId);
   const { userReviewId } = userId;
-  console.log(userReviewId);
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -43,7 +43,7 @@ const ReviewerRegisterView = () => {
         userReviewerInfo.name +
         ' your profile is created.' +
         ' You will receive an email with a link asking to confirm your email address.' +
-        ' Please do this before logging in, in order to give you full functionality.';
+        ' You will need to confirm your email in order to login.';
       setRegistrationConfirmation(warn);
     }
   }, [userReviewerInfo]);
@@ -60,6 +60,7 @@ const ReviewerRegisterView = () => {
       setEmail('');
       setPassword('');
       setConfirmPassword('');
+      //divert to home page
     }
   };
 
@@ -117,7 +118,7 @@ const ReviewerRegisterView = () => {
               className={!passwordRegEx.test(password) ? 'invalid' : 'entered'}
               error={
                 !passwordRegEx.test(password) && password.length !== 0
-                  ? `Password must contain at least 1 uppercase letter and a number`
+                  ? `Password must contain at least l Capital letter, 1 number and 1 special character.`
                   : null
               }
               onChange={(e) => setPassword(e.target.value)}
@@ -137,7 +138,7 @@ const ReviewerRegisterView = () => {
               error={
                 !passwordConfirmRegEx.test(confirmPassword) &&
                 confirmPassword.length !== 0
-                  ? `Password must contain at least 1 uppercase letter and a number`
+                  ? `Password must contain at least l Capital letter, 1 number and 1 special character.`
                   : null
               }
               onChange={(e) => setConfirmPassword(e.target.value)}
