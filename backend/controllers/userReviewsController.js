@@ -108,9 +108,7 @@ const registerUserReviewer = asyncHandler(async (req, res) => {
 
     const link = `${
       process.env.MAILER_LOCAL_URL
-    }/api/verifyReviewer/token=${generateToken(userReviewer._id)}`;
-
-    console.log('xxx', link);
+    }api/verifyReviewer/token=${generateToken(userReviewer._id)}`;
 
     // send mail with defined transport object
     let info = await transporter.sendMail({
