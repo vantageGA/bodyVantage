@@ -3,10 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { profilesAction } from '../../store/actions/profileActions';
 import './HomeView.scss';
 
+import logo from '../../assets/logo/logo.svg';
+
 import SearchInput from '../../components/searchInput/SearchInput';
 import LoadingSpinner from '../../components/loadingSpinner/LoadingSpinner';
 import Message from '../../components/message/Message';
 import Card from '../../components/card/Card';
+import BodyVantage from '../../components/bodyVantage/BodyVantage';
 
 const HomeView = () => {
   const dispatch = useDispatch();
@@ -73,7 +76,7 @@ const HomeView = () => {
   return (
     <>
       <fieldset className="fieldSet">
-        <legend>Find a trainer near you</legend>
+        <legend>{keyword.length > 0 ? null : 'Find a trainer near you'}</legend>
         {error ? <Message message={error} /> : null}
 
         <div
@@ -84,27 +87,35 @@ const HomeView = () => {
             backgroundSize: 'cover',
             paddingBottom: '1rem',
           }}
+          className="input-wrapper"
         >
-          {/* <div className="main-heading">Welcome to BODY-VANTAGE</div> */}
-          <div className="main-heading">Find a trainer near you</div>
-          <div>
+          {keyword.length > 0 ? null : (
+            <>
+              <img className="home-image-wrapper" src={logo} alt="" />
+              <div className="main-heading">
+                <BodyVantage />
+              </div>
+            </>
+          )}
+
+          <div className="search-input-position">
             <SearchInput
               type="search"
               value={keyword}
               handleSearch={handleSearch}
-              label="Search 'fat loss Guildford' for example"
+              placeholder="Search 'fat loss Guildford' for example"
             />
+            {keyword.length > 0 ? (
+              <div className="keyword-length">
+                <span className="keyword-length-highlight">
+                  {searchedProfiles.length}
+                </span>{' '}
+                profile[s] found that match your search criteria.
+              </div>
+            ) : null}
           </div>
-          {keyword.length > 0 ? (
-            <div className="keyword-length">
-              We found{' '}
-              <span className="keyword-length-highlight">
-                {searchedProfiles.length}
-              </span>{' '}
-              profile[s] that match your search criteria.
-            </div>
-          ) : null}
         </div>
+
         <div className="home-view">
           {keyword.length > 0 ? (
             <div className="card-wrapper">

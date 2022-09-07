@@ -1,11 +1,11 @@
 @import '../../index.scss';
 
 .search-input-wrapper {
-  width: 60%;
+  width: 100%;
   margin: 0 auto;
   /* form starting stylings ------------------------------- */
   input {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.6);
     border-radius: 4px;
     font-size: 1rem;
     padding: 10px 10px 10px 5px;
