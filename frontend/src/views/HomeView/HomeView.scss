@@ -1,6 +1,9 @@
 @import '../../index.scss';
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
+.input-wrapper {
+  padding-top: 1em;
+}
 .main-heading {
   font-family: 'Bebas Neue', cursive;
   font-size: 2.6em;
@@ -15,21 +18,31 @@
   text-align: center;
   letter-spacing: 0.1em;
 }
+.search-input-position {
+  width: 60%;
+  margin: 0 auto;
+}
+.home-image-wrapper {
+  width: 20%;
+  margin: auto;
+}
 .keyword-search {
   // width: auto;
 }
 .keyword-length {
-  font-size: 1em;
+  font-size: 0.8em;
+  background-color: $main-bg-colour;
 
   .keyword-length-highlight {
-    background-color: $rating-colour;
-    font-size: 1em;
+    color: $rating-colour;
+    font-size: 1.2em;
     padding: 0.2em;
   }
 }
 input[type='search']::placeholder {
   text-align: center;
 }
+
 .home-view {
   height: (
     100% - #{($header-height + $footer-height)}
@@ -48,7 +61,11 @@ input[type='search']::placeholder {
     border: 1px solid $border-colour-light;
   }
   /* Responsive layout */
-  @media (max-width: 812px) {
+  @media (max-width: 814px) {
+    .home-image-wrapper {
+      width: 100%;
+      margin: auto;
+    }
     .card-wrapper {
       flex-wrap: wrap;
       flex-direction: column;
@@ -56,5 +73,12 @@ input[type='search']::placeholder {
         width: 100vw; /* and this */
       }
     }
+  }
+}
+
+/* Responsive layout */
+@media (max-width: 896px) {
+  .search-input-position {
+    width: 100%;
   }
 }
