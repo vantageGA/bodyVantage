@@ -6,10 +6,10 @@ const CookiesView = () => {
     <>
       <fieldset className="fieldSet">
         <legend>Cookies Policy</legend>
-        <h1>Cookie Policy for fisicalfitness.co.uk</h1>
+        <h1>Cookie Policy for bodyvantage.co.uk</h1>
         <p>
-          This is the Cookie Policy for fisicalfitness.co.uk, accessible from
-          https://fisicalfitness.co.uk/
+          This is the Cookie Policy for bodyvantage.co.uk, accessible from
+          https://bodyvantage.co.uk
         </p>
         <p>
           <strong>What Are Cookies</strong>
@@ -90,6 +90,16 @@ const CookiesView = () => {
               user details for future correspondence.
             </p>
           </li>
+          <li>
+            <p>Site preferences cookies</p>
+            <p>
+              In order to provide you with a great experience on this site we
+              provide the functionality to set your preferences for how this
+              site runs when you use it. In order to remember your preferences
+              we need to set cookies so that this information can be called
+              whenever you interact with a page is affected by your preferences.
+            </p>
+          </li>
         </ul>
         <p>
           <strong>Third Party Cookies</strong>
@@ -116,20 +126,23 @@ const CookiesView = () => {
           </li>
           <li>
             <p>
-              Third party analytics are used to track and measure usage of this
-              site so that we can continue to produce engaging content. These
-              cookies may track things such as how long you spend on the site or
-              pages you visit which helps us to understand how we can improve
-              the site for you.
-            </p>
-          </li>
-          <li>
-            <p>
               From time to time we test new features and make subtle changes to
               the way that the site is delivered. When we are still testing new
               features these cookies may be used to ensure that you receive a
               consistent experience whilst on the site whilst ensuring we
               understand which optimisations our users appreciate the most.
+            </p>
+          </li>
+          <li>
+            <p>
+              We also use social media buttons and/or plugins on this site that
+              allow you to connect with your social network in various ways. For
+              these to work the following social media sites including; [List
+              the social networks whose features you have integrated with your
+              site?:12], will set cookies through our site which may be used to
+              enhance your profile on their site or contribute to the data they
+              hold for various purposes outlined in their respective privacy
+              policies.
             </p>
           </li>
         </ul>
@@ -151,8 +164,11 @@ const CookiesView = () => {
         </p>
         <p>
           However if you are still looking for more information then you can
-          contact us
+          contact us through one of our preferred contact methods:
         </p>
+        <ul>
+          <li>By visiting this link: bodyvantage.co.uk</li>
+        </ul>
       </fieldset>
     </>
   );

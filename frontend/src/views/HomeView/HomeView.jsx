@@ -91,7 +91,6 @@ const HomeView = () => {
         >
           {keyword.length > 0 ? null : (
             <>
-              <img className="home-image-wrapper" src={logo} alt="" />
               <div className="main-heading">
                 <BodyVantage />
               </div>
