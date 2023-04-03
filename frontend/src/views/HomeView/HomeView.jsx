@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { profilesAction } from '../../store/actions/profileActions';
 import './HomeView.scss';
 
-import logo from '../../assets/logo/logo.svg';
-
 import SearchInput from '../../components/searchInput/SearchInput';
 import LoadingSpinner from '../../components/loadingSpinner/LoadingSpinner';
 import Message from '../../components/message/Message';
@@ -91,7 +89,6 @@ const HomeView = () => {
         >
           {keyword.length > 0 ? null : (
             <>
-              <img className="home-image-wrapper" src={logo} alt="" />
               <div className="main-heading">
                 <BodyVantage />
               </div>

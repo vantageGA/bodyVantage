@@ -7,11 +7,8 @@ const Footer = () => {
     <footer>
       <fieldset className="fieldSet">
         <div className="footer-wrapper">
-          <div>Developed by Gary Allin</div>
-          <div>CopyRight &copy; Body-Vantage</div>
-        </div>
-        <div className="date-time">
           <DateTime />
+          <div>CopyRight &copy; Body-Vantage</div>
         </div>
       </fieldset>
     </footer>
