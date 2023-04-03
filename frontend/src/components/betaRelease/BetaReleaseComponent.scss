@@ -1,0 +1,35 @@
+@import '../../index.scss';
+
+.badge {
+  position: absolute;
+  left: -7px;
+  top: 20px;
+  background-color: $secondary-bg-colour;
+  -webkit-transform: rotate(-45deg) scale(1) skew(0deg) translate(10px);
+  -moz-transform: rotate(-45deg) scale(1) skew(0deg) translate(10px);
+  -o-transform: rotate(-45deg) scale(1) skew(0deg) translate(10px);
+  -ms-transform: rotate(-45deg) scale(1) skew(0deg) translate(10px);
+  transform: rotate(-45deg) scale(1) skew(0deg) translate(10px);
+  text-align: center;
+  color: $main-bg-colour;
+  padding: 0 0.5em;
+  border-top: 0px;
+  line-height: 20px;
+  margin: 0;
+}
+.badge:after {
+  content: ' ';
+  position: absolute;
+  right: -20px;
+  top: 0px;
+  border-right: 20px solid transparent;
+  border-bottom: 20px solid $secondary-bg-colour;
+}
+.badge:before {
+  content: ' ';
+  position: absolute;
+  left: -20px;
+  top: 0;
+  border-left: 20px solid transparent;
+  border-bottom: 20px solid $secondary-bg-colour;
+}
