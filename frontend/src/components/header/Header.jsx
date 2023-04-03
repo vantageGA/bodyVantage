@@ -49,19 +49,19 @@ const Header = () => {
 
           <div className="large-tabs">
             <NavLink
-              to="/contact"
+              to="/about"
               className={(nav) => (nav.isActive ? 'is-active' : '')}
             >
-              <i className="fa-solid fa-envelope-open fa-2xl"></i>
+              <i className="fa-solid fa-info fa-2xl"></i>
             </NavLink>
           </div>
 
           <div className="large-tabs">
             <NavLink
-              to="/about"
+              to="/contact"
               className={(nav) => (nav.isActive ? 'is-active' : '')}
             >
-              <i className="fa-solid fa-info fa-2xl"></i>
+              <i className="fa-solid fa-envelope-open fa-2xl"></i>
             </NavLink>
           </div>
 
