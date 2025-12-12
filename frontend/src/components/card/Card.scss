@@ -1,5 +1,5 @@
-@import '../../index.scss';
-@import '../../scssMixIn.scss';
+@use '../../index.scss' as *;
+@use '../../scssMixIn.scss' as *;
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
 .card-inner-wrapper {
@@ -20,7 +20,7 @@
 
     .specialisation {
       font-size: 0.75em;
-      width: (100% / 3);
+      width: calc(100% / 3);
       margin-left: 0.2em;
       text-align: center;
       background-color: $main-bg-colour;

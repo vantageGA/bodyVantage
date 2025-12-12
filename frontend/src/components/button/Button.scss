@@ -1,4 +1,4 @@
-@import '../../index.scss';
+@use '../../index.scss' as *;
 
 .btn {
   color: $main-font-colour;

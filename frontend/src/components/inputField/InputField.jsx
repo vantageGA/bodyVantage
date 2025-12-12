@@ -6,7 +6,7 @@ import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const InputField = ({
   id,
-  type,
+  type = 'text',
   label,
   name,
   value,
@@ -69,10 +69,6 @@ const InputField = ({
       {error && <p className="validation-error">{error}</p>}
     </div>
   );
-};
-
-InputField.defaultProps = {
-  type: 'text',
 };
 
 InputField.propTypes = {

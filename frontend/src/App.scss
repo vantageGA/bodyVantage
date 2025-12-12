@@ -1,5 +1,5 @@
-@import 'index.scss';
-@import './scssMixIn.scss';
+@use 'index.scss' as *;
+@use './scssMixIn.scss' as *;
 $grid__bp-md: 1280;
 
 .container {

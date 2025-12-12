@@ -34,14 +34,19 @@ const FullProfileView = () => {
 
   useEffect(() => {
     dispatch(profileByIdAction(id));
-    dispatch(profileImagesPublicAction(profile?.user));
-    dispatch(userReviewIdAction(profile?.user));
-    setDivHeight(ref.current.offsetHeight);
-    setNameHeight(refName.current.offsetHeight);
+  }, [dispatch, id]);
+
+  useEffect(() => {
+    if (profile?.user) {
+      dispatch(profileImagesPublicAction(profile.user));
+      dispatch(userReviewIdAction(profile.user));
+    }
+    setDivHeight(ref.current?.offsetHeight || 0);
+    setNameHeight(refName.current?.offsetHeight || 0);
     return () => {
       console.log('Full Profile cleanup');
     };
-  }, [dispatch, id, profile?.user]);
+  }, [dispatch, profile?.user]);
 
   const profileImagesPublic = useSelector((state) => state.profileImagesPublic);
   const {
@@ -145,10 +150,10 @@ const FullProfileView = () => {
                       <div className="profile-image-public-wrapper">
                         {profileImages.map((image, index) =>
                           profileImageLoading ? (
-                            <LoadingSpinner />
+                            <LoadingSpinner key={`loading-${index}`} />
                           ) : (
                             <span
-                              key={image._id}
+                              key={image._id || `image-${index}`}
                               onClick={() => handleProfileImage(index)}
                             >
                               <img

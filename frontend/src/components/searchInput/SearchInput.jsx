@@ -3,7 +3,7 @@ import './SearchInput.scss';
 import PropTypes from 'prop-types';
 
 const SearchInput = ({
-  type,
+  type = 'search',
   placeholder,
   handleSearch,
   className,
@@ -28,10 +28,6 @@ const SearchInput = ({
       </div>
     </>
   );
-};
-
-SearchInput.defaultProps = {
-  type: 'search',
 };
 
 SearchInput.propTypes = {

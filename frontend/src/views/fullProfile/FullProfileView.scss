@@ -1,4 +1,4 @@
-@import '../../index.scss';
+@use '../../index.scss' as *;
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
 .full-profile-wrapper {
@@ -12,7 +12,7 @@
       display: flex;
       .specialisation {
         font-size: 0.75em;
-        width: (100% / 3);
+        width: calc(100% / 3);
         margin-left: 0.2em;
         text-align: center;
         background-color: black;

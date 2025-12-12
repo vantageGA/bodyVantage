@@ -2,7 +2,12 @@ import React from 'react';
 import './Rating.scss';
 import PropTypes from 'prop-types';
 
-const Rating = ({ value, text, colour, fontSize }) => {
+const Rating = ({
+  value = 0,
+  text,
+  colour = 'orange',
+  fontSize = '12px',
+}) => {
   return (
     <div className="rating">
       <span>
@@ -74,14 +79,9 @@ const Rating = ({ value, text, colour, fontSize }) => {
   );
 };
 
-Rating.defaultProps = {
-  colour: 'orange',
-  fontSize: '12px',
-};
-
-Rating.prototype = {
-  value: PropTypes.number.isRequired,
-  text: PropTypes.string.isRequired,
+Rating.propTypes = {
+  value: PropTypes.number,
+  text: PropTypes.string,
   colour: PropTypes.string,
   fontSize: PropTypes.string,
 };

@@ -26,7 +26,7 @@ import FaqsView from './views/faqsView/FaqsView';
 // Change the display width by removing the --fluid after the container class
 const App = () => {
   return (
-    <Router>
+    <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <div className="container--fluid">
         <Header />
         <div className="content-wrapper">

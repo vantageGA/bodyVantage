@@ -2,7 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Button.scss';
 
-const Button = ({ colour, text, disabled, title, onClick, type }) => {
+const Button = ({
+  colour = 'yellow',
+  text,
+  disabled = true,
+  title,
+  onClick,
+  type,
+}) => {
   return (
     <button
       type={type}
@@ -15,11 +22,6 @@ const Button = ({ colour, text, disabled, title, onClick, type }) => {
       {text}
     </button>
   );
-};
-
-Button.defaultProps = {
-  colour: 'yellow',
-  disabled: true,
 };
 
 Button.propTypes = {

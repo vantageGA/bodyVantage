@@ -1,23 +1,11 @@
+@use './styles/theme' as *;
+@use './css/scrollBar.scss' as *;
+@forward './styles/theme';
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 
-/* variable setup */
-$main-bg-colour: rgba(12, 12, 12, 1);
-$secondary-bg-colour: hsl(23, 100%, 50%);
-$light-orange: rgba(236, 127, 55, 1);
-$burnt-orange: rgba(190, 79, 12, 1);
-$danger: crimson;
-$link-colour: lightblue;
-$success: rgba(92, 184, 92, 1);
-$warning: rgba(240, 173, 78, 1);
-$rating-colour: orange;
-$rating-colour: rgba(196, 166, 36, 1);
-$main-font-colour: whitesmoke;
-$border-colour: rgba(200, 200, 200, 0.5);
-$border-colour-light: hsla(0, 0%, 78%, 0.2);
-$fieldSet-bg-colour: rgba(34, 35, 39, 1);
-$header-height: 80px;
-$footer-height: 40px;
+/* variable setup moved to styles/_theme.scss */
 /* Box sizing rules */
 *,
 *::before,
@@ -190,4 +178,3 @@ hr.style-one {
     rgba(0, 0, 0, 0)
   );
 }
-@import './css/scrollBar.scss';

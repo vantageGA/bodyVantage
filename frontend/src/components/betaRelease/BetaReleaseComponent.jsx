@@ -1,7 +1,7 @@
 import './BetaReleaseComponent.scss';
 
 const BetaReleaseComponent = () => {
-  return <div class="badge">Beta</div>;
+  return <div className="badge">Beta</div>;
 };
 
 export default BetaReleaseComponent;

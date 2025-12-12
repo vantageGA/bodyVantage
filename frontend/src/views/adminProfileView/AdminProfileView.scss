@@ -1,5 +1,5 @@
-@import '../../index.scss';
-@import '../../scssMixIn.scss';
+@use '../../index.scss' as *;
+@use '../../scssMixIn.scss' as *;
 
 .admin-profile-view-wrapper {
   $description-width: 52%;
@@ -50,7 +50,7 @@
     height: auto;
     overflow-y: auto;
     text-align: center;
-    width: (100% / 6);
+    width: calc(100% / 6);
     font-size: 0.8em;
     border-left: 1px solid $border-colour;
   }

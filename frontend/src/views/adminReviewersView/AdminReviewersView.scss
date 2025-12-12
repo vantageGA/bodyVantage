@@ -1,5 +1,5 @@
-@import '../../index.scss';
-@import '../../scssMixIn.scss';
+@use '../../index.scss' as *;
+@use '../../scssMixIn.scss' as *;
 
 .admin-reviewer-wrapper {
   .heading {
@@ -24,7 +24,7 @@
     height: auto;
     overflow-y: auto;
     text-align: center;
-    width: (100% / 5);
+    width: calc(100% / 5);
     font-size: 0.8em;
     border-left: 1px solid $border-colour;
   }
