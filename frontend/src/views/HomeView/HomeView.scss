@@ -3,6 +3,11 @@
 
 .input-wrapper {
   padding-top: 1em;
+  min-height: calc(100vh - (#{$header-height} + #{$footer-height}));
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1.5rem;
 }
 .main-heading {
   font-family: 'Bebas Neue', cursive;
@@ -19,6 +24,7 @@
   letter-spacing: 0.1em;
 }
 .search-input-position {
+  position: relative;
   width: 60%;
   margin: 0 auto;
 }
@@ -44,9 +50,8 @@ input[type='search']::placeholder {
 }
 
 .home-view {
-  height: (
-    100% - #{($header-height + $footer-height)}
-  ); //This is for the background image
+  // Cards below the hero
+  padding: 1rem 0;
 
   .card-wrapper {
     display: flex;

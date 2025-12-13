@@ -88,27 +88,29 @@ const ProfileEditView = () => {
       dispatch(profileOfLoggedInUserAction());
     }
 
-    setName(profile?.name);
-    setEmail(profile?.email);
-    setFaceBook(profile?.faceBook);
-    setInstagram(profile?.instagram);
-    setWebsiteUrl(profile?.websiteUrl);
-    setProfileImage(profile?.profileImage);
-    setDescription(profile?.description);
-    setSpecialisation(profile?.specialisation);
-    setQualifications(profile?.qualifications);
-    setLocation(profile?.location);
-    setTelephoneNumber(profile?.telephoneNumber);
-    setkeyWordSearch(profile?.keyWordSearch);
-    setkeyWordSearchOne(profile?.keyWordSearchOne);
-    setkeyWordSearchTwo(profile?.keyWordSearchTwo);
-    setkeyWordSearchThree(profile?.keyWordSearchThree);
-    setkeyWordSearchFour(profile?.keyWordSearchFour);
-    setkeyWordSearchFive(profile?.keyWordSearchFive);
-    setSpecialisationOne(profile?.specialisationOne);
-    setSpecialisationTwo(profile?.specialisationTwo);
-    setSpecialisationThree(profile?.specialisationThree);
-    setSpecialisationFour(profile?.specialisationFour);
+    if (profile) {
+      setName(profile.name ?? '');
+      setEmail(profile.email ?? '');
+      setFaceBook(profile.faceBook ?? '');
+      setInstagram(profile.instagram ?? '');
+      setWebsiteUrl(profile.websiteUrl ?? '');
+      setProfileImage(profile.profileImage ?? '');
+      setDescription(profile.description ?? '');
+      setSpecialisation(profile.specialisation ?? '');
+      setQualifications(profile.qualifications ?? '');
+      setLocation(profile.location ?? '');
+      setTelephoneNumber(profile.telephoneNumber ?? '');
+      setkeyWordSearch(profile.keyWordSearch ?? '');
+      setkeyWordSearchOne(profile.keyWordSearchOne ?? '');
+      setkeyWordSearchTwo(profile.keyWordSearchTwo ?? '');
+      setkeyWordSearchThree(profile.keyWordSearchThree ?? '');
+      setkeyWordSearchFour(profile.keyWordSearchFour ?? '');
+      setkeyWordSearchFive(profile.keyWordSearchFive ?? '');
+      setSpecialisationOne(profile.specialisationOne ?? '');
+      setSpecialisationTwo(profile.specialisationTwo ?? '');
+      setSpecialisationThree(profile.specialisationThree ?? '');
+      setSpecialisationFour(profile.specialisationFour ?? '');
+    }
 
     dispatch(profileImagesAction());
 
